@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/home/jaspreet/Downloads/Thesis/code/pyskl')
 # Copyright (c) OpenMMLab. All rights reserved.
 import argparse
 import copy as cp
@@ -40,7 +42,14 @@ default_pose_ckpt = (
     'hrnet_w32_coco_256x192-c78dce93_20200708.pth')
 
 
-def extract_frame(video_path):
+def extract_frame(video_path, is_folder=False):
+    if is_folder:
+        ## read all the frames from the folder
+        frames = []
+        for frame in sorted(os.listdir(video_path)):
+            print(frame)
+            frames.append(mmcv.imread(os.path.join(video_path, frame)))
+        return frames
     vid = decord.VideoReader(video_path)
     return [x.asnumpy() for x in vid]
 
@@ -125,14 +134,14 @@ def main():
 
     lines = mrlines(args.video_list)
     lines = [x.split() for x in lines]
-
+    print(lines[0])
     # * We set 'frame_dir' as the base name (w/o. suffix) of each video
     assert len(lines[0]) in [1, 2]
     if len(lines[0]) == 1:
         annos = [dict(frame_dir=osp.basename(x[0]).split('.')[0], filename=x[0]) for x in lines]
     else:
         annos = [dict(frame_dir=osp.basename(x[0]).split('.')[0], filename=x[0], label=int(x[1])) for x in lines]
-
+    print(annos[0])
     if args.non_dist:
         my_part = annos
         os.makedirs(args.tmpdir, exist_ok=True)
@@ -145,12 +154,13 @@ def main():
         my_part = annos[rank::world_size]
 
     det_model = init_detector(args.det_config, args.det_ckpt, 'cuda')
+    print(det_model)
     assert det_model.CLASSES[0] == 'person', 'A detector trained on COCO is required'
     pose_model = init_pose_model(args.pose_config, args.pose_ckpt, 'cuda')
-
+    print(pose_model)
     results = []
     for anno in tqdm(my_part):
-        frames = extract_frame(anno['filename'])
+        frames = extract_frame(anno['filename'], is_folder = True)
         det_results = detection_inference(det_model, frames)
         # * Get detection results for human
         det_results = [x[0] for x in det_results]
