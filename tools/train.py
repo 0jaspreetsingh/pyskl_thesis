@@ -1,4 +1,5 @@
-# Copyright (c) OpenMMLab. All rights reserved.
+import sys
+sys.path.append('/home/jaspreet/Downloads/Thesis/code/1 june/pyskl')# Copyright (c) OpenMMLab. All rights reserved.
 # flake8: noqa: E722
 import argparse
 import mmcv

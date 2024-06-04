@@ -176,6 +176,7 @@ def main():
         shape = frames[0].shape[:2]
         anno['img_shape'] = shape
         anno = pose_inference(anno, pose_model, frames, det_results, compress=args.compress)
+        print(anno['keypoint_score'].shape)
         anno.pop('filename')
         results.append(anno)
 
