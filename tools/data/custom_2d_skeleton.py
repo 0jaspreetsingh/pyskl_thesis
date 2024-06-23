@@ -160,7 +160,7 @@ def main():
     print(pose_model)
     results = []
     for anno in tqdm(my_part):
-        frames = extract_frame(anno['filename'], is_folder = True)
+        frames = extract_frame(anno['filename'])
         det_results = detection_inference(det_model, frames)
         # * Get detection results for human
         det_results = [x[0] for x in det_results]
