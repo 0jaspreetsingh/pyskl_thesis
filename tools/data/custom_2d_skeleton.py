@@ -1,5 +1,7 @@
 import sys
-sys.path.append('/home/jaspreet/Downloads/Thesis/code/pyskl')
+# sys.path.append('/home/jaspreet/Downloads/Thesis/code/pyskl')
+sys.path.append('/home/jsingh/projects/thesis/code/pyskl_thesis')
+# /home/jsingh/projects/thesis/code/pyskl_thesis/tools/data/custom_2d_skeleton.py
 # Copyright (c) OpenMMLab. All rights reserved.
 import argparse
 import copy as cp

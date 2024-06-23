@@ -1,0 +1,14 @@
+Job 1098067: Running on node(s) serv-3317
+Job 1098067: Started at 2024-06-23 18:29:54+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1098067&from=1719160194000
+srun: jobinfo: version v1.0.0
+Job 1098067: Running on node(s) serv-3317
+Job 1098067: Started at 2024-06-23 18:29:54+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1098067&from=1719160194000
+Job 1098067: creating container for /netscratch/enroot/nvcr.io_nvidia_pytorch_22.11-py3.sqsh
+Job 1098067: creating container for /netscratch/enroot/nvcr.io_nvidia_pytorch_22.11-py3.sqsh took 13.8 seconds
+slurmstepd: error: run_command: user task_prolog can not be executed (/home/jsingh/projects/thesis/code/pyskl_thesis/scripts/install.sh) Permission denied
+slurmstepd: error: user task_prolog did not exit normally. reason: Run command failed - configuration error
+slurmstepd: error: --task-prolog failed status=1
+srun: error: serv-3317: task 0: Exited with exit code 1
+srun: Terminating StepId=1098067.0
