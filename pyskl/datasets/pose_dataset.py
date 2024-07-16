@@ -62,7 +62,8 @@ class PoseDataset(BaseDataset):
         self.class_prob = class_prob
         if self.box_thr is not None:
             assert box_thr in [.5, .6, .7, .8, .9]
-
+        logger = get_root_logger()
+        logger.info(f'{len(self)} videos remain before valid thresholding, pose dataset')
         # Thresholding Training Examples
         self.valid_ratio = valid_ratio
         if self.valid_ratio is not None and isinstance(self.valid_ratio, float) and self.valid_ratio > 0:
@@ -80,8 +81,7 @@ class PoseDataset(BaseDataset):
             if self.memcached:
                 item['key'] = item['frame_dir']
 
-        logger = get_root_logger()
-        logger.info(f'{len(self)} videos remain after valid thresholding')
+        logger.info(f'{len(self)} videos remain after valid thresholding, Pose dataset')
 
     def load_annotations(self):
         """Load annotation file to get video information."""

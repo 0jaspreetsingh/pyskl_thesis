@@ -16,7 +16,7 @@ JOB_NAME=custom_2d_skeleton
 
 srun -K\
   --container-mounts="`pwd`":"`pwd`",/netscratch/$USER:/netscratch/$USER,/ds:/ds:ro,/home/jsingh/projects/thesis/datasets,/home/jsingh/projects/thesis/code/pyskl_thesis \
-  --container-image=/enroot/nvcr.io_nvidia_pytorch_23.11-py3.sqsh \
+  --container-image=/enroot/nvcr.io_nvidia_pytorch_23.06-py3.sqsh \
   --container-workdir="`pwd`" \
   --task-prolog=/home/jsingh/projects/thesis/code/pyskl_thesis/install.sh \
-  python tools/data/custom_2d_skeleton.py --video-list /home/jsingh/projects/thesis/datasets/AUTHUAVGestureDatasetVideos_fps-15/uav_dfki_dataset.list --out /home/jsingh/projects/thesis/datasets/AUTHUAVGestureDatasetVideos_fps-15/uavgesture_annos.pkl --non-dist
+  python tools/data/custom_2d_skeleton.py --video-list /netscratch/jsingh/thesis/datasets/AUTHUAVGestureDatasetVideos_fps-15/uav_dfki_dataset.list --out /netscratch/jsingh/thesis/datasets/AUTHUAVGestureDatasetVideos_fps-15/uavgesture_annos.pkl --non-dist

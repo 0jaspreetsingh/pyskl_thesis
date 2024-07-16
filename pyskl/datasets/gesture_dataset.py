@@ -53,7 +53,7 @@ class GestureDataset(BaseDataset):
         self.subset = subset
         super().__init__(ann_file, pipeline, start_index=0, modality=modality, **kwargs)
         logger = get_root_logger()
-        logger.info(f'{len(self)} videos remain after valid thresholding')
+        logger.info(f'{len(self)} videos remain after valid thresholding, Gesture Dataset')
 
     def load_annotations(self):
         """Load annotation file to get video information."""

@@ -1,0 +1,328 @@
+Job 1120841: Running on node(s) kent
+Job 1120841: Started at 2024-07-09 16:51:48+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1120841&from=1720536708000
+srun: jobinfo: version v1.0.0
+Job 1120841: Running on node(s) kent
+Job 1120841: Started at 2024-07-09 16:51:48+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1120841&from=1720536708000
+Job 1120841: creating container for /netscratch/jsingh/pyskl7.sqsh
+Job 1120841: creating container for /netscratch/jsingh/pyskl7.sqsh took 42.1 seconds
+2024-07-09 16:52:36,145 - pyskl - INFO - Environment info:
+------------------------------------------------------------
+sys.platform: linux
+Python: 3.7.11 (default, Jul 27 2021, 14:32:16) [GCC 7.5.0]
+CUDA available: True
+GPU 0,1,2,3: Quadro RTX 6000
+CUDA_HOME: /usr/local/cuda
+NVCC: Cuda compilation tools, release 11.1, V11.1.105
+GCC: gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
+PyTorch: 1.11.0
+PyTorch compiling details: PyTorch built with:
+  - GCC 7.3
+  - C++ Version: 201402
+  - Intel(R) oneAPI Math Kernel Library Version 2021.4-Product Build 20210904 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.5.2 (Git Hash a9302535553c73243c632ad3c4c80beec3d19a1e)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - CUDA Runtime 11.3
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 8.2
+  - Magma 2.5.2
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.3, CUDNN_VERSION=8.2.0, CXX_COMPILER=/opt/rh/devtoolset-7/root/usr/bin/c++, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_KINETO -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DEDGE_PROFILER_USE_KINETO -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-unused-local-typedefs -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.11.0, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=OFF, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, 
+
+TorchVision: 0.12.0
+OpenCV: 4.10.0
+MMCV: 1.5.0
+MMCV Compiler: GCC 7.3
+MMCV CUDA Compiler: 11.3
+pyskl: 0.1.0+99609cf
+------------------------------------------------------------
+
+2024-07-09 16:52:38,898 - pyskl - INFO - Config: model = dict(
+    type='Recognizer3D',
+    backbone=dict(
+        type='ResNet3dSlowOnly',
+        in_channels=17,
+        base_channels=32,
+        num_stages=3,
+        out_indices=(2, ),
+        stage_blocks=(4, 6, 3),
+        conv1_stride=(1, 1),
+        pool1_stride=(1, 1),
+        inflate=(0, 1, 1),
+        spatial_strides=(2, 2, 2),
+        temporal_strides=(1, 1, 2)),
+    cls_head=dict(type='I3DHead', in_channels=512, num_classes=6, dropout=0.5),
+    test_cfg=dict(average_clips='prob'))
+dataset_type = 'PoseDataset'
+ann_file = '/netscratch/jsingh/thesis/datasets/AUTHUAVGestureDatasetVideos_fps-15/uavgesture_annos_hrnet.pkl'
+left_kp = [1, 3, 5, 7, 9, 11, 13, 15]
+right_kp = [2, 4, 6, 8, 10, 12, 14, 16]
+skeletons = [[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10], [5, 11],
+             [11, 13], [13, 15], [6, 12], [12, 14], [14, 16], [0, 1], [0, 2],
+             [1, 3], [2, 4], [11, 12]]
+left_limb = [0, 2, 3, 6, 7, 8, 12, 14]
+right_limb = [1, 4, 5, 9, 10, 11, 13, 15]
+train_pipeline = [
+    dict(type='UniformSampleFrames', clip_len=48),
+    dict(type='PoseDecode'),
+    dict(type='PoseCompact', hw_ratio=1.0, allow_imgpad=True),
+    dict(type='Resize', scale=(-1, 64)),
+    dict(type='RandomResizedCrop', area_range=(0.56, 1.0)),
+    dict(type='Resize', scale=(56, 56), keep_ratio=False),
+    dict(
+        type='Flip',
+        flip_ratio=0.5,
+        left_kp=[1, 3, 5, 7, 9, 11, 13, 15],
+        right_kp=[2, 4, 6, 8, 10, 12, 14, 16]),
+    dict(
+        type='GeneratePoseTarget',
+        with_kp=False,
+        with_limb=True,
+        skeletons=[[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10], [5, 11],
+                   [11, 13], [13, 15], [6, 12], [12, 14], [14, 16], [0, 1],
+                   [0, 2], [1, 3], [2, 4], [11, 12]]),
+    dict(type='FormatShape', input_format='NCTHW_Heatmap'),
+    dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+    dict(type='ToTensor', keys=['imgs', 'label'])
+]
+val_pipeline = [
+    dict(type='UniformSampleFrames', clip_len=48, num_clips=1),
+    dict(type='PoseDecode'),
+    dict(type='PoseCompact', hw_ratio=1.0, allow_imgpad=True),
+    dict(type='Resize', scale=(64, 64), keep_ratio=False),
+    dict(
+        type='GeneratePoseTarget',
+        with_kp=False,
+        with_limb=True,
+        skeletons=[[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10], [5, 11],
+                   [11, 13], [13, 15], [6, 12], [12, 14], [14, 16], [0, 1],
+                   [0, 2], [1, 3], [2, 4], [11, 12]]),
+    dict(type='FormatShape', input_format='NCTHW_Heatmap'),
+    dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+    dict(type='ToTensor', keys=['imgs'])
+]
+test_pipeline = [
+    dict(type='UniformSampleFrames', clip_len=48, num_clips=10),
+    dict(type='PoseDecode'),
+    dict(type='PoseCompact', hw_ratio=1.0, allow_imgpad=True),
+    dict(type='Resize', scale=(64, 64), keep_ratio=False),
+    dict(
+        type='GeneratePoseTarget',
+        with_kp=False,
+        with_limb=True,
+        skeletons=[[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10], [5, 11],
+                   [11, 13], [13, 15], [6, 12], [12, 14], [14, 16], [0, 1],
+                   [0, 2], [1, 3], [2, 4], [11, 12]],
+        double=True,
+        left_kp=[1, 3, 5, 7, 9, 11, 13, 15],
+        right_kp=[2, 4, 6, 8, 10, 12, 14, 16],
+        left_limb=[0, 2, 3, 6, 7, 8, 12, 14],
+        right_limb=[1, 4, 5, 9, 10, 11, 13, 15]),
+    dict(type='FormatShape', input_format='NCTHW_Heatmap'),
+    dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+    dict(type='ToTensor', keys=['imgs'])
+]
+data = dict(
+    videos_per_gpu=32,
+    workers_per_gpu=4,
+    test_dataloader=dict(videos_per_gpu=1),
+    train=dict(
+        type='RepeatDataset',
+        times=10,
+        dataset=dict(
+            type='PoseDataset',
+            ann_file=
+            '/netscratch/jsingh/thesis/datasets/AUTHUAVGestureDatasetVideos_fps-15/uavgesture_annos_hrnet.pkl',
+            split='train',
+            pipeline=[
+                dict(type='UniformSampleFrames', clip_len=48),
+                dict(type='PoseDecode'),
+                dict(type='PoseCompact', hw_ratio=1.0, allow_imgpad=True),
+                dict(type='Resize', scale=(-1, 64)),
+                dict(type='RandomResizedCrop', area_range=(0.56, 1.0)),
+                dict(type='Resize', scale=(56, 56), keep_ratio=False),
+                dict(
+                    type='Flip',
+                    flip_ratio=0.5,
+                    left_kp=[1, 3, 5, 7, 9, 11, 13, 15],
+                    right_kp=[2, 4, 6, 8, 10, 12, 14, 16]),
+                dict(
+                    type='GeneratePoseTarget',
+                    with_kp=False,
+                    with_limb=True,
+                    skeletons=[[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10],
+                               [5, 11], [11, 13], [13, 15], [6, 12], [12, 14],
+                               [14, 16], [0, 1], [0, 2], [1, 3], [2, 4],
+                               [11, 12]]),
+                dict(type='FormatShape', input_format='NCTHW_Heatmap'),
+                dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+                dict(type='ToTensor', keys=['imgs', 'label'])
+            ])),
+    val=dict(
+        type='PoseDataset',
+        ann_file=
+        '/netscratch/jsingh/thesis/datasets/AUTHUAVGestureDatasetVideos_fps-15/uavgesture_annos_hrnet.pkl',
+        split='test',
+        pipeline=[
+            dict(type='UniformSampleFrames', clip_len=48, num_clips=1),
+            dict(type='PoseDecode'),
+            dict(type='PoseCompact', hw_ratio=1.0, allow_imgpad=True),
+            dict(type='Resize', scale=(64, 64), keep_ratio=False),
+            dict(
+                type='GeneratePoseTarget',
+                with_kp=False,
+                with_limb=True,
+                skeletons=[[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10],
+                           [5, 11], [11, 13], [13, 15], [6, 12], [12, 14],
+                           [14, 16], [0, 1], [0, 2], [1, 3], [2, 4], [11,
+                                                                      12]]),
+            dict(type='FormatShape', input_format='NCTHW_Heatmap'),
+            dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+            dict(type='ToTensor', keys=['imgs'])
+        ]),
+    test=dict(
+        type='PoseDataset',
+        ann_file=
+        '/netscratch/jsingh/thesis/datasets/AUTHUAVGestureDatasetVideos_fps-15/uavgesture_annos_hrnet.pkl',
+        split='test',
+        pipeline=[
+            dict(type='UniformSampleFrames', clip_len=48, num_clips=10),
+            dict(type='PoseDecode'),
+            dict(type='PoseCompact', hw_ratio=1.0, allow_imgpad=True),
+            dict(type='Resize', scale=(64, 64), keep_ratio=False),
+            dict(
+                type='GeneratePoseTarget',
+                with_kp=False,
+                with_limb=True,
+                skeletons=[[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10],
+                           [5, 11], [11, 13], [13, 15], [6, 12], [12, 14],
+                           [14, 16], [0, 1], [0, 2], [1, 3], [2, 4], [11, 12]],
+                double=True,
+                left_kp=[1, 3, 5, 7, 9, 11, 13, 15],
+                right_kp=[2, 4, 6, 8, 10, 12, 14, 16],
+                left_limb=[0, 2, 3, 6, 7, 8, 12, 14],
+                right_limb=[1, 4, 5, 9, 10, 11, 13, 15]),
+            dict(type='FormatShape', input_format='NCTHW_Heatmap'),
+            dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+            dict(type='ToTensor', keys=['imgs'])
+        ]))
+optimizer = dict(type='SGD', lr=0.4, momentum=0.9, weight_decay=0.0003)
+optimizer_config = dict(grad_clip=dict(max_norm=40, norm_type=2))
+lr_config = dict(policy='CosineAnnealing', by_epoch=False, min_lr=0)
+total_epochs = 24
+checkpoint_config = dict(interval=1)
+evaluation = dict(
+    interval=1, metrics=['top_k_accuracy', 'mean_class_accuracy'], topk=(1, 5))
+log_config = dict(interval=20, hooks=[dict(type='TextLoggerHook')])
+log_level = 'INFO'
+work_dir = './work_dirs/posec3d/slowonly_r50_ntu60_xsub/limb_uav'
+dist_params = dict(backend='nccl')
+gpu_ids = range(0, 1)
+
+2024-07-09 16:52:38,898 - pyskl - INFO - Set random seed to 373959902, deterministic: False
+2024-07-09 16:52:39,113 - pyskl - INFO - 1932 videos remain after valid thresholding
+2024-07-09 16:52:44,597 - pyskl - INFO - 459 videos remain after valid thresholding
+2024-07-09 16:52:44,598 - pyskl - INFO - Start running, host: jsingh@kent, work_dir: /home/jsingh/projects/thesis/code/pyskl_thesis/work_dirs/posec3d/slowonly_r50_ntu60_xsub/limb_uav
+2024-07-09 16:52:44,598 - pyskl - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) DistEvalHook                       
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(NORMAL      ) DistSamplerSeedHook                
+(NORMAL      ) DistEvalHook                       
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(NORMAL      ) DistEvalHook                       
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(ABOVE_NORMAL) OptimizerHook                      
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) DistEvalHook                       
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) DistEvalHook                       
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) DistSamplerSeedHook                
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_epoch:
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+after_run:
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+2024-07-09 16:52:44,598 - pyskl - INFO - workflow: [('train', 1)], max: 24 epochs
+2024-07-09 16:52:44,598 - pyskl - INFO - Checkpoints will be saved to /home/jsingh/projects/thesis/code/pyskl_thesis/work_dirs/posec3d/slowonly_r50_ntu60_xsub/limb_uav by HardDiskBackend.
+[W reducer.cpp:1289] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+2024-07-09 16:53:30,837 - pyskl - INFO - Epoch [1][20/604]	lr: 4.000e-01, eta: 9:17:45, time: 2.312, data_time: 1.190, memory: 18980, top1_acc: 0.2125, top5_acc: 0.8500, loss_cls: 2.2335, loss: 2.2335, grad_norm: 1.7256
+2024-07-09 16:54:01,144 - pyskl - INFO - Epoch [1][40/604]	lr: 4.000e-01, eta: 7:41:02, time: 1.515, data_time: 0.550, memory: 18980, top1_acc: 0.2094, top5_acc: 0.8703, loss_cls: 1.8651, loss: 1.8651, grad_norm: 0.5364
+2024-07-09 16:54:33,898 - pyskl - INFO - Epoch [1][60/604]	lr: 4.000e-01, eta: 7:18:16, time: 1.638, data_time: 0.662, memory: 18980, top1_acc: 0.1844, top5_acc: 0.8969, loss_cls: 1.8390, loss: 1.8390, grad_norm: 0.4358
+2024-07-09 16:55:04,464 - pyskl - INFO - Epoch [1][80/604]	lr: 4.000e-01, eta: 7:00:03, time: 1.528, data_time: 0.560, memory: 18980, top1_acc: 0.2266, top5_acc: 0.8953, loss_cls: 1.8208, loss: 1.8208, grad_norm: 0.3965
+2024-07-09 16:55:33,031 - pyskl - INFO - Epoch [1][100/604]	lr: 4.000e-01, eta: 6:44:07, time: 1.428, data_time: 0.447, memory: 18980, top1_acc: 0.2625, top5_acc: 0.8953, loss_cls: 1.7460, loss: 1.7460, grad_norm: 0.3513
+2024-07-09 16:56:02,513 - pyskl - INFO - Epoch [1][120/604]	lr: 3.999e-01, eta: 6:35:09, time: 1.474, data_time: 0.493, memory: 18980, top1_acc: 0.3078, top5_acc: 0.8953, loss_cls: 1.6958, loss: 1.6958, grad_norm: 0.4054
+2024-07-09 16:56:32,864 - pyskl - INFO - Epoch [1][140/604]	lr: 3.999e-01, eta: 6:30:06, time: 1.518, data_time: 0.553, memory: 18980, top1_acc: 0.3844, top5_acc: 0.9297, loss_cls: 1.5707, loss: 1.5707, grad_norm: 0.5476
+2024-07-09 16:57:02,434 - pyskl - INFO - Epoch [1][160/604]	lr: 3.999e-01, eta: 6:25:01, time: 1.478, data_time: 0.505, memory: 18980, top1_acc: 0.3578, top5_acc: 0.9563, loss_cls: 1.5014, loss: 1.5014, grad_norm: 0.4650
+2024-07-09 16:57:32,547 - pyskl - INFO - Epoch [1][180/604]	lr: 3.998e-01, eta: 6:21:41, time: 1.506, data_time: 0.536, memory: 18980, top1_acc: 0.3578, top5_acc: 0.9422, loss_cls: 1.5202, loss: 1.5202, grad_norm: 0.4688
+2024-07-09 16:58:01,680 - pyskl - INFO - Epoch [1][200/604]	lr: 3.998e-01, eta: 6:17:44, time: 1.457, data_time: 0.491, memory: 18980, top1_acc: 0.3500, top5_acc: 0.9594, loss_cls: 1.4402, loss: 1.4402, grad_norm: 0.4271
+2024-07-09 16:58:31,529 - pyskl - INFO - Epoch [1][220/604]	lr: 3.998e-01, eta: 6:15:12, time: 1.492, data_time: 0.518, memory: 18980, top1_acc: 0.4422, top5_acc: 0.9828, loss_cls: 1.3476, loss: 1.3476, grad_norm: 0.4564
+2024-07-09 16:59:02,412 - pyskl - INFO - Epoch [1][240/604]	lr: 3.997e-01, eta: 6:14:01, time: 1.544, data_time: 0.579, memory: 18980, top1_acc: 0.4531, top5_acc: 0.9844, loss_cls: 1.3540, loss: 1.3540, grad_norm: 0.4794
+2024-07-09 16:59:32,219 - pyskl - INFO - Epoch [1][260/604]	lr: 3.997e-01, eta: 6:11:58, time: 1.490, data_time: 0.527, memory: 18980, top1_acc: 0.5141, top5_acc: 0.9984, loss_cls: 1.1908, loss: 1.1908, grad_norm: 0.7266
+2024-07-09 17:00:02,061 - pyskl - INFO - Epoch [1][280/604]	lr: 3.996e-01, eta: 6:10:10, time: 1.492, data_time: 0.523, memory: 18980, top1_acc: 0.5766, top5_acc: 0.9953, loss_cls: 1.0497, loss: 1.0497, grad_norm: 0.5396
+2024-07-09 17:00:33,310 - pyskl - INFO - Epoch [1][300/604]	lr: 3.996e-01, eta: 6:09:39, time: 1.562, data_time: 0.573, memory: 18980, top1_acc: 0.6078, top5_acc: 1.0000, loss_cls: 0.9922, loss: 0.9922, grad_norm: 0.6101
+2024-07-09 17:01:03,625 - pyskl - INFO - Epoch [1][320/604]	lr: 3.995e-01, eta: 6:08:26, time: 1.516, data_time: 0.550, memory: 18980, top1_acc: 0.5781, top5_acc: 1.0000, loss_cls: 1.0527, loss: 1.0527, grad_norm: 0.6809
+2024-07-09 17:01:32,641 - pyskl - INFO - Epoch [1][340/604]	lr: 3.995e-01, eta: 6:06:24, time: 1.451, data_time: 0.477, memory: 18980, top1_acc: 0.5406, top5_acc: 0.9984, loss_cls: 1.1361, loss: 1.1361, grad_norm: 0.7200
+2024-07-09 17:02:02,593 - pyskl - INFO - Epoch [1][360/604]	lr: 3.994e-01, eta: 6:05:10, time: 1.498, data_time: 0.527, memory: 18980, top1_acc: 0.6219, top5_acc: 0.9984, loss_cls: 0.9400, loss: 0.9400, grad_norm: 0.5206
+2024-07-09 17:02:32,534 - pyskl - INFO - Epoch [1][380/604]	lr: 3.993e-01, eta: 6:04:00, time: 1.497, data_time: 0.526, memory: 18980, top1_acc: 0.6047, top5_acc: 1.0000, loss_cls: 0.9745, loss: 0.9745, grad_norm: 0.5889
+2024-07-09 17:03:02,239 - pyskl - INFO - Epoch [1][400/604]	lr: 3.993e-01, eta: 6:02:45, time: 1.485, data_time: 0.506, memory: 18980, top1_acc: 0.6266, top5_acc: 1.0000, loss_cls: 0.9333, loss: 0.9333, grad_norm: 0.5783
+2024-07-09 17:03:32,967 - pyskl - INFO - Epoch [1][420/604]	lr: 3.992e-01, eta: 6:02:09, time: 1.536, data_time: 0.569, memory: 18980, top1_acc: 0.6172, top5_acc: 1.0000, loss_cls: 0.9438, loss: 0.9438, grad_norm: 0.5786
+2024-07-09 17:04:02,775 - pyskl - INFO - Epoch [1][440/604]	lr: 3.991e-01, eta: 6:01:04, time: 1.490, data_time: 0.521, memory: 18980, top1_acc: 0.6625, top5_acc: 0.9969, loss_cls: 0.8710, loss: 0.8710, grad_norm: 0.4967
+2024-07-09 17:04:32,998 - pyskl - INFO - Epoch [1][460/604]	lr: 3.990e-01, eta: 6:00:15, time: 1.511, data_time: 0.513, memory: 18980, top1_acc: 0.6328, top5_acc: 1.0000, loss_cls: 0.8977, loss: 0.8977, grad_norm: 0.6209
+2024-07-09 17:05:02,309 - pyskl - INFO - Epoch [1][480/604]	lr: 3.989e-01, eta: 5:59:00, time: 1.466, data_time: 0.499, memory: 18980, top1_acc: 0.6109, top5_acc: 0.9984, loss_cls: 0.9718, loss: 0.9718, grad_norm: 0.5968
+2024-07-09 17:05:31,849 - pyskl - INFO - Epoch [1][500/604]	lr: 3.988e-01, eta: 5:57:56, time: 1.477, data_time: 0.507, memory: 18980, top1_acc: 0.6266, top5_acc: 1.0000, loss_cls: 0.8775, loss: 0.8775, grad_norm: 0.6226
+2024-07-09 17:06:01,005 - pyskl - INFO - Epoch [1][520/604]	lr: 3.987e-01, eta: 5:56:44, time: 1.458, data_time: 0.489, memory: 18980, top1_acc: 0.6000, top5_acc: 1.0000, loss_cls: 0.9841, loss: 0.9841, grad_norm: 0.6096
+2024-07-09 17:06:29,988 - pyskl - INFO - Epoch [1][540/604]	lr: 3.986e-01, eta: 5:55:31, time: 1.449, data_time: 0.477, memory: 18980, top1_acc: 0.6422, top5_acc: 1.0000, loss_cls: 0.8558, loss: 0.8558, grad_norm: 0.5369
+Traceback (most recent call last):
+  File "tools/train.py", line 167, in <module>
+    main()
+  File "tools/train.py", line 159, in main
+    train_model(model, datasets, cfg, validate=args.validate, test=test_option, timestamp=timestamp, meta=meta)
+  File "/workspace/pyskl/pyskl/apis/train.py", line 144, in train_model
+    runner.run(data_loaders, cfg.workflow, cfg.total_epochs)
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/mmcv/runner/epoch_based_runner.py", line 127, in run
+    epoch_runner(data_loaders[i], **kwargs)
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/mmcv/runner/epoch_based_runner.py", line 51, in train
+    self.call_hook('after_train_iter')
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/mmcv/runner/base_runner.py", line 309, in call_hook
+    getattr(hook, fn_name)(self)
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/mmcv/runner/hooks/logger/base.py", line 153, in after_train_iter
+    self.log(runner)
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/mmcv/runner/hooks/logger/text.py", line 235, in log
+    self._dump_log(log_dict, runner)
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/mmcv/runner/hooks/logger/text.py", line 192, in _dump_log
+    with open(self.json_log_path, 'a+') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/jsingh/projects/thesis/code/pyskl_thesis/work_dirs/posec3d/slowonly_r50_ntu60_xsub/limb_uav/20240709_165236.log.json'
+srun: error: kent: task 0: Exited with exit code 1
+srun: Terminating StepId=1120841.0

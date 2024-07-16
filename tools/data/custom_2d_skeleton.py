@@ -1,3 +1,6 @@
+import torch
+print(torch.__version__)
+print(torch.version.cuda)
 import sys
 # sys.path.append('/home/jaspreet/Downloads/Thesis/code/pyskl')
 sys.path.append('/home/jsingh/projects/thesis/code/pyskl_thesis')
@@ -11,6 +14,7 @@ import numpy as np
 import os
 import os.path as osp
 import torch.distributed as dist
+# from mmengine.dist import get_dist_info, init_dist
 from mmcv.runner import get_dist_info, init_dist
 from tqdm import tqdm
 

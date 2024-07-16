@@ -14,7 +14,7 @@ from torch.utils.data import Dataset
 from pyskl.smp import auto_mix2
 from ..core import mean_average_precision, mean_class_accuracy, top_k_accuracy
 from .pipelines import Compose
-
+from pyskl.utils import  get_root_logger
 
 class BaseDataset(Dataset, metaclass=ABCMeta):
     """Base class for datasets.
@@ -70,6 +70,7 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
 
         self.pipeline = Compose(pipeline)
         self.video_infos = self.load_annotations()
+        self.logger = get_root_logger()
 
     @abstractmethod
     def load_annotations(self):
@@ -129,11 +130,16 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         Returns:
             dict: Evaluation results dict.
         """
+        self.logger.info(results)
+        # print_log(results)
+        # print(logger)
         if not isinstance(results, list):
             raise TypeError(f'results must be a list, but got {type(results)}')
         assert len(results) == len(self), (
             f'The length of results is not equal to the dataset len: '
             f'{len(results)} != {len(self)}')
+
+        # print_log(results)
 
         if isinstance(results[0], list) or isinstance(results[0], tuple):
             num_results = len(results[0])
