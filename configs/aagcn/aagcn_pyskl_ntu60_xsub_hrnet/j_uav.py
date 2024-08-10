@@ -6,7 +6,7 @@ model = dict(
     cls_head=dict(type='GCNHead', num_classes=6, in_channels=256))
 
 dataset_type = 'PoseDataset2'
-ann_file = '/home/jaspreet/Downloads/Thesis/dataset/AUTHUAVGestureDatasetVideos_fps-15/uavgesture_annos_hrnet.pkl'
+ann_file = '/netscratch/jsingh/thesis/datasets/AUTHUAVGestureDatasetVideos_fps-15/uavgesture_annos_hrnet.pkl'
 train_pipeline = [
     dict(type='PreNormalize2D'),
     dict(type='GenSkeFeat', dataset='coco', feats=['j']),
