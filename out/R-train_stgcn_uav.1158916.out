@@ -1,0 +1,19 @@
+Job 1158916: Running on node(s) kersey
+Job 1158916: Started at 2024-08-12 10:13:31+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1158916&from=1723450411000
+srun: jobinfo: version v1.0.0
+Job 1158916: Running on node(s) kersey
+Job 1158916: Started at 2024-08-12 10:13:31+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1158916&from=1723450411000
+Job 1158916: creating container for /netscratch/jsingh/pyskl7.sqsh
+slurmstepd: error: pyxis: child 1744706 failed with error code: 137
+srun: error: kersey: task 0: Out Of Memory
+srun: Terminating StepId=1158916.0
+slurmstepd: error: pyxis: failed to create container filesystem
+slurmstepd: error: pyxis: printing enroot log file:
+slurmstepd: error: pyxis:     [INFO] Extracting squashfs filesystem...
+slurmstepd: error: pyxis:     /usr/lib/enroot/runtime.sh: line 384: 1744734 Killed                  unsquashfs ${TTY_OFF+-no-progress} -user-xattrs -d "${rootfs}" "${image}" 1>&2
+slurmstepd: error: pyxis: couldn't start container
+slurmstepd: error: spank: required plugin spank_pyxis.so: task_init() failed with rc=-1
+slurmstepd: error: Failed to invoke spank plugin stack
+slurmstepd: error: Detected 1 oom_kill event in StepId=1158916.0. Some of the step tasks have been OOM Killed.

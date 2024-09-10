@@ -1,0 +1,10 @@
+Job 1182910: Running on node(s) serv-3329
+Job 1182910: Started at 2024-09-02 23:37:41+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1182910&from=1725313061000
+srun: jobinfo: version v1.0.0
+Job 1182910: Running on node(s) serv-3329
+Job 1182910: Started at 2024-09-02 23:37:42+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1182910&from=1725313062000
+Job 1182910: creating container for /netscratch/jsingh/pyskl7.sqsh
+Job 1182910: creating container for /netscratch/jsingh/pyskl7.sqsh took 40.0 seconds
+Updated PYTHONPATH: :/home/jsingh/projects/thesis/code/pyskl_thesis/pyskl

@@ -1,0 +1,242 @@
+Job 1182915: Running on node(s) kent
+Job 1182915: Started at 2024-09-02 23:47:03+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1182915&from=1725313623000
+srun: jobinfo: version v1.0.0
+Job 1182915: Running on node(s) kent
+Job 1182915: Started at 2024-09-02 23:47:03+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1182915&from=1725313623000
+Job 1182915: creating container for /netscratch/jsingh/pyskl7.sqsh
+Job 1182915: creating container for /netscratch/jsingh/pyskl7.sqsh took 32.7 seconds
+Updated PYTHONPATH: :/home/jsingh/projects/thesis/code/pyskl_thesis/pyskl
+2024-09-02 23:47:42,777 - pyskl - INFO - Environment info:
+------------------------------------------------------------
+sys.platform: linux
+Python: 3.7.11 (default, Jul 27 2021, 14:32:16) [GCC 7.5.0]
+CUDA available: True
+GPU 0: Quadro RTX 6000
+CUDA_HOME: /usr/local/cuda
+NVCC: Cuda compilation tools, release 11.1, V11.1.105
+GCC: gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
+PyTorch: 1.11.0
+PyTorch compiling details: PyTorch built with:
+  - GCC 7.3
+  - C++ Version: 201402
+  - Intel(R) oneAPI Math Kernel Library Version 2021.4-Product Build 20210904 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.5.2 (Git Hash a9302535553c73243c632ad3c4c80beec3d19a1e)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - CUDA Runtime 11.3
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 8.2
+  - Magma 2.5.2
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.3, CUDNN_VERSION=8.2.0, CXX_COMPILER=/opt/rh/devtoolset-7/root/usr/bin/c++, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_KINETO -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DEDGE_PROFILER_USE_KINETO -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-unused-local-typedefs -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.11.0, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=OFF, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, 
+
+TorchVision: 0.12.0
+OpenCV: 4.10.0
+MMCV: 1.5.0
+MMCV Compiler: GCC 7.3
+MMCV CUDA Compiler: 11.3
+pyskl: 0.1.0+74f00a8
+------------------------------------------------------------
+
+2024-09-02 23:47:43,432 - pyskl - INFO - Config: model = dict(
+    type='RecognizerGCN',
+    backbone=dict(
+        type='STGCN',
+        gcn_adaptive='init',
+        gcn_with_res=True,
+        tcn_type='mstcn',
+        graph_cfg=dict(layout='nturgb+d', mode='spatial')),
+    cls_head=dict(type='GCNHead', num_classes=6, in_channels=256))
+dataset_type = 'PoseDataset2'
+ann_file = '/home/jsingh/projects/thesis/code/pyskl_thesis/extracted_pose_3d.pkl'
+train_pipeline = [
+    dict(type='PreNormalize3D'),
+    dict(type='GenSkeFeat', dataset='nturgb+d', feats=['b']),
+    dict(type='UniformSample', clip_len=100),
+    dict(type='PoseDecode'),
+    dict(type='FormatGCNInput', num_person=2),
+    dict(type='Collect', keys=['keypoint', 'label'], meta_keys=[]),
+    dict(type='ToTensor', keys=['keypoint'])
+]
+val_pipeline = [
+    dict(type='PreNormalize3D'),
+    dict(type='GenSkeFeat', dataset='nturgb+d', feats=['b']),
+    dict(type='UniformSample', clip_len=100, num_clips=1),
+    dict(type='PoseDecode'),
+    dict(type='FormatGCNInput', num_person=2),
+    dict(type='Collect', keys=['keypoint', 'label'], meta_keys=[]),
+    dict(type='ToTensor', keys=['keypoint'])
+]
+test_pipeline = [
+    dict(type='PreNormalize3D'),
+    dict(type='GenSkeFeat', dataset='nturgb+d', feats=['b']),
+    dict(type='UniformSample', clip_len=100, num_clips=10),
+    dict(type='PoseDecode'),
+    dict(type='FormatGCNInput', num_person=2),
+    dict(type='Collect', keys=['keypoint', 'label'], meta_keys=[]),
+    dict(type='ToTensor', keys=['keypoint'])
+]
+data = dict(
+    videos_per_gpu=16,
+    workers_per_gpu=2,
+    test_dataloader=dict(videos_per_gpu=1),
+    train=dict(
+        type='RepeatDataset',
+        times=5,
+        dataset=dict(
+            type='PoseDataset2',
+            ann_file=
+            '/home/jsingh/projects/thesis/code/pyskl_thesis/extracted_pose_3d.pkl',
+            pipeline=[
+                dict(type='PreNormalize3D'),
+                dict(type='GenSkeFeat', dataset='nturgb+d', feats=['b']),
+                dict(type='UniformSample', clip_len=100),
+                dict(type='PoseDecode'),
+                dict(type='FormatGCNInput', num_person=2),
+                dict(type='Collect', keys=['keypoint', 'label'], meta_keys=[]),
+                dict(type='ToTensor', keys=['keypoint'])
+            ],
+            split='train')),
+    val=dict(
+        type='PoseDataset2',
+        ann_file=
+        '/home/jsingh/projects/thesis/code/pyskl_thesis/extracted_pose_3d.pkl',
+        pipeline=[
+            dict(type='PreNormalize3D'),
+            dict(type='GenSkeFeat', dataset='nturgb+d', feats=['b']),
+            dict(type='UniformSample', clip_len=100, num_clips=1),
+            dict(type='PoseDecode'),
+            dict(type='FormatGCNInput', num_person=2),
+            dict(type='Collect', keys=['keypoint', 'label'], meta_keys=[]),
+            dict(type='ToTensor', keys=['keypoint'])
+        ],
+        split='test'),
+    test=dict(
+        type='PoseDataset2',
+        ann_file=
+        '/home/jsingh/projects/thesis/code/pyskl_thesis/extracted_pose_3d.pkl',
+        pipeline=[
+            dict(type='PreNormalize3D'),
+            dict(type='GenSkeFeat', dataset='nturgb+d', feats=['b']),
+            dict(type='UniformSample', clip_len=100, num_clips=10),
+            dict(type='PoseDecode'),
+            dict(type='FormatGCNInput', num_person=2),
+            dict(type='Collect', keys=['keypoint', 'label'], meta_keys=[]),
+            dict(type='ToTensor', keys=['keypoint'])
+        ],
+        split='test'))
+optimizer = dict(
+    type='SGD', lr=0.1, momentum=0.9, weight_decay=0.0005, nesterov=True)
+optimizer_config = dict(grad_clip=None)
+lr_config = dict(policy='CosineAnnealing', min_lr=0, by_epoch=False)
+total_epochs = 16
+checkpoint_config = dict(interval=1)
+evaluation = dict(interval=1, metrics=['top_k_accuracy'])
+log_config = dict(interval=100, hooks=[dict(type='TextLoggerHook')])
+log_level = 'INFO'
+work_dir = './work_dirs/stgcn++/stgcn++_ntu60_xsub_3dkp/b_uav'
+dist_params = dict(backend='nccl')
+gpu_ids = range(0, 1)
+
+2024-09-02 23:47:43,432 - pyskl - INFO - Set random seed to 1792376121, deterministic: False
+2024-09-02 23:47:43,467 - pyskl - INFO - 1 videos remain before valid thresholding, pose dataset
+2024-09-02 23:47:43,467 - pyskl - INFO - box_thr: None, valid_ratio: None, class_prob: None, split: train
+2024-09-02 23:47:43,467 - pyskl - INFO - 1 videos remain after valid thresholding, Pose dataset
+2024-09-02 23:47:55,508 - pyskl - INFO - 1 videos remain before valid thresholding, pose dataset
+2024-09-02 23:47:55,509 - pyskl - INFO - box_thr: None, valid_ratio: None, class_prob: None, split: test
+2024-09-02 23:47:55,509 - pyskl - INFO - 1 videos remain after valid thresholding, Pose dataset
+2024-09-02 23:47:55,509 - pyskl - INFO - Start running, host: jsingh@kent, work_dir: /home/jsingh/projects/thesis/code/pyskl_thesis/work_dirs/stgcn++/stgcn++_ntu60_xsub_3dkp/b_uav
+2024-09-02 23:47:55,509 - pyskl - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) DistEvalHook                       
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(NORMAL      ) DistSamplerSeedHook                
+(NORMAL      ) DistEvalHook                       
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(NORMAL      ) DistEvalHook                       
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(ABOVE_NORMAL) OptimizerHook                      
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) DistEvalHook                       
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) DistEvalHook                       
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) DistSamplerSeedHook                
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_epoch:
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+after_run:
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+2024-09-02 23:47:55,510 - pyskl - INFO - workflow: [('train', 1)], max: 16 epochs
+2024-09-02 23:47:55,510 - pyskl - INFO - Checkpoints will be saved to /home/jsingh/projects/thesis/code/pyskl_thesis/work_dirs/stgcn++/stgcn++_ntu60_xsub_3dkp/b_uav by HardDiskBackend.
+Traceback (most recent call last):
+  File "/home/jsingh/projects/thesis/code/pyskl_thesis/tools/train.py", line 167, in <module>
+    main()
+  File "/home/jsingh/projects/thesis/code/pyskl_thesis/tools/train.py", line 159, in main
+    train_model(model, datasets, cfg, validate=args.validate, test=test_option, timestamp=timestamp, meta=meta)
+  File "/home/jsingh/projects/thesis/code/pyskl_thesis/pyskl/apis/train.py", line 144, in train_model
+    runner.run(data_loaders, cfg.workflow, cfg.total_epochs)
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/mmcv/runner/epoch_based_runner.py", line 127, in run
+    epoch_runner(data_loaders[i], **kwargs)
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/mmcv/runner/epoch_based_runner.py", line 47, in train
+    for i, data_batch in enumerate(self.data_loader):
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 530, in __next__
+    data = self._next_data()
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 1224, in _next_data
+    return self._process_data(data)
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 1250, in _process_data
+    data.reraise()
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/torch/_utils.py", line 457, in reraise
+    raise exception
+KeyError: Caught KeyError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/torch/utils/data/_utils/worker.py", line 287, in _worker_loop
+    data = fetcher.fetch(index)
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/torch/utils/data/_utils/fetch.py", line 49, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/root/miniconda3/envs/pys/lib/python3.7/site-packages/torch/utils/data/_utils/fetch.py", line 49, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/jsingh/projects/thesis/code/pyskl_thesis/pyskl/datasets/dataset_wrappers.py", line 34, in __getitem__
+    return self.dataset[idx % self._ori_len]
+  File "/home/jsingh/projects/thesis/code/pyskl_thesis/pyskl/datasets/base.py", line 328, in __getitem__
+    return self.prepare_test_frames(idx) if self.test_mode else self.prepare_train_frames(idx)
+  File "/home/jsingh/projects/thesis/code/pyskl_thesis/pyskl/datasets/base.py", line 279, in prepare_train_frames
+    return self.pipeline(results)
+  File "/home/jsingh/projects/thesis/code/pyskl_thesis/pyskl/datasets/pipelines/compose.py", line 41, in __call__
+    data = t(data)
+  File "/home/jsingh/projects/thesis/code/pyskl_thesis/pyskl/datasets/pipelines/pose_related.py", line 243, in __call__
+    skeleton = results['keypoint']
+KeyError: 'keypoint'
+
+srun: error: kent: task 0: Exited with exit code 1
+srun: Terminating StepId=1182915.0

@@ -1,0 +1,547 @@
+Job 1184167: Running on node(s) kent
+Job 1184167: Started at 2024-09-03 23:34:40+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1184167&from=1725399280000
+srun: jobinfo: version v1.0.0
+Job 1184167: Running on node(s) kent
+Job 1184167: Started at 2024-09-03 23:34:40+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1184167&from=1725399280000
+Job 1184167: creating container for /netscratch/jsingh/pyskl7.sqsh
+Job 1184167: creating container for /netscratch/jsingh/pyskl7.sqsh took 32.0 seconds
+Updated PYTHONPATH: :/home/jsingh/projects/thesis/code/pyskl_thesis/pyskl
+2024-09-03 23:35:15,576 - pyskl - INFO - Environment info:
+------------------------------------------------------------
+sys.platform: linux
+Python: 3.7.11 (default, Jul 27 2021, 14:32:16) [GCC 7.5.0]
+CUDA available: True
+GPU 0: Quadro RTX 6000
+CUDA_HOME: /usr/local/cuda
+NVCC: Cuda compilation tools, release 11.1, V11.1.105
+GCC: gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
+PyTorch: 1.11.0
+PyTorch compiling details: PyTorch built with:
+  - GCC 7.3
+  - C++ Version: 201402
+  - Intel(R) oneAPI Math Kernel Library Version 2021.4-Product Build 20210904 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.5.2 (Git Hash a9302535553c73243c632ad3c4c80beec3d19a1e)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - CUDA Runtime 11.3
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 8.2
+  - Magma 2.5.2
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.3, CUDNN_VERSION=8.2.0, CXX_COMPILER=/opt/rh/devtoolset-7/root/usr/bin/c++, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_KINETO -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DEDGE_PROFILER_USE_KINETO -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-unused-local-typedefs -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.11.0, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=OFF, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, 
+
+TorchVision: 0.12.0
+OpenCV: 4.10.0
+MMCV: 1.5.0
+MMCV Compiler: GCC 7.3
+MMCV CUDA Compiler: 11.3
+pyskl: 0.1.0+74f00a8
+------------------------------------------------------------
+
+2024-09-03 23:35:16,206 - pyskl - INFO - Config: model = dict(
+    type='RecognizerGCN',
+    backbone=dict(
+        type='STGCN',
+        gcn_adaptive='init',
+        gcn_with_res=True,
+        tcn_type='mstcn',
+        graph_cfg=dict(layout='coco', mode='spatial')),
+    cls_head=dict(type='GCNHead', num_classes=6, in_channels=256))
+dataset_type = 'PoseDataset2'
+ann_file = '/home/jsingh/projects/thesis/code/pyskl_thesis/extracted_pose_3d.pkl'
+train_pipeline = [
+    dict(type='PreNormalize3D'),
+    dict(type='GenSkeFeat', dataset='coco', feats=['b']),
+    dict(type='UniformSample', clip_len=100),
+    dict(type='PoseDecode'),
+    dict(type='FormatGCNInput', num_person=2),
+    dict(type='Collect', keys=['keypoint', 'label'], meta_keys=[]),
+    dict(type='ToTensor', keys=['keypoint'])
+]
+val_pipeline = [
+    dict(type='PreNormalize3D'),
+    dict(type='GenSkeFeat', dataset='coco', feats=['b']),
+    dict(type='UniformSample', clip_len=100, num_clips=1),
+    dict(type='PoseDecode'),
+    dict(type='FormatGCNInput', num_person=2),
+    dict(type='Collect', keys=['keypoint', 'label'], meta_keys=[]),
+    dict(type='ToTensor', keys=['keypoint'])
+]
+test_pipeline = [
+    dict(type='PreNormalize3D'),
+    dict(type='GenSkeFeat', dataset='coco', feats=['b']),
+    dict(type='UniformSample', clip_len=100, num_clips=10),
+    dict(type='PoseDecode'),
+    dict(type='FormatGCNInput', num_person=2),
+    dict(type='Collect', keys=['keypoint', 'label'], meta_keys=[]),
+    dict(type='ToTensor', keys=['keypoint'])
+]
+data = dict(
+    videos_per_gpu=16,
+    workers_per_gpu=2,
+    test_dataloader=dict(videos_per_gpu=1),
+    train=dict(
+        type='RepeatDataset',
+        times=5,
+        dataset=dict(
+            type='PoseDataset2',
+            ann_file=
+            '/home/jsingh/projects/thesis/code/pyskl_thesis/extracted_pose_3d.pkl',
+            pipeline=[
+                dict(type='PreNormalize3D'),
+                dict(type='GenSkeFeat', dataset='coco', feats=['b']),
+                dict(type='UniformSample', clip_len=100),
+                dict(type='PoseDecode'),
+                dict(type='FormatGCNInput', num_person=2),
+                dict(type='Collect', keys=['keypoint', 'label'], meta_keys=[]),
+                dict(type='ToTensor', keys=['keypoint'])
+            ],
+            split='train')),
+    val=dict(
+        type='PoseDataset2',
+        ann_file=
+        '/home/jsingh/projects/thesis/code/pyskl_thesis/extracted_pose_3d.pkl',
+        pipeline=[
+            dict(type='PreNormalize3D'),
+            dict(type='GenSkeFeat', dataset='coco', feats=['b']),
+            dict(type='UniformSample', clip_len=100, num_clips=1),
+            dict(type='PoseDecode'),
+            dict(type='FormatGCNInput', num_person=2),
+            dict(type='Collect', keys=['keypoint', 'label'], meta_keys=[]),
+            dict(type='ToTensor', keys=['keypoint'])
+        ],
+        split='test'),
+    test=dict(
+        type='PoseDataset2',
+        ann_file=
+        '/home/jsingh/projects/thesis/code/pyskl_thesis/extracted_pose_3d.pkl',
+        pipeline=[
+            dict(type='PreNormalize3D'),
+            dict(type='GenSkeFeat', dataset='coco', feats=['b']),
+            dict(type='UniformSample', clip_len=100, num_clips=10),
+            dict(type='PoseDecode'),
+            dict(type='FormatGCNInput', num_person=2),
+            dict(type='Collect', keys=['keypoint', 'label'], meta_keys=[]),
+            dict(type='ToTensor', keys=['keypoint'])
+        ],
+        split='test'))
+optimizer = dict(
+    type='SGD', lr=0.1, momentum=0.9, weight_decay=0.0005, nesterov=True)
+optimizer_config = dict(grad_clip=None)
+lr_config = dict(policy='CosineAnnealing', min_lr=0, by_epoch=False)
+total_epochs = 16
+checkpoint_config = dict(interval=1)
+evaluation = dict(interval=1, metrics=['top_k_accuracy'])
+log_config = dict(interval=100, hooks=[dict(type='TextLoggerHook')])
+log_level = 'INFO'
+work_dir = './work_dirs/stgcn++/stgcn++_ntu60_xsub_3dkp/b_uav'
+dist_params = dict(backend='nccl')
+gpu_ids = range(0, 1)
+
+2024-09-03 23:35:16,207 - pyskl - INFO - Set random seed to 1390587655, deterministic: False
+2024-09-03 23:35:16,243 - pyskl - INFO - 10 videos remain before valid thresholding, pose dataset
+2024-09-03 23:35:16,243 - pyskl - INFO - box_thr: None, valid_ratio: None, class_prob: None, split: train
+2024-09-03 23:35:16,243 - pyskl - INFO - 10 videos remain after valid thresholding, Pose dataset
+2024-09-03 23:35:19,103 - pyskl - INFO - 11 videos remain before valid thresholding, pose dataset
+2024-09-03 23:35:19,103 - pyskl - INFO - box_thr: None, valid_ratio: None, class_prob: None, split: test
+2024-09-03 23:35:19,103 - pyskl - INFO - 11 videos remain after valid thresholding, Pose dataset
+2024-09-03 23:35:19,103 - pyskl - INFO - Start running, host: jsingh@kent, work_dir: /home/jsingh/projects/thesis/code/pyskl_thesis/work_dirs/stgcn++/stgcn++_ntu60_xsub_3dkp/b_uav
+2024-09-03 23:35:19,103 - pyskl - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) DistEvalHook                       
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(NORMAL      ) DistSamplerSeedHook                
+(NORMAL      ) DistEvalHook                       
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(NORMAL      ) DistEvalHook                       
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(ABOVE_NORMAL) OptimizerHook                      
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) DistEvalHook                       
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) DistEvalHook                       
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) DistSamplerSeedHook                
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_epoch:
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+after_run:
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+2024-09-03 23:35:19,104 - pyskl - INFO - workflow: [('train', 1)], max: 16 epochs
+2024-09-03 23:35:19,104 - pyskl - INFO - Checkpoints will be saved to /home/jsingh/projects/thesis/code/pyskl_thesis/work_dirs/stgcn++/stgcn++_ntu60_xsub_3dkp/b_uav by HardDiskBackend.
+[W reducer.cpp:1289] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+2024-09-03 23:35:27,834 - pyskl - INFO - Saving checkpoint at 1 epochs
+2024-09-03 23:35:35,282 - pyskl - INFO - [array([0.091451  , 0.01450144, 0.22008993, 0.00756782, 0.01591846,
+       0.6504714 ], dtype=float32), array([0.09221778, 0.01482041, 0.22067301, 0.00781024, 0.016256  ,
+       0.64822257], dtype=float32), array([0.09131851, 0.0144485 , 0.21994704, 0.00753297, 0.01586024,
+       0.65089273], dtype=float32), array([0.09131574, 0.01444741, 0.21994527, 0.00753206, 0.01585911,
+       0.6509004 ], dtype=float32), array([0.09125036, 0.01442072, 0.2198855 , 0.00751749, 0.01583157,
+       0.6510944 ], dtype=float32), array([0.0913261 , 0.01445123, 0.2199526 , 0.00753484, 0.01586317,
+       0.6508721 ], dtype=float32), array([0.09127577, 0.01443579, 0.2199088 , 0.00752405, 0.0158448 ,
+       0.65101075], dtype=float32), array([0.09221779, 0.01482023, 0.22066754, 0.00781027, 0.01625566,
+       0.6482285 ], dtype=float32), array([0.09131851, 0.0144485 , 0.21994704, 0.00753297, 0.01586024,
+       0.65089273], dtype=float32), array([0.09131574, 0.01444741, 0.21994527, 0.00753206, 0.01585911,
+       0.6509004 ], dtype=float32), array([0.09125036, 0.01442072, 0.2198855 , 0.00751749, 0.01583157,
+       0.6510944 ], dtype=float32)]
+2024-09-03 23:35:35,285 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:35:35,285 - pyskl - INFO - 
+top1_acc	0.1818
+top5_acc	0.8182
+2024-09-03 23:35:35,389 - pyskl - INFO - Now best checkpoint is saved as best_top1_acc_epoch_1.pth.
+2024-09-03 23:35:35,389 - pyskl - INFO - Best top1_acc is 0.1818 at 1 epoch.
+2024-09-03 23:35:35,390 - pyskl - INFO - Epoch(val) [1][1]	top1_acc: 0.1818, top5_acc: 0.8182
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    69s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    18s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.2 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.4 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:35:43,218 - pyskl - INFO - Saving checkpoint at 2 epochs
+2024-09-03 23:35:50,801 - pyskl - INFO - [array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32)]
+2024-09-03 23:35:50,804 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:35:50,804 - pyskl - INFO - 
+top1_acc	0.1818
+top5_acc	0.8182
+2024-09-03 23:35:50,804 - pyskl - INFO - Epoch(val) [2][1]	top1_acc: 0.1818, top5_acc: 0.8182
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    69s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    18s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.2 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.4 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:35:58,573 - pyskl - INFO - Saving checkpoint at 3 epochs
+2024-09-03 23:36:06,237 - pyskl - INFO - [array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32)]
+2024-09-03 23:36:06,239 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:36:06,239 - pyskl - INFO - 
+top1_acc	0.1818
+top5_acc	0.8182
+2024-09-03 23:36:06,239 - pyskl - INFO - Epoch(val) [3][1]	top1_acc: 0.1818, top5_acc: 0.8182
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    70s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    19s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.1 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.4 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:36:14,035 - pyskl - INFO - Saving checkpoint at 4 epochs
+2024-09-03 23:36:21,585 - pyskl - INFO - [array([0.000000e+00, 0.000000e+00, 9.217285e-38, 1.000000e+00,
+       0.000000e+00, 9.938244e-38], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0.0000000e+00, 0.0000000e+00, 5.5920817e-30, 1.0000000e+00,
+       0.0000000e+00, 6.1313533e-30], dtype=float32), array([1.4012985e-45, 0.0000000e+00, 1.7529822e-28, 1.0000000e+00,
+       0.0000000e+00, 1.8748376e-28], dtype=float32), array([1.4713634e-43, 0.0000000e+00, 1.9504384e-27, 1.0000000e+00,
+       0.0000000e+00, 2.2843245e-27], dtype=float32), array([0.0000000e+00, 0.0000000e+00, 3.0468275e-31, 1.0000000e+00,
+       0.0000000e+00, 3.3951716e-31], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([0.0000000e+00, 0.0000000e+00, 5.5920817e-30, 1.0000000e+00,
+       0.0000000e+00, 6.1313533e-30], dtype=float32), array([1.4012985e-45, 0.0000000e+00, 1.7529822e-28, 1.0000000e+00,
+       0.0000000e+00, 1.8748376e-28], dtype=float32), array([1.4713634e-43, 0.0000000e+00, 1.9504384e-27, 1.0000000e+00,
+       0.0000000e+00, 2.2843245e-27], dtype=float32)]
+2024-09-03 23:36:21,588 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:36:21,588 - pyskl - INFO - 
+top1_acc	0.1818
+top5_acc	1.0000
+2024-09-03 23:36:21,588 - pyskl - INFO - Epoch(val) [4][1]	top1_acc: 0.1818, top5_acc: 1.0000
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    70s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    19s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.1 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.4 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:36:29,426 - pyskl - INFO - Saving checkpoint at 5 epochs
+2024-09-03 23:36:36,987 - pyskl - INFO - [array([8.1412035e-32, 4.6089000e-36, 1.1273924e-15, 1.0000000e+00,
+       2.8119647e-35, 5.8816904e-20], dtype=float32), array([0., 0., 0., 1., 0., 0.], dtype=float32), array([1.9916954e-18, 2.1775471e-21, 5.1539137e-09, 1.0000000e+00,
+       6.4454931e-21, 1.1419641e-11], dtype=float32), array([1.0463846e-16, 1.6713754e-19, 3.7956450e-08, 1.0000000e+00,
+       4.5084295e-19, 1.3540748e-10], dtype=float32), array([8.4156437e-14, 3.0080565e-16, 7.9361905e-07, 9.9999917e-01,
+       6.8686151e-16, 6.9465695e-09], dtype=float32), array([6.3271982e-20, 4.9679727e-23, 9.2424146e-10, 1.0000000e+00,
+       1.5940810e-22, 1.3366781e-12], dtype=float32), array([4.0910819e-38, 6.9924793e-43, 3.7857332e-19, 1.0000000e+00,
+       5.8476185e-42, 4.2566307e-24], dtype=float32), array([0.e+00, 0.e+00, 1.e-45, 1.e+00, 0.e+00, 0.e+00], dtype=float32), array([1.9916954e-18, 2.1775471e-21, 5.1539137e-09, 1.0000000e+00,
+       6.4454931e-21, 1.1419641e-11], dtype=float32), array([1.0463846e-16, 1.6713754e-19, 3.7956450e-08, 1.0000000e+00,
+       4.5084295e-19, 1.3540748e-10], dtype=float32), array([8.4156437e-14, 3.0080565e-16, 7.9361905e-07, 9.9999917e-01,
+       6.8686151e-16, 6.9465695e-09], dtype=float32)]
+2024-09-03 23:36:36,989 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:36:36,990 - pyskl - INFO - 
+top1_acc	0.1818
+top5_acc	1.0000
+2024-09-03 23:36:36,990 - pyskl - INFO - Epoch(val) [5][1]	top1_acc: 0.1818, top5_acc: 1.0000
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    70s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    32s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    19s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.1 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.4 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:36:44,753 - pyskl - INFO - Saving checkpoint at 6 epochs
+2024-09-03 23:36:52,181 - pyskl - INFO - [array([7.0167866e-15, 4.1347827e-17, 9.3202216e-06, 9.9999070e-01,
+       9.9598521e-17, 3.8248813e-09], dtype=float32), array([4.2038954e-44, 0.0000000e+00, 2.9156175e-19, 1.0000000e+00,
+       0.0000000e+00, 5.5756433e-28], dtype=float32), array([6.1647042e-06, 9.3884665e-08, 7.1071088e-02, 9.2739183e-01,
+       1.4339969e-07, 1.5306644e-03], dtype=float32), array([5.4525208e-05, 9.2265003e-07, 1.7115746e-01, 8.2302821e-01,
+       1.3399704e-06, 5.7574669e-03], dtype=float32), array([1.3101617e-02, 3.1729520e-04, 7.0705360e-01, 1.8438560e-01,
+       3.9396263e-04, 9.4747886e-02], dtype=float32), array([8.4674338e-07, 1.1779255e-08, 3.0943245e-02, 9.6860641e-01,
+       1.8817701e-08, 4.4946198e-04], dtype=float32), array([2.4041391e-17, 1.1291111e-19, 5.9535955e-07, 9.9999940e-01,
+       3.0586526e-19, 8.7652663e-11], dtype=float32), array([1.6255062e-43, 0.0000000e+00, 5.3815973e-19, 1.0000000e+00,
+       0.0000000e+00, 1.3327194e-27], dtype=float32), array([6.1647042e-06, 9.3884665e-08, 7.1071088e-02, 9.2739183e-01,
+       1.4339969e-07, 1.5306644e-03], dtype=float32), array([5.4525208e-05, 9.2265003e-07, 1.7115746e-01, 8.2302821e-01,
+       1.3399704e-06, 5.7574669e-03], dtype=float32), array([1.3101617e-02, 3.1729520e-04, 7.0705360e-01, 1.8438560e-01,
+       3.9396263e-04, 9.4747886e-02], dtype=float32)]
+2024-09-03 23:36:52,183 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:36:52,183 - pyskl - INFO - 
+top1_acc	0.1818
+top5_acc	1.0000
+2024-09-03 23:36:52,184 - pyskl - INFO - Epoch(val) [6][1]	top1_acc: 0.1818, top5_acc: 1.0000
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    69s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    18s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.2 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.5 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:36:59,907 - pyskl - INFO - Saving checkpoint at 7 epochs
+2024-09-03 23:37:07,393 - pyskl - INFO - [array([6.5613406e-08, 1.4885658e-09, 4.9046478e-03, 9.9503618e-01,
+       2.3978994e-09, 5.9106329e-05], dtype=float32), array([3.5054255e-35, 6.1194847e-37, 1.9771782e-16, 1.0000000e+00,
+       3.1458995e-36, 4.3765006e-23], dtype=float32), array([2.4862496e-02, 4.9472571e-04, 7.3981470e-01, 1.0312922e-01,
+       6.0063158e-04, 1.3109827e-01], dtype=float32), array([0.06081685, 0.00115099, 0.72061026, 0.04053139, 0.00135286,
+       0.17553766], dtype=float32), array([0.43098816, 0.00513969, 0.34662485, 0.00092793, 0.00553011,
+       0.21078922], dtype=float32), array([9.6319225e-03, 1.9554967e-04, 6.8761611e-01, 2.1217209e-01,
+       2.4488365e-04, 9.0139411e-02], dtype=float32), array([1.2151821e-10, 2.5812423e-12, 2.3515131e-04, 9.9976391e-01,
+       4.6758097e-12, 9.0604703e-07], dtype=float32), array([1.27915344e-34, 2.26132981e-36, 3.69856433e-16, 1.00000000e+00,
+       1.13473317e-35, 1.03121646e-22], dtype=float32), array([2.4862496e-02, 4.9472571e-04, 7.3981470e-01, 1.0312922e-01,
+       6.0063158e-04, 1.3109827e-01], dtype=float32), array([0.06081685, 0.00115099, 0.72061026, 0.04053139, 0.00135286,
+       0.17553766], dtype=float32), array([0.43098816, 0.00513969, 0.34662485, 0.00092793, 0.00553011,
+       0.21078922], dtype=float32)]
+2024-09-03 23:37:07,396 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:37:07,396 - pyskl - INFO - 
+top1_acc	0.6364
+top5_acc	1.0000
+2024-09-03 23:37:07,398 - pyskl - INFO - The previous best checkpoint /home/jsingh/projects/thesis/code/pyskl_thesis/work_dirs/stgcn++/stgcn++_ntu60_xsub_3dkp/b_uav/best_top1_acc_epoch_1.pth was removed
+2024-09-03 23:37:07,504 - pyskl - INFO - Now best checkpoint is saved as best_top1_acc_epoch_7.pth.
+2024-09-03 23:37:07,504 - pyskl - INFO - Best top1_acc is 0.6364 at 7 epoch.
+2024-09-03 23:37:07,504 - pyskl - INFO - Epoch(val) [7][1]	top1_acc: 0.6364, top5_acc: 1.0000
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    70s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    19s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.2 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.4 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:37:15,270 - pyskl - INFO - Saving checkpoint at 8 epochs
+2024-09-03 23:37:22,730 - pyskl - INFO - [array([3.9176038e-03, 6.5551816e-05, 6.0018158e-01, 3.4147111e-01,
+       8.4760090e-05, 5.4279394e-02], dtype=float32), array([5.2539026e-20, 2.4607537e-21, 4.9942299e-09, 1.0000000e+00,
+       6.2677147e-21, 2.3519272e-13], dtype=float32), array([0.23518446, 0.00208628, 0.52766293, 0.00364023, 0.0023566 ,
+       0.22906947], dtype=float32), array([0.33513892, 0.00262834, 0.42870212, 0.00156869, 0.00291843,
+       0.22904354], dtype=float32), array([5.4581630e-01, 2.9849794e-03, 2.5091729e-01, 2.4356594e-04,
+       3.2236318e-03, 1.9681421e-01], dtype=float32), array([0.1560906 , 0.0015221 , 0.61611694, 0.00766715, 0.00174953,
+       0.21685366], dtype=float32), array([1.02898266e-04, 1.72925832e-06, 1.77052438e-01, 8.16527009e-01,
+       2.42504552e-06, 6.31350745e-03], dtype=float32), array([1.0427649e-19, 4.8801843e-21, 6.8996329e-09, 1.0000000e+00,
+       1.2278801e-20, 3.7260429e-13], dtype=float32), array([0.23518446, 0.00208628, 0.52766293, 0.00364023, 0.0023566 ,
+       0.22906947], dtype=float32), array([0.33513892, 0.00262834, 0.42870212, 0.00156869, 0.00291843,
+       0.22904354], dtype=float32), array([5.4581630e-01, 2.9849794e-03, 2.5091729e-01, 2.4356594e-04,
+       3.2236318e-03, 1.9681421e-01], dtype=float32)]
+2024-09-03 23:37:22,732 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:37:22,732 - pyskl - INFO - 
+top1_acc	0.7273
+top5_acc	1.0000
+2024-09-03 23:37:22,734 - pyskl - INFO - The previous best checkpoint /home/jsingh/projects/thesis/code/pyskl_thesis/work_dirs/stgcn++/stgcn++_ntu60_xsub_3dkp/b_uav/best_top1_acc_epoch_7.pth was removed
+2024-09-03 23:37:22,838 - pyskl - INFO - Now best checkpoint is saved as best_top1_acc_epoch_8.pth.
+2024-09-03 23:37:22,838 - pyskl - INFO - Best top1_acc is 0.7273 at 8 epoch.
+2024-09-03 23:37:22,838 - pyskl - INFO - Epoch(val) [8][1]	top1_acc: 0.7273, top5_acc: 1.0000
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    68s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    18s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.2 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.5 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:37:30,524 - pyskl - INFO - Saving checkpoint at 9 epochs
+2024-09-03 23:37:38,114 - pyskl - INFO - [array([3.1502046e-02, 4.0082590e-04, 7.5802702e-01, 7.0193812e-02,
+       4.8879511e-04, 1.3938746e-01], dtype=float32), array([5.1210480e-11, 2.6227475e-12, 8.2766150e-05, 9.9991703e-01,
+       4.5245331e-12, 2.0656857e-07], dtype=float32), array([0.29708597, 0.00200285, 0.4582823 , 0.00195598, 0.00225257,
+       0.23842037], dtype=float32), array([0.38008037, 0.00227925, 0.3809958 , 0.00098654, 0.00253228,
+       0.23312567], dtype=float32), array([5.6334555e-01, 2.3164235e-03, 2.3206231e-01, 1.8162468e-04,
+       2.5189950e-03, 1.9957501e-01], dtype=float32), array([0.22646096, 0.00169433, 0.5305341 , 0.00361457, 0.00192821,
+       0.23576786], dtype=float32), array([8.5069798e-03, 1.2295053e-04, 6.9296145e-01, 2.2123472e-01,
+       1.5556312e-04, 7.7018335e-02], dtype=float32), array([6.7903454e-11, 3.4964356e-12, 9.3998577e-05, 9.9990571e-01,
+       6.0013778e-12, 2.4956142e-07], dtype=float32), array([0.29708597, 0.00200285, 0.4582823 , 0.00195598, 0.00225257,
+       0.23842037], dtype=float32), array([0.38008037, 0.00227925, 0.3809958 , 0.00098654, 0.00253228,
+       0.23312567], dtype=float32), array([5.6334555e-01, 2.3164235e-03, 2.3206231e-01, 1.8162468e-04,
+       2.5189950e-03, 1.9957501e-01], dtype=float32)]
+2024-09-03 23:37:38,117 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:37:38,117 - pyskl - INFO - 
+top1_acc	0.7273
+top5_acc	1.0000
+2024-09-03 23:37:38,117 - pyskl - INFO - Epoch(val) [9][1]	top1_acc: 0.7273, top5_acc: 1.0000
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    69s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    18s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.2 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.4 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:37:45,895 - pyskl - INFO - Saving checkpoint at 10 epochs
+2024-09-03 23:37:53,301 - pyskl - INFO - [array([3.7883081e-02, 3.6523744e-04, 7.6213843e-01, 3.6700483e-02,
+       4.4527077e-04, 1.6246742e-01], dtype=float32), array([7.8820101e-08, 3.1068621e-09, 3.7717256e-03, 9.9618918e-01,
+       4.7845918e-09, 3.9039533e-05], dtype=float32), array([0.23174334, 0.0012681 , 0.5115159 , 0.00211311, 0.00145083,
+       0.2519087 ], dtype=float32), array([0.29541147, 0.00145065, 0.44652915, 0.00120025, 0.00164227,
+       0.25376624], dtype=float32), array([5.4988295e-01, 1.5492428e-03, 2.3353945e-01, 1.2023749e-04,
+       1.7031103e-03, 2.1320504e-01], dtype=float32), array([0.1833227 , 0.00109903, 0.5656349 , 0.00338531, 0.00126901,
+       0.24528907], dtype=float32), array([1.7991837e-02, 2.0474762e-04, 7.7216548e-01, 9.1310807e-02,
+       2.5483730e-04, 1.1807232e-01], dtype=float32), array([8.7834607e-08, 3.4959908e-09, 3.9400985e-03, 9.9601787e-01,
+       5.3727125e-09, 4.1918694e-05], dtype=float32), array([0.23174334, 0.0012681 , 0.5115159 , 0.00211311, 0.00145083,
+       0.2519087 ], dtype=float32), array([0.29541147, 0.00145065, 0.44652915, 0.00120025, 0.00164227,
+       0.25376624], dtype=float32), array([5.4988295e-01, 1.5492428e-03, 2.3353945e-01, 1.2023749e-04,
+       1.7031103e-03, 2.1320504e-01], dtype=float32)]
+2024-09-03 23:37:53,304 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:37:53,304 - pyskl - INFO - 
+top1_acc	0.7273
+top5_acc	1.0000
+2024-09-03 23:37:53,304 - pyskl - INFO - Epoch(val) [10][1]	top1_acc: 0.7273, top5_acc: 1.0000
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    69s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    18s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.2 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.5 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:38:01,233 - pyskl - INFO - Saving checkpoint at 11 epochs
+2024-09-03 23:38:08,888 - pyskl - INFO - [array([3.6915883e-02, 5.8557471e-04, 6.5114051e-01, 1.2679826e-01,
+       7.1335153e-04, 1.8384647e-01], dtype=float32), array([1.4622389e-09, 1.6334799e-10, 1.4040836e-04, 9.9985778e-01,
+       2.5902122e-10, 1.7753526e-06], dtype=float32), array([0.26570594, 0.00210805, 0.43745065, 0.00504619, 0.00239601,
+       0.28729317], dtype=float32), array([0.34555322, 0.00239688, 0.36606896, 0.00249503, 0.00269016,
+       0.28079575], dtype=float32), array([5.5859548e-01, 2.4702330e-03, 2.0561925e-01, 3.4409191e-04,
+       2.7004995e-03, 2.3027055e-01], dtype=float32), array([0.20083998, 0.00179777, 0.5017438 , 0.00940277, 0.00206776,
+       0.2841479 ], dtype=float32), array([7.7977497e-03, 1.6680440e-04, 4.8219648e-01, 4.2579800e-01,
+       2.1072505e-04, 8.3830260e-02], dtype=float32), array([1.5787178e-09, 1.7879112e-10, 1.4468085e-04, 9.9985337e-01,
+       2.8302691e-10, 1.8642061e-06], dtype=float32), array([0.26570594, 0.00210805, 0.43745065, 0.00504619, 0.00239601,
+       0.28729317], dtype=float32), array([0.34555322, 0.00239688, 0.36606896, 0.00249503, 0.00269016,
+       0.28079575], dtype=float32), array([5.5859548e-01, 2.4702330e-03, 2.0561925e-01, 3.4409191e-04,
+       2.7004995e-03, 2.3027055e-01], dtype=float32)]
+2024-09-03 23:38:08,891 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:38:08,891 - pyskl - INFO - 
+top1_acc	0.7273
+top5_acc	1.0000
+2024-09-03 23:38:08,891 - pyskl - INFO - Epoch(val) [11][1]	top1_acc: 0.7273, top5_acc: 1.0000
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    70s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    19s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.2 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.4 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:38:16,751 - pyskl - INFO - Saving checkpoint at 12 epochs
+2024-09-03 23:38:24,237 - pyskl - INFO - [array([0.02801889, 0.00059865, 0.48284754, 0.28612608, 0.00073269,
+       0.20167615], dtype=float32), array([1.0121393e-11, 2.0533111e-12, 3.4450470e-06, 9.9999642e-01,
+       3.4665706e-12, 7.7856804e-08], dtype=float32), array([0.23232804, 0.00258987, 0.40565807, 0.01377192, 0.00295407,
+       0.34269798], dtype=float32), array([0.31059855, 0.00303527, 0.34294173, 0.00662497, 0.00341446,
+       0.333385  ], dtype=float32), array([0.5710295 , 0.00362371, 0.17136072, 0.00063277, 0.00392996,
+       0.2494234 ], dtype=float32), array([0.16896026, 0.00213899, 0.46019396, 0.02689744, 0.00247217,
+       0.33933717], dtype=float32), array([1.2313504e-03, 3.9462571e-05, 1.3468075e-01, 8.3208722e-01,
+       5.1207400e-05, 3.1910054e-02], dtype=float32), array([1.0635674e-11, 2.1953858e-12, 3.5160881e-06, 9.9999642e-01,
+       3.7016922e-12, 8.0056900e-08], dtype=float32), array([0.23232804, 0.00258987, 0.40565807, 0.01377192, 0.00295407,
+       0.34269798], dtype=float32), array([0.31059855, 0.00303527, 0.34294173, 0.00662497, 0.00341446,
+       0.333385  ], dtype=float32), array([0.5710295 , 0.00362371, 0.17136072, 0.00063277, 0.00392996,
+       0.2494234 ], dtype=float32)]
+2024-09-03 23:38:24,240 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:38:24,240 - pyskl - INFO - 
+top1_acc	0.7273
+top5_acc	1.0000
+2024-09-03 23:38:24,240 - pyskl - INFO - Epoch(val) [12][1]	top1_acc: 0.7273, top5_acc: 1.0000
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    69s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    18s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.2 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.4 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:38:32,051 - pyskl - INFO - Saving checkpoint at 13 epochs
+2024-09-03 23:38:39,476 - pyskl - INFO - [array([0.05736349, 0.00066045, 0.48196563, 0.09414094, 0.00080306,
+       0.36506647], dtype=float32), array([1.7118856e-10, 1.9400415e-11, 1.4971664e-05, 9.9998379e-01,
+       3.1797794e-11, 1.2142863e-06], dtype=float32), array([0.2526754 , 0.00168428, 0.32833746, 0.00609014, 0.0019341 ,
+       0.40927866], dtype=float32), array([0.32579204, 0.00191482, 0.2788072 , 0.00307342, 0.00217152,
+       0.38824105], dtype=float32), array([5.9815478e-01, 2.3220032e-03, 1.3249137e-01, 2.7488967e-04,
+       2.5339280e-03, 2.6422304e-01], dtype=float32), array([0.19132575, 0.00144888, 0.37493664, 0.01158265, 0.00168394,
+       0.4190221 ], dtype=float32), array([3.9996351e-03, 7.5391508e-05, 2.4393095e-01, 6.4013118e-01,
+       9.7515294e-05, 1.1176527e-01], dtype=float32), array([1.6805021e-10, 1.9592153e-11, 1.4713910e-05, 9.9998415e-01,
+       3.2097606e-11, 1.1878966e-06], dtype=float32), array([0.2526754 , 0.00168428, 0.32833746, 0.00609014, 0.0019341 ,
+       0.40927866], dtype=float32), array([0.32579204, 0.00191482, 0.2788072 , 0.00307342, 0.00217152,
+       0.38824105], dtype=float32), array([5.9815478e-01, 2.3220032e-03, 1.3249137e-01, 2.7488967e-04,
+       2.5339280e-03, 2.6422304e-01], dtype=float32)]
+2024-09-03 23:38:39,479 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:38:39,479 - pyskl - INFO - 
+top1_acc	0.6364
+top5_acc	1.0000
+2024-09-03 23:38:39,479 - pyskl - INFO - Epoch(val) [13][1]	top1_acc: 0.6364, top5_acc: 1.0000
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    69s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    18s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.2 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.5 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:38:47,220 - pyskl - INFO - Saving checkpoint at 14 epochs
+2024-09-03 23:38:54,698 - pyskl - INFO - [array([0.07185945, 0.00058293, 0.44225752, 0.04579626, 0.00070822,
+       0.43879557], dtype=float32), array([1.7141008e-09, 1.2293211e-10, 6.0738872e-05, 9.9992990e-01,
+       1.9751159e-10, 9.3333256e-06], dtype=float32), array([0.24410048, 0.00124867, 0.30229512, 0.00427486, 0.00144385,
+       0.44663703], dtype=float32), array([0.31031775, 0.0014095 , 0.2605865 , 0.00228086, 0.00161113,
+       0.4237944 ], dtype=float32), array([6.0147792e-01, 1.8594539e-03, 1.1980302e-01, 1.9825302e-04,
+       2.0374705e-03, 2.7462384e-01], dtype=float32), array([0.1876733 , 0.00108365, 0.34239107, 0.00778009, 0.00126735,
+       0.45980456], dtype=float32), array([6.9044484e-03, 9.3926988e-05, 3.2308272e-01, 4.6818280e-01,
+       1.2153549e-04, 2.0161463e-01], dtype=float32), array([1.6038474e-09, 1.1900105e-10, 5.8168593e-05, 9.9993300e-01,
+       1.9122591e-10, 8.8408324e-06], dtype=float32), array([0.24410048, 0.00124867, 0.30229512, 0.00427486, 0.00144385,
+       0.44663703], dtype=float32), array([0.31031775, 0.0014095 , 0.2605865 , 0.00228086, 0.00161113,
+       0.4237944 ], dtype=float32), array([6.0147792e-01, 1.8594539e-03, 1.1980302e-01, 1.9825302e-04,
+       2.0374705e-03, 2.7462384e-01], dtype=float32)]
+2024-09-03 23:38:54,701 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:38:54,701 - pyskl - INFO - 
+top1_acc	0.6364
+top5_acc	1.0000
+2024-09-03 23:38:54,701 - pyskl - INFO - Epoch(val) [14][1]	top1_acc: 0.6364, top5_acc: 1.0000
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    69s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    18s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.2 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.4 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:39:02,389 - pyskl - INFO - Saving checkpoint at 15 epochs
+2024-09-03 23:39:09,820 - pyskl - INFO - [array([0.07609886, 0.00050812, 0.43723288, 0.03238388, 0.00061864,
+       0.45315766], dtype=float32), array([2.9396954e-09, 1.6612518e-10, 9.9529840e-05, 9.9988413e-01,
+       2.6790276e-10, 1.6357906e-05], dtype=float32), array([0.23085928, 0.0010336 , 0.30678776, 0.0038695 , 0.00120231,
+       0.45624748], dtype=float32), array([0.29482886, 0.00117705, 0.26580518, 0.00210021, 0.00135342,
+       0.43473527], dtype=float32), array([5.9837902e-01, 1.6886151e-03, 1.1997757e-01, 1.8483507e-04,
+       1.8557149e-03, 2.7791432e-01], dtype=float32), array([0.17580341, 0.00088608, 0.34681225, 0.00699027, 0.00104276,
+       0.46846512], dtype=float32), array([6.4678444e-03, 7.4403288e-05, 3.4825987e-01, 4.2709845e-01,
+       9.7134442e-05, 2.1800224e-01], dtype=float32), array([2.6649047e-09, 1.5628138e-10, 9.3842958e-05, 9.9989104e-01,
+       2.5217953e-10, 1.5193992e-05], dtype=float32), array([0.23085928, 0.0010336 , 0.30678776, 0.0038695 , 0.00120231,
+       0.45624748], dtype=float32), array([0.29482886, 0.00117705, 0.26580518, 0.00210021, 0.00135342,
+       0.43473527], dtype=float32), array([5.9837902e-01, 1.6886151e-03, 1.1997757e-01, 1.8483507e-04,
+       1.8557149e-03, 2.7791432e-01], dtype=float32)]
+2024-09-03 23:39:09,823 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:39:09,823 - pyskl - INFO - 
+top1_acc	0.5455
+top5_acc	1.0000
+2024-09-03 23:39:09,823 - pyskl - INFO - Epoch(val) [15][1]	top1_acc: 0.5455, top5_acc: 1.0000
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    69s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    18s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.2 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.5 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:39:17,505 - pyskl - INFO - Saving checkpoint at 16 epochs
+2024-09-03 23:39:25,090 - pyskl - INFO - [array([0.11448205, 0.00069241, 0.40443626, 0.01625626, 0.00082945,
+       0.4633036 ], dtype=float32), array([4.0931162e-08, 1.8393070e-09, 4.6426521e-04, 9.9944264e-01,
+       2.8610321e-09, 9.3077295e-05], dtype=float32), array([0.31148243, 0.00132124, 0.25962242, 0.00197592, 0.00151203,
+       0.4240859 ], dtype=float32), array([0.3848406 , 0.00147658, 0.21875052, 0.00107856, 0.00167018,
+       0.3921836 ], dtype=float32), array([6.2627685e-01, 1.7547166e-03, 1.0904985e-01, 1.4111171e-04,
+       1.9177827e-03, 2.6085964e-01], dtype=float32), array([0.24481334, 0.00116835, 0.30160293, 0.00361046, 0.00135252,
+       0.44745237], dtype=float32), array([1.3709480e-02, 1.4418038e-04, 4.3084994e-01, 2.5737292e-01,
+       1.8479647e-04, 2.9773873e-01], dtype=float32), array([3.6745309e-08, 1.7213467e-09, 4.3502182e-04, 9.9947923e-01,
+       2.6793743e-09, 8.5822612e-05], dtype=float32), array([0.31148243, 0.00132124, 0.25962242, 0.00197592, 0.00151203,
+       0.4240859 ], dtype=float32), array([0.3848406 , 0.00147658, 0.21875052, 0.00107856, 0.00167018,
+       0.3921836 ], dtype=float32), array([6.2627685e-01, 1.7547166e-03, 1.0904985e-01, 1.4111171e-04,
+       1.9177827e-03, 2.6085964e-01], dtype=float32)]
+2024-09-03 23:39:25,093 - pyskl - INFO - Evaluating top_k_accuracy ...
+2024-09-03 23:39:25,093 - pyskl - INFO - 
+top1_acc	0.5455
+top5_acc	1.0000
+2024-09-03 23:39:25,093 - pyskl - INFO - Epoch(val) [16][1]	top1_acc: 0.5455, top5_acc: 1.0000
+2024-09-03 23:39:28,100 - pyskl - INFO - 11 videos remain before valid thresholding, pose dataset
+2024-09-03 23:39:28,100 - pyskl - INFO - box_thr: None, valid_ratio: None, class_prob: None, split: test
+2024-09-03 23:39:28,100 - pyskl - INFO - 11 videos remain after valid thresholding, Pose dataset
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    69s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    18s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.2 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.5 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+
+2024-09-03 23:39:35,775 - pyskl - INFO - [array([0.15908593, 0.000852  , 0.3689983 , 0.01367699, 0.00100486,
+       0.456382  ], dtype=float32), array([5.3047273e-08, 2.2961975e-09, 5.3640385e-04, 9.9935353e-01,
+       3.5577508e-09, 1.1007630e-04], dtype=float32), array([0.23149016, 0.00108642, 0.3129961 , 0.00551545, 0.00125942,
+       0.44765243], dtype=float32), array([0.3247554 , 0.00132415, 0.25234818, 0.00197381, 0.00151122,
+       0.41808724], dtype=float32), array([6.2672412e-01, 1.7730187e-03, 1.0893609e-01, 1.4162567e-04,
+       1.9368686e-03, 2.6048827e-01], dtype=float32), array([0.16898838, 0.00089307, 0.3607479 , 0.01332958, 0.00104815,
+       0.45499298], dtype=float32), array([1.2570093e-02, 1.2233423e-04, 3.1271949e-01, 4.5199656e-01,
+       1.5535220e-04, 2.2243623e-01], dtype=float32), array([4.6500531e-08, 2.0999655e-09, 4.9727911e-04, 9.9940252e-01,
+       3.2575525e-09, 1.0016223e-04], dtype=float32), array([0.23149016, 0.00108642, 0.3129961 , 0.00551545, 0.00125942,
+       0.44765243], dtype=float32), array([0.3247554 , 0.00132415, 0.25234818, 0.00197381, 0.00151122,
+       0.41808724], dtype=float32), array([6.2672412e-01, 1.7730187e-03, 1.0893609e-01, 1.4162567e-04,
+       1.9368686e-03, 2.6048827e-01], dtype=float32)]
+2024-09-03 23:39:35,778 - pyskl - INFO - Testing results of the last checkpoint
+2024-09-03 23:39:35,778 - pyskl - INFO - top1_acc: 0.5455
+2024-09-03 23:39:35,778 - pyskl - INFO - top5_acc: 1.0000
+2024-09-03 23:39:35,778 - pyskl - INFO - load checkpoint from local path: ./work_dirs/stgcn++/stgcn++_ntu60_xsub_3dkp/b_uav/best_top1_acc_epoch_8.pth
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    69s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    19s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.1 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.4 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.5 task/s, elapsed: 7s, ETA:     0s
+Evaluating top_k_accuracy ...
+
+top1_acc	0.5455
+top5_acc	1.0000
+2024-09-03 23:39:43,427 - pyskl - INFO - [array([1.6284650e-02, 2.0669737e-04, 5.8757579e-01, 3.1724092e-01,
+       2.5208746e-04, 7.8439884e-02], dtype=float32), array([1.00303630e-19, 4.52796527e-21, 6.53268728e-09, 1.00000000e+00,
+       1.13790366e-20, 3.51639806e-13], dtype=float32), array([0.15594545, 0.00152565, 0.6190012 , 0.01234883, 0.00174843,
+       0.20943041], dtype=float32), array([0.27064964, 0.0023051 , 0.49285108, 0.00316419, 0.00258417,
+       0.22844587], dtype=float32), array([5.4592246e-01, 3.0003556e-03, 2.5079426e-01, 2.4448481e-04,
+       3.2395578e-03, 1.9679888e-01], dtype=float32), array([0.09242087, 0.00096518, 0.69065493, 0.03661205, 0.00112536,
+       0.17822158], dtype=float32), array([1.1004323e-04, 1.6743987e-06, 1.4064801e-01, 8.5370106e-01,
+       2.3261359e-06, 5.5369311e-03], dtype=float32), array([1.9099224e-19, 8.6122443e-21, 8.8933918e-09, 1.0000000e+00,
+       2.1401463e-20, 5.4378100e-13], dtype=float32), array([0.15594545, 0.00152565, 0.6190012 , 0.01234883, 0.00174843,
+       0.20943041], dtype=float32), array([0.27064964, 0.0023051 , 0.49285108, 0.00316419, 0.00258417,
+       0.22844587], dtype=float32), array([5.4592246e-01, 3.0003556e-03, 2.5079426e-01, 2.4448481e-04,
+       3.2395578e-03, 1.9679888e-01], dtype=float32)]
+2024-09-03 23:39:43,429 - pyskl - INFO - Testing results of the best checkpoint
+2024-09-03 23:39:43,429 - pyskl - INFO - top1_acc: 0.7273
+2024-09-03 23:39:43,429 - pyskl - INFO - top5_acc: 1.0000
+[                                                  ] 0/11, elapsed: 0s, ETA:[>>>                               ] 1/11, 0.1 task/s, elapsed: 7s, ETA:    69s[>>>>>>                            ] 2/11, 0.3 task/s, elapsed: 7s, ETA:    31s[>>>>>>>>>                         ] 3/11, 0.4 task/s, elapsed: 7s, ETA:    18s[>>>>>>>>>>>>                      ] 4/11, 0.6 task/s, elapsed: 7s, ETA:    12s[>>>>>>>>>>>>>>>                   ] 5/11, 0.7 task/s, elapsed: 7s, ETA:     8s[>>>>>>>>>>>>>>>>>>                ] 6/11, 0.9 task/s, elapsed: 7s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>             ] 7/11, 1.0 task/s, elapsed: 7s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>          ] 8/11, 1.1 task/s, elapsed: 7s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>       ] 9/11, 1.3 task/s, elapsed: 7s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 10/11, 1.4 task/s, elapsed: 7s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 11/11, 1.6 task/s, elapsed: 7s, ETA:     0s
+Evaluating top_k_accuracy ...
+
+top1_acc	0.7273
+top5_acc	1.0000

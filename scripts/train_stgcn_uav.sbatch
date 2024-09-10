@@ -5,7 +5,6 @@
 #SBATCH --cpus-per-task=4       # We want 4 cores for this job.
 #SBATCH --mem-per-cpu=24gb      # each core to have 16 Gb RAM
 #SBATCH --gres=gpu:4            # We want 4 GPUs in each node for this job.
-#SBATCH --partition=RTXA6000,V100-32GB,RTX3090  # Run this only in these mentioned GPUs. If you don't have any choice over GPUs, remove this parameter.
 #SBATCH --job-name=train_stgcn_uav
 #SBATCH -e ./out/R-%x.%j.out
 #SBATCH -o ./out/R-%x.%j.out
