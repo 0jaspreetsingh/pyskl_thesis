@@ -41,9 +41,9 @@ data = dict(
     train=dict(
         type='RepeatDataset',
         times=5,
-        dataset=dict(type=dataset_type, ann_file=ann_file, pipeline=train_pipeline, split='xsub_train')),
-    val=dict(type=dataset_type, ann_file=ann_file, pipeline=val_pipeline, split='xsub_val'),
-    test=dict(type=dataset_type, ann_file=ann_file, pipeline=test_pipeline, split='xsub_val'))
+        dataset=dict(type=dataset_type, ann_file=ann_file, pipeline=train_pipeline, split='train')),
+    val=dict(type=dataset_type, ann_file=ann_file, pipeline=val_pipeline, split='test'),
+    test=dict(type=dataset_type, ann_file=ann_file, pipeline=test_pipeline, split='test'))
 
 # optimizer
 optimizer = dict(type='SGD', lr=0.1, momentum=0.9, weight_decay=0.0005, nesterov=True)
