@@ -10,6 +10,7 @@
 #SBATCH -e ./out/R-%x.%j.out
 #SBATCH -o ./out/R-%x.%j.out
 #SBATCH --open-mode=append
+#SBATCH --time=3-00:00:00  # Request 3 days (format: days-hours:minutes:seconds)
 
 NOW=$( date '+%F-%H-%M-%S' )
 JOB_NAME=custom_2d_skeleton
