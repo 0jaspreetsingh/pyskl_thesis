@@ -1,0 +1,40 @@
+Job 1804648: Running on node(s) serv-9225
+Job 1804648: Started at 2025-04-25 14:39:11+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1804648&from=1745584751000
+srun: jobinfo: version v1.0.0
+Job 1804648: Running on node(s) serv-9225
+Job 1804648: Started at 2025-04-25 14:39:12+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1804648&from=1745584752000
+Job 1804648: creating container for /netscratch/jsingh/pyskl7.sqsh
+Job 1804648: creating container for /netscratch/jsingh/pyskl7.sqsh took 42.8 seconds
+No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/S1__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/S5__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/S3__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/S2__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/S4__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P6__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P11__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P3__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P5__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P8__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P9__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P2__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P7__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P10__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P1__with_null_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/S1_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/S5_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/S3_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/S2_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/S4_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P6_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P11_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P3_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P5_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P8_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P9_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P2_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P7_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P10_annotations.pkl
+✅ Saved: /netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P1_annotations.pkl

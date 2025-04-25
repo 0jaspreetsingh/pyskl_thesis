@@ -165,6 +165,26 @@ def main():
 
     dist.barrier()
     outputs = inference_pytorch(args, cfg, data_loader)
+    #############################################################
+    if rank == 0:
+        import json
+
+        # Convert predictions to labels
+        pred_labels = [int(out.argmax()) for out in outputs]  # assuming outputs are tensors
+        gt_labels = [int(data_loader.dataset[i]['label']) for i in range(len(data_loader.dataset))]
+
+        results_dict = {
+            'preds': pred_labels,
+            'gts': gt_labels
+        }
+
+        ## TODO
+        final_path = os.path.join(os.path.dirname(args.out),'preds_and_gts.json' )
+        with open(final_path, 'w') as f:
+            json.dump(results_dict, f, indent=4)
+
+        print("Saved preds_and_gts.json")
+    #############################################################
 
     rank, _ = get_dist_info()
     if rank == 0:

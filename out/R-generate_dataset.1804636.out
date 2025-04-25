@@ -1,0 +1,19 @@
+Job 1804636: Running on node(s) kent
+Job 1804636: Started at 2025-04-25 14:33:11+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1804636&from=1745584391000
+srun: jobinfo: version v1.0.0
+Job 1804636: Running on node(s) kent
+Job 1804636: Started at 2025-04-25 14:33:11+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1804636&from=1745584391000
+Job 1804636: creating container for /netscratch/jsingh/pyskl7.sqsh
+slurmstepd: error: pyxis: child 3843458 failed with error code: 137
+slurmstepd: error: pyxis: failed to create container filesystem
+slurmstepd: error: pyxis: printing enroot log file:
+slurmstepd: error: pyxis:     [INFO] Extracting squashfs filesystem...
+slurmstepd: error: pyxis:     /usr/lib/enroot/runtime.sh: line 384: 3843486 Killed                  unsquashfs ${TTY_OFF+-no-progress} -processors "${ENROOT_MAX_PROCESSORS}" -user-xattrs -d "${rootfs}" "${image}" 1>&2
+slurmstepd: error: pyxis: couldn't start container
+slurmstepd: error: spank: required plugin spank_pyxis.so: task_init() failed with rc=-1
+slurmstepd: error: Failed to invoke spank plugin stack
+slurmstepd: error: Detected 1 oom_kill event in StepId=1804636.0. Some of the step tasks have been OOM Killed.
+srun: error: kent: task 0: Out Of Memory
+srun: Terminating StepId=1804636.0

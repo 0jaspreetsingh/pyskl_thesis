@@ -20,7 +20,7 @@ model = dict(
     test_cfg=dict(average_clips='prob'))
 
 dataset_type = 'PoseDataset'
-ann_file = '/netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/P7_annotations.pkl'
+ann_file = '/netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/P7_annotations.pkl'
 left_kp = [1, 3, 5, 7, 9, 11, 13, 15]
 right_kp = [2, 4, 6, 8, 10, 12, 14, 16]
 skeletons = [[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10], [5, 11],
@@ -82,4 +82,4 @@ checkpoint_config = dict(interval=1)
 evaluation = dict(interval=1, metrics=['top_k_accuracy', 'mean_class_accuracy'], topk=(1, 5))
 log_config = dict(interval=20, hooks=[dict(type='TextLoggerHook')])
 log_level = 'INFO'
-work_dir = './work_dirs/posec3d/slowonly_r50_ntu60_xsub/limb_p7'
+work_dir = '/netscratch/jsingh/thesis_dataset/full_dataset/skletons/splits/pyskl/sliding_window_3sec/work_dirs/posec3d/slowonly_r50_ntu60_xsub/limb_p7'

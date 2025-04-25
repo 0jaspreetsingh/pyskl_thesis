@@ -1,0 +1,19 @@
+Job 1797058: Running on node(s) kent
+Job 1797058: Started at 2025-04-21 11:36:51+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1797058&from=1745228211000
+srun: jobinfo: version v1.0.0
+Job 1797058: Running on node(s) kent
+Job 1797058: Started at 2025-04-21 11:36:51+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1797058&from=1745228211000
+Job 1797058: creating container for /netscratch/jsingh/pyskl7.sqsh
+Job 1797058: creating container for /netscratch/jsingh/pyskl7.sqsh took 33.0 seconds
+Updated PYTHONPATH: :/home/jsingh/projects/thesis/code/pyskl_thesis/pyskl
+usage: test.py [-h] [-C CHECKPOINT] [--out OUT] [--fuse-conv-bn]
+               [--eval EVAL [EVAL ...]] [--tmpdir TMPDIR]
+               [--average-clips {score,prob,None}]
+               [--launcher {pytorch,slurm}] [--compile]
+               [--local_rank LOCAL_RANK] [--local-rank LOCAL_RANK]
+               config
+test.py: error: unrecognized arguments: /home/jsingh/projects/thesis/code/pyskl_thesis/work_dirs/posec3d/slowonly_r50_ntu60_xsub/limb_thesis2/latest.pth
+srun: error: kent: task 0: Exited with exit code 2
+srun: Terminating StepId=1797058.0

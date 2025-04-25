@@ -1,0 +1,1236 @@
+Job 1795108: Running on node(s) kent
+Job 1795108: Started at 2025-04-19 18:47:28+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1795108&from=1745081248000
+srun: jobinfo: version v1.0.0
+Job 1795108: Running on node(s) kent
+Job 1795108: Started at 2025-04-19 18:47:29+0200
+Monitor this job here: http://monitoring.pegasus.kl.dfki.de/d/slurm-job-details/job-details?var-jobid=1795108&from=1745081249000
+Job 1795108: creating container for /netscratch/jsingh/pyskl7.sqsh
+Job 1795108: creating container for /netscratch/jsingh/pyskl7.sqsh took 30.3 seconds
+Updated PYTHONPATH: :/home/jsingh/projects/thesis/code/pyskl_thesis/pyskl
+2025-04-19 18:48:05,504 - pyskl - INFO - Environment info:
+------------------------------------------------------------
+sys.platform: linux
+Python: 3.7.11 (default, Jul 27 2021, 14:32:16) [GCC 7.5.0]
+CUDA available: True
+GPU 0,1,2,3: Quadro RTX 6000
+CUDA_HOME: /usr/local/cuda
+NVCC: Cuda compilation tools, release 11.1, V11.1.105
+GCC: gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
+PyTorch: 1.11.0
+PyTorch compiling details: PyTorch built with:
+  - GCC 7.3
+  - C++ Version: 201402
+  - Intel(R) oneAPI Math Kernel Library Version 2021.4-Product Build 20210904 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.5.2 (Git Hash a9302535553c73243c632ad3c4c80beec3d19a1e)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - CUDA Runtime 11.3
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 8.2
+  - Magma 2.5.2
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.3, CUDNN_VERSION=8.2.0, CXX_COMPILER=/opt/rh/devtoolset-7/root/usr/bin/c++, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_KINETO -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DEDGE_PROFILER_USE_KINETO -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-unused-local-typedefs -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.11.0, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=OFF, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, 
+
+TorchVision: 0.12.0
+OpenCV: 4.10.0
+MMCV: 1.5.0
+MMCV Compiler: GCC 7.3
+MMCV CUDA Compiler: 11.3
+pyskl: 0.1.0+68c005f
+------------------------------------------------------------
+
+2025-04-19 18:48:08,318 - pyskl - INFO - Config: model = dict(
+    type='Recognizer3D',
+    backbone=dict(
+        type='ResNet3dSlowOnly',
+        in_channels=17,
+        base_channels=32,
+        num_stages=3,
+        out_indices=(2, ),
+        stage_blocks=(4, 6, 3),
+        conv1_stride=(1, 1),
+        pool1_stride=(1, 1),
+        inflate=(0, 1, 1),
+        spatial_strides=(2, 2, 2),
+        temporal_strides=(1, 1, 2)),
+    cls_head=dict(type='I3DHead', in_channels=512, num_classes=6, dropout=0.5),
+    test_cfg=dict(average_clips='prob'))
+dataset_type = 'PoseDataset2'
+ann_file = '/netscratch/jsingh/thesis/datasets/AUTHUAVGestureDatasetVideos_fps-15/uavgesture_annos_hrnet.pkl'
+left_kp = [1, 3, 5, 7, 9, 11, 13, 15]
+right_kp = [2, 4, 6, 8, 10, 12, 14, 16]
+skeletons = [[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10], [5, 11],
+             [11, 13], [13, 15], [6, 12], [12, 14], [14, 16], [0, 1], [0, 2],
+             [1, 3], [2, 4], [11, 12]]
+left_limb = [0, 2, 3, 6, 7, 8, 12, 14]
+right_limb = [1, 4, 5, 9, 10, 11, 13, 15]
+train_pipeline = [
+    dict(type='UniformSampleFrames', clip_len=48),
+    dict(type='PoseDecode'),
+    dict(type='PoseCompact', hw_ratio=1.0, allow_imgpad=True),
+    dict(type='Resize', scale=(-1, 64)),
+    dict(type='RandomResizedCrop', area_range=(0.56, 1.0)),
+    dict(type='Resize', scale=(56, 56), keep_ratio=False),
+    dict(
+        type='Flip',
+        flip_ratio=0.5,
+        left_kp=[1, 3, 5, 7, 9, 11, 13, 15],
+        right_kp=[2, 4, 6, 8, 10, 12, 14, 16]),
+    dict(
+        type='GeneratePoseTarget',
+        with_kp=False,
+        with_limb=True,
+        skeletons=[[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10], [5, 11],
+                   [11, 13], [13, 15], [6, 12], [12, 14], [14, 16], [0, 1],
+                   [0, 2], [1, 3], [2, 4], [11, 12]]),
+    dict(type='FormatShape', input_format='NCTHW_Heatmap'),
+    dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+    dict(type='ToTensor', keys=['imgs', 'label'])
+]
+val_pipeline = [
+    dict(type='UniformSampleFrames', clip_len=48, num_clips=1),
+    dict(type='PoseDecode'),
+    dict(type='PoseCompact', hw_ratio=1.0, allow_imgpad=True),
+    dict(type='Resize', scale=(64, 64), keep_ratio=False),
+    dict(
+        type='GeneratePoseTarget',
+        with_kp=False,
+        with_limb=True,
+        skeletons=[[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10], [5, 11],
+                   [11, 13], [13, 15], [6, 12], [12, 14], [14, 16], [0, 1],
+                   [0, 2], [1, 3], [2, 4], [11, 12]]),
+    dict(type='FormatShape', input_format='NCTHW_Heatmap'),
+    dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+    dict(type='ToTensor', keys=['imgs'])
+]
+test_pipeline = [
+    dict(type='UniformSampleFrames', clip_len=48, num_clips=10),
+    dict(type='PoseDecode'),
+    dict(type='PoseCompact', hw_ratio=1.0, allow_imgpad=True),
+    dict(type='Resize', scale=(64, 64), keep_ratio=False),
+    dict(
+        type='GeneratePoseTarget',
+        with_kp=False,
+        with_limb=True,
+        skeletons=[[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10], [5, 11],
+                   [11, 13], [13, 15], [6, 12], [12, 14], [14, 16], [0, 1],
+                   [0, 2], [1, 3], [2, 4], [11, 12]],
+        double=True,
+        left_kp=[1, 3, 5, 7, 9, 11, 13, 15],
+        right_kp=[2, 4, 6, 8, 10, 12, 14, 16],
+        left_limb=[0, 2, 3, 6, 7, 8, 12, 14],
+        right_limb=[1, 4, 5, 9, 10, 11, 13, 15]),
+    dict(type='FormatShape', input_format='NCTHW_Heatmap'),
+    dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+    dict(type='ToTensor', keys=['imgs'])
+]
+data = dict(
+    videos_per_gpu=32,
+    workers_per_gpu=4,
+    test_dataloader=dict(videos_per_gpu=1),
+    train=dict(
+        type='RepeatDataset',
+        times=10,
+        dataset=dict(
+            type='PoseDataset2',
+            ann_file=
+            '/netscratch/jsingh/thesis/datasets/AUTHUAVGestureDatasetVideos_fps-15/uavgesture_annos_hrnet.pkl',
+            split='train',
+            pipeline=[
+                dict(type='UniformSampleFrames', clip_len=48),
+                dict(type='PoseDecode'),
+                dict(type='PoseCompact', hw_ratio=1.0, allow_imgpad=True),
+                dict(type='Resize', scale=(-1, 64)),
+                dict(type='RandomResizedCrop', area_range=(0.56, 1.0)),
+                dict(type='Resize', scale=(56, 56), keep_ratio=False),
+                dict(
+                    type='Flip',
+                    flip_ratio=0.5,
+                    left_kp=[1, 3, 5, 7, 9, 11, 13, 15],
+                    right_kp=[2, 4, 6, 8, 10, 12, 14, 16]),
+                dict(
+                    type='GeneratePoseTarget',
+                    with_kp=False,
+                    with_limb=True,
+                    skeletons=[[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10],
+                               [5, 11], [11, 13], [13, 15], [6, 12], [12, 14],
+                               [14, 16], [0, 1], [0, 2], [1, 3], [2, 4],
+                               [11, 12]]),
+                dict(type='FormatShape', input_format='NCTHW_Heatmap'),
+                dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+                dict(type='ToTensor', keys=['imgs', 'label'])
+            ])),
+    val=dict(
+        type='PoseDataset2',
+        ann_file=
+        '/netscratch/jsingh/thesis/datasets/AUTHUAVGestureDatasetVideos_fps-15/uavgesture_annos_hrnet.pkl',
+        split='test',
+        pipeline=[
+            dict(type='UniformSampleFrames', clip_len=48, num_clips=1),
+            dict(type='PoseDecode'),
+            dict(type='PoseCompact', hw_ratio=1.0, allow_imgpad=True),
+            dict(type='Resize', scale=(64, 64), keep_ratio=False),
+            dict(
+                type='GeneratePoseTarget',
+                with_kp=False,
+                with_limb=True,
+                skeletons=[[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10],
+                           [5, 11], [11, 13], [13, 15], [6, 12], [12, 14],
+                           [14, 16], [0, 1], [0, 2], [1, 3], [2, 4], [11,
+                                                                      12]]),
+            dict(type='FormatShape', input_format='NCTHW_Heatmap'),
+            dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+            dict(type='ToTensor', keys=['imgs'])
+        ]),
+    test=dict(
+        type='PoseDataset2',
+        ann_file=
+        '/netscratch/jsingh/thesis/datasets/AUTHUAVGestureDatasetVideos_fps-15/uavgesture_annos_hrnet.pkl',
+        split='test',
+        pipeline=[
+            dict(type='UniformSampleFrames', clip_len=48, num_clips=10),
+            dict(type='PoseDecode'),
+            dict(type='PoseCompact', hw_ratio=1.0, allow_imgpad=True),
+            dict(type='Resize', scale=(64, 64), keep_ratio=False),
+            dict(
+                type='GeneratePoseTarget',
+                with_kp=False,
+                with_limb=True,
+                skeletons=[[0, 5], [0, 6], [5, 7], [7, 9], [6, 8], [8, 10],
+                           [5, 11], [11, 13], [13, 15], [6, 12], [12, 14],
+                           [14, 16], [0, 1], [0, 2], [1, 3], [2, 4], [11, 12]],
+                double=True,
+                left_kp=[1, 3, 5, 7, 9, 11, 13, 15],
+                right_kp=[2, 4, 6, 8, 10, 12, 14, 16],
+                left_limb=[0, 2, 3, 6, 7, 8, 12, 14],
+                right_limb=[1, 4, 5, 9, 10, 11, 13, 15]),
+            dict(type='FormatShape', input_format='NCTHW_Heatmap'),
+            dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+            dict(type='ToTensor', keys=['imgs'])
+        ]))
+optimizer = dict(type='SGD', lr=0.4, momentum=0.9, weight_decay=0.0003)
+optimizer_config = dict(grad_clip=dict(max_norm=40, norm_type=2))
+lr_config = dict(policy='CosineAnnealing', by_epoch=False, min_lr=0)
+total_epochs = 24
+checkpoint_config = dict(interval=1)
+evaluation = dict(
+    interval=1, metrics=['top_k_accuracy', 'mean_class_accuracy'], topk=(1, 5))
+log_config = dict(interval=20, hooks=[dict(type='TextLoggerHook')])
+log_level = 'INFO'
+work_dir = './work_dirs/posec3d/slowonly_r50_ntu60_xsub/limb_uav'
+dist_params = dict(backend='nccl')
+gpu_ids = range(0, 1)
+resume_from = './work_dirs/posec3d/slowonly_r50_ntu60_xsub/limb_uav/latest.pth'
+
+2025-04-19 18:48:08,319 - pyskl - INFO - Set random seed to 1864095379, deterministic: False
+2025-04-19 18:48:08,720 - pyskl - INFO - 1932 videos remain before valid thresholding, pose dataset
+2025-04-19 18:48:08,721 - pyskl - INFO - box_thr: None, valid_ratio: None, class_prob: None, split: train
+2025-04-19 18:48:08,721 - pyskl - INFO - 1932 videos remain after valid thresholding, Pose dataset
+2025-04-19 18:48:13,950 - pyskl - INFO - 459 videos remain before valid thresholding, pose dataset
+2025-04-19 18:48:13,950 - pyskl - INFO - box_thr: None, valid_ratio: None, class_prob: None, split: test
+2025-04-19 18:48:13,950 - pyskl - INFO - 459 videos remain after valid thresholding, Pose dataset
+2025-04-19 18:48:13,951 - pyskl - INFO - load checkpoint from local path: ./work_dirs/posec3d/slowonly_r50_ntu60_xsub/limb_uav/latest.pth
+2025-04-19 18:48:14,068 - pyskl - INFO - resumed epoch 24, iter 14496
+2025-04-19 18:48:14,069 - pyskl - INFO - Start running, host: jsingh@kent, work_dir: /home/jsingh/projects/thesis/code/pyskl_thesis/work_dirs/posec3d/slowonly_r50_ntu60_xsub/limb_uav
+2025-04-19 18:48:14,069 - pyskl - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) DistEvalHook                       
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(NORMAL      ) DistSamplerSeedHook                
+(NORMAL      ) DistEvalHook                       
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) CosineAnnealingLrUpdaterHook       
+(NORMAL      ) DistEvalHook                       
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(ABOVE_NORMAL) OptimizerHook                      
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) DistEvalHook                       
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) DistEvalHook                       
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) DistSamplerSeedHook                
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_epoch:
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+after_run:
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+2025-04-19 18:48:14,069 - pyskl - INFO - workflow: [('train', 1)], max: 24 epochs
+2025-04-19 18:48:14,070 - pyskl - INFO - Checkpoints will be saved to /home/jsingh/projects/thesis/code/pyskl_thesis/work_dirs/posec3d/slowonly_r50_ntu60_xsub/limb_uav by HardDiskBackend.
+2025-04-19 18:48:17,191 - pyskl - INFO - 459 videos remain before valid thresholding, pose dataset
+2025-04-19 18:48:17,191 - pyskl - INFO - box_thr: None, valid_ratio: None, class_prob: None, split: test
+2025-04-19 18:48:17,191 - pyskl - INFO - 459 videos remain after valid thresholding, Pose dataset
+[                                                  ] 0/459, elapsed: 0s, ETA:[                                ] 1/459, 0.1 task/s, elapsed: 18s, ETA:  8045s[                                ] 2/459, 0.1 task/s, elapsed: 18s, ETA:  4105s[                                ] 3/459, 0.2 task/s, elapsed: 18s, ETA:  2769s[                                ] 4/459, 0.2 task/s, elapsed: 18s, ETA:  2101s[                                ] 5/459, 0.3 task/s, elapsed: 19s, ETA:  1699s[                                ] 6/459, 0.3 task/s, elapsed: 19s, ETA:  1433s[                                ] 7/459, 0.4 task/s, elapsed: 19s, ETA:  1242s[                                ] 8/459, 0.4 task/s, elapsed: 20s, ETA:  1099s[                                ] 9/459, 0.5 task/s, elapsed: 20s, ETA:   988s[                               ] 10/459, 0.5 task/s, elapsed: 20s, ETA:   899s[                               ] 11/459, 0.5 task/s, elapsed: 22s, ETA:   896s[                               ] 12/459, 0.5 task/s, elapsed: 22s, ETA:   830s[                               ] 13/459, 0.6 task/s, elapsed: 23s, ETA:   773s[                               ] 14/459, 0.6 task/s, elapsed: 23s, ETA:   724s[>                              ] 15/459, 0.6 task/s, elapsed: 24s, ETA:   721s[>                              ] 16/459, 0.7 task/s, elapsed: 25s, ETA:   681s[>                              ] 17/459, 0.7 task/s, elapsed: 25s, ETA:   646s[>                              ] 18/459, 0.7 task/s, elapsed: 25s, ETA:   615s[>                              ] 19/459, 0.7 task/s, elapsed: 27s, ETA:   617s[>                              ] 20/459, 0.7 task/s, elapsed: 27s, ETA:   591s[>                              ] 21/459, 0.8 task/s, elapsed: 27s, ETA:   567s[>                              ] 22/459, 0.8 task/s, elapsed: 27s, ETA:   545s[>                              ] 23/459, 0.8 task/s, elapsed: 29s, ETA:   546s[>                              ] 24/459, 0.8 task/s, elapsed: 29s, ETA:   528s[>                              ] 25/459, 0.9 task/s, elapsed: 29s, ETA:   510s[>                              ] 26/459, 0.9 task/s, elapsed: 30s, ETA:   493s[>                              ] 27/459, 0.9 task/s, elapsed: 31s, ETA:   502s[>                              ] 28/459, 0.9 task/s, elapsed: 32s, ETA:   487s[>                              ] 29/459, 0.9 task/s, elapsed: 32s, ETA:   473s[>>                             ] 30/459, 0.9 task/s, elapsed: 32s, ETA:   460s[>>                             ] 31/459, 0.9 task/s, elapsed: 34s, ETA:   472s[>>                             ] 32/459, 0.9 task/s, elapsed: 34s, ETA:   459s[>>                             ] 33/459, 1.0 task/s, elapsed: 35s, ETA:   448s[>>                             ] 34/459, 1.0 task/s, elapsed: 35s, ETA:   437s[>>                             ] 35/459, 1.0 task/s, elapsed: 37s, ETA:   444s[>>                             ] 36/459, 1.0 task/s, elapsed: 37s, ETA:   434s[>>                             ] 37/459, 1.0 task/s, elapsed: 37s, ETA:   424s[>>                             ] 38/459, 1.0 task/s, elapsed: 37s, ETA:   415s[>>                             ] 39/459, 1.0 task/s, elapsed: 39s, ETA:   419s[>>                             ] 40/459, 1.0 task/s, elapsed: 39s, ETA:   410s[>>                             ] 41/459, 1.0 task/s, elapsed: 40s, ETA:   404s[>>                             ] 42/459, 1.1 task/s, elapsed: 40s, ETA:   396s[>>                             ] 43/459, 1.0 task/s, elapsed: 41s, ETA:   401s[>>                             ] 44/459, 1.1 task/s, elapsed: 42s, ETA:   393s[>>>                            ] 45/459, 1.1 task/s, elapsed: 42s, ETA:   386s[>>>                            ] 46/459, 1.1 task/s, elapsed: 42s, ETA:   379s[>>>                            ] 47/459, 1.1 task/s, elapsed: 44s, ETA:   385s[>>>                            ] 48/459, 1.1 task/s, elapsed: 44s, ETA:   378s[>>>                            ] 49/459, 1.1 task/s, elapsed: 44s, ETA:   372s[>>>                            ] 50/459, 1.1 task/s, elapsed: 45s, ETA:   366s[>>>                            ] 51/459, 1.1 task/s, elapsed: 46s, ETA:   368s[>>>                            ] 52/459, 1.1 task/s, elapsed: 46s, ETA:   363s[>>>                            ] 53/459, 1.1 task/s, elapsed: 47s, ETA:   358s[>>>                            ] 54/459, 1.2 task/s, elapsed: 47s, ETA:   352s[>>>                            ] 55/459, 1.1 task/s, elapsed: 49s, ETA:   358s[>>>                            ] 56/459, 1.1 task/s, elapsed: 49s, ETA:   353s[>>>                            ] 57/459, 1.2 task/s, elapsed: 49s, ETA:   347s[>>>                            ] 58/459, 1.2 task/s, elapsed: 50s, ETA:   342s[>>>                            ] 59/459, 1.2 task/s, elapsed: 51s, ETA:   347s[>>>>                           ] 60/459, 1.2 task/s, elapsed: 51s, ETA:   342s[>>>>                           ] 61/459, 1.2 task/s, elapsed: 52s, ETA:   337s[>>>>                           ] 62/459, 1.2 task/s, elapsed: 52s, ETA:   333s[>>>>                           ] 63/459, 1.2 task/s, elapsed: 54s, ETA:   337s[>>>>                           ] 64/459, 1.2 task/s, elapsed: 54s, ETA:   333s[>>>>                           ] 65/459, 1.2 task/s, elapsed: 54s, ETA:   328s[>>>>                           ] 66/459, 1.2 task/s, elapsed: 55s, ETA:   325s[>>>>                           ] 67/459, 1.2 task/s, elapsed: 56s, ETA:   329s[>>>>                           ] 68/459, 1.2 task/s, elapsed: 57s, ETA:   325s[>>>>                           ] 69/459, 1.2 task/s, elapsed: 57s, ETA:   321s[>>>>                           ] 70/459, 1.2 task/s, elapsed: 57s, ETA:   317s[>>>>                           ] 71/459, 1.2 task/s, elapsed: 59s, ETA:   320s[>>>>                           ] 72/459, 1.2 task/s, elapsed: 59s, ETA:   316s[>>>>                           ] 73/459, 1.2 task/s, elapsed: 59s, ETA:   312s[>>>>                           ] 74/459, 1.2 task/s, elapsed: 59s, ETA:   309s[>>>>>                          ] 75/459, 1.2 task/s, elapsed: 61s, ETA:   312s[>>>>>                          ] 76/459, 1.2 task/s, elapsed: 61s, ETA:   308s[>>>>>                          ] 77/459, 1.3 task/s, elapsed: 61s, ETA:   304s[>>>>>                          ] 78/459, 1.3 task/s, elapsed: 62s, ETA:   301s[>>>>>                          ] 79/459, 1.3 task/s, elapsed: 63s, ETA:   303s[>>>>>                          ] 80/459, 1.3 task/s, elapsed: 63s, ETA:   299s[>>>>>                          ] 81/459, 1.3 task/s, elapsed: 64s, ETA:   297s[>>>>>                          ] 82/459, 1.3 task/s, elapsed: 64s, ETA:   294s[>>>>>                          ] 83/459, 1.3 task/s, elapsed: 65s, ETA:   296s[>>>>>                          ] 84/459, 1.3 task/s, elapsed: 65s, ETA:   292s[>>>>>                          ] 85/459, 1.3 task/s, elapsed: 66s, ETA:   290s[>>>>>                          ] 86/459, 1.3 task/s, elapsed: 66s, ETA:   287s[>>>>>                          ] 87/459, 1.3 task/s, elapsed: 68s, ETA:   289s[>>>>>                          ] 88/459, 1.3 task/s, elapsed: 68s, ETA:   286s[>>>>>>                         ] 89/459, 1.3 task/s, elapsed: 68s, ETA:   285s[>>>>>>                         ] 90/459, 1.3 task/s, elapsed: 69s, ETA:   282s[>>>>>>                         ] 91/459, 1.3 task/s, elapsed: 70s, ETA:   282s[>>>>>>                         ] 92/459, 1.3 task/s, elapsed: 70s, ETA:   279s[>>>>>>                         ] 93/459, 1.3 task/s, elapsed: 71s, ETA:   278s[>>>>>>                         ] 94/459, 1.3 task/s, elapsed: 71s, ETA:   276s[>>>>>>                         ] 95/459, 1.3 task/s, elapsed: 72s, ETA:   276s[>>>>>>                         ] 96/459, 1.3 task/s, elapsed: 72s, ETA:   273s[>>>>>>                         ] 97/459, 1.3 task/s, elapsed: 73s, ETA:   272s[>>>>>>                         ] 98/459, 1.3 task/s, elapsed: 73s, ETA:   269s[>>>>>>                         ] 99/459, 1.3 task/s, elapsed: 74s, ETA:   270s[>>>>>>                        ] 100/459, 1.3 task/s, elapsed: 75s, ETA:   268s[>>>>>>                        ] 101/459, 1.3 task/s, elapsed: 75s, ETA:   266s[>>>>>>                        ] 102/459, 1.4 task/s, elapsed: 75s, ETA:   264s[>>>>>>                        ] 103/459, 1.3 task/s, elapsed: 77s, ETA:   265s[>>>>>>                        ] 104/459, 1.4 task/s, elapsed: 77s, ETA:   263s[>>>>>>                        ] 105/459, 1.3 task/s, elapsed: 78s, ETA:   265s[>>>>>>                        ] 106/459, 1.3 task/s, elapsed: 79s, ETA:   262s[>>>>>>                        ] 107/459, 1.4 task/s, elapsed: 79s, ETA:   260s[>>>>>>>                       ] 108/459, 1.4 task/s, elapsed: 79s, ETA:   258s[>>>>>>>                       ] 109/459, 1.3 task/s, elapsed: 81s, ETA:   260s[>>>>>>>                       ] 110/459, 1.4 task/s, elapsed: 81s, ETA:   258s[>>>>>>>                       ] 111/459, 1.4 task/s, elapsed: 81s, ETA:   255s[>>>>>>>                       ] 112/459, 1.4 task/s, elapsed: 82s, ETA:   253s[>>>>>>>                       ] 113/459, 1.4 task/s, elapsed: 83s, ETA:   255s[>>>>>>>                       ] 114/459, 1.4 task/s, elapsed: 83s, ETA:   252s[>>>>>>>                       ] 115/459, 1.4 task/s, elapsed: 84s, ETA:   251s[>>>>>>>                       ] 116/459, 1.4 task/s, elapsed: 84s, ETA:   249s[>>>>>>>                       ] 117/459, 1.4 task/s, elapsed: 86s, ETA:   251s[>>>>>>>                       ] 118/459, 1.4 task/s, elapsed: 86s, ETA:   249s[>>>>>>>                       ] 119/459, 1.4 task/s, elapsed: 86s, ETA:   247s[>>>>>>>                       ] 120/459, 1.4 task/s, elapsed: 87s, ETA:   245s[>>>>>>>                       ] 121/459, 1.4 task/s, elapsed: 88s, ETA:   246s[>>>>>>>                       ] 122/459, 1.4 task/s, elapsed: 88s, ETA:   244s[>>>>>>>>                      ] 123/459, 1.4 task/s, elapsed: 89s, ETA:   242s[>>>>>>>>                      ] 124/459, 1.4 task/s, elapsed: 89s, ETA:   241s[>>>>>>>>                      ] 125/459, 1.4 task/s, elapsed: 90s, ETA:   242s[>>>>>>>>                      ] 126/459, 1.4 task/s, elapsed: 91s, ETA:   240s[>>>>>>>>                      ] 127/459, 1.4 task/s, elapsed: 91s, ETA:   238s[>>>>>>>>                      ] 128/459, 1.4 task/s, elapsed: 92s, ETA:   237s[>>>>>>>>                      ] 129/459, 1.4 task/s, elapsed: 93s, ETA:   237s[>>>>>>>>                      ] 130/459, 1.4 task/s, elapsed: 93s, ETA:   236s[>>>>>>>>                      ] 131/459, 1.4 task/s, elapsed: 94s, ETA:   235s[>>>>>>>>                      ] 132/459, 1.4 task/s, elapsed: 94s, ETA:   233s[>>>>>>>>                      ] 133/459, 1.4 task/s, elapsed: 95s, ETA:   233s[>>>>>>>>                      ] 134/459, 1.4 task/s, elapsed: 95s, ETA:   231s[>>>>>>>>                      ] 135/459, 1.4 task/s, elapsed: 97s, ETA:   232s[>>>>>>>>                      ] 136/459, 1.4 task/s, elapsed: 97s, ETA:   230s[>>>>>>>>                      ] 137/459, 1.4 task/s, elapsed: 97s, ETA:   229s[>>>>>>>>>                     ] 138/459, 1.4 task/s, elapsed: 98s, ETA:   227s[>>>>>>>>>                     ] 139/459, 1.4 task/s, elapsed: 99s, ETA:   228s[>>>>>>>>>                     ] 140/459, 1.4 task/s, elapsed: 99s, ETA:   226s[>>>>>>>>                     ] 141/459, 1.4 task/s, elapsed: 100s, ETA:   226s[>>>>>>>>                     ] 142/459, 1.4 task/s, elapsed: 100s, ETA:   224s[>>>>>>>>>                    ] 143/459, 1.4 task/s, elapsed: 102s, ETA:   224s[>>>>>>>>>                    ] 144/459, 1.4 task/s, elapsed: 102s, ETA:   223s[>>>>>>>>>                    ] 145/459, 1.4 task/s, elapsed: 102s, ETA:   221s[>>>>>>>>>                    ] 146/459, 1.4 task/s, elapsed: 102s, ETA:   220s[>>>>>>>>>                    ] 147/459, 1.4 task/s, elapsed: 104s, ETA:   220s[>>>>>>>>>                    ] 148/459, 1.4 task/s, elapsed: 104s, ETA:   218s[>>>>>>>>>                    ] 149/459, 1.4 task/s, elapsed: 105s, ETA:   218s[>>>>>>>>>                    ] 150/459, 1.4 task/s, elapsed: 105s, ETA:   217s[>>>>>>>>>                    ] 151/459, 1.4 task/s, elapsed: 107s, ETA:   217s[>>>>>>>>>                    ] 152/459, 1.4 task/s, elapsed: 107s, ETA:   216s[>>>>>>>>>                    ] 153/459, 1.4 task/s, elapsed: 107s, ETA:   215s[>>>>>>>>>                    ] 154/459, 1.4 task/s, elapsed: 108s, ETA:   213s[>>>>>>>>>                    ] 155/459, 1.4 task/s, elapsed: 109s, ETA:   215s[>>>>>>>>>                    ] 156/459, 1.4 task/s, elapsed: 110s, ETA:   213s[>>>>>>>>>                    ] 157/459, 1.4 task/s, elapsed: 110s, ETA:   212s[>>>>>>>>>                    ] 158/459, 1.4 task/s, elapsed: 110s, ETA:   210s[>>>>>>>>>>                   ] 159/459, 1.4 task/s, elapsed: 112s, ETA:   211s[>>>>>>>>>>                   ] 160/459, 1.4 task/s, elapsed: 112s, ETA:   209s[>>>>>>>>>>                   ] 161/459, 1.4 task/s, elapsed: 112s, ETA:   208s[>>>>>>>>>>                   ] 162/459, 1.4 task/s, elapsed: 113s, ETA:   206s[>>>>>>>>>>                   ] 163/459, 1.4 task/s, elapsed: 114s, ETA:   207s[>>>>>>>>>>                   ] 164/459, 1.4 task/s, elapsed: 114s, ETA:   206s[>>>>>>>>>>                   ] 165/459, 1.4 task/s, elapsed: 115s, ETA:   204s[>>>>>>>>>>                   ] 166/459, 1.4 task/s, elapsed: 115s, ETA:   203s[>>>>>>>>>>                   ] 167/459, 1.4 task/s, elapsed: 116s, ETA:   203s[>>>>>>>>>>                   ] 168/459, 1.4 task/s, elapsed: 116s, ETA:   202s[>>>>>>>>>>                   ] 169/459, 1.4 task/s, elapsed: 117s, ETA:   200s[>>>>>>>>>>                   ] 170/459, 1.5 task/s, elapsed: 117s, ETA:   199s[>>>>>>>>>>                   ] 171/459, 1.4 task/s, elapsed: 118s, ETA:   199s[>>>>>>>>>>                   ] 172/459, 1.4 task/s, elapsed: 119s, ETA:   198s[>>>>>>>>>>                   ] 173/459, 1.5 task/s, elapsed: 119s, ETA:   197s[>>>>>>>>>>                   ] 174/459, 1.5 task/s, elapsed: 119s, ETA:   195s[>>>>>>>>>>>                  ] 175/459, 1.4 task/s, elapsed: 121s, ETA:   196s[>>>>>>>>>>>                  ] 176/459, 1.5 task/s, elapsed: 121s, ETA:   195s[>>>>>>>>>>>                  ] 177/459, 1.5 task/s, elapsed: 121s, ETA:   193s[>>>>>>>>>>>                  ] 178/459, 1.5 task/s, elapsed: 122s, ETA:   192s[>>>>>>>>>>>                  ] 179/459, 1.4 task/s, elapsed: 124s, ETA:   193s[>>>>>>>>>>>                  ] 180/459, 1.5 task/s, elapsed: 124s, ETA:   192s[>>>>>>>>>>>                  ] 181/459, 1.5 task/s, elapsed: 124s, ETA:   191s[>>>>>>>>>>>                  ] 182/459, 1.5 task/s, elapsed: 124s, ETA:   189s[>>>>>>>>>>>                  ] 183/459, 1.4 task/s, elapsed: 127s, ETA:   191s[>>>>>>>>>>>                  ] 184/459, 1.4 task/s, elapsed: 127s, ETA:   190s[>>>>>>>>>>>                  ] 185/459, 1.5 task/s, elapsed: 127s, ETA:   188s[>>>>>>>>>>>                  ] 186/459, 1.5 task/s, elapsed: 127s, ETA:   187s[>>>>>>>>>>>                  ] 187/459, 1.5 task/s, elapsed: 129s, ETA:   187s[>>>>>>>>>>>                  ] 188/459, 1.5 task/s, elapsed: 129s, ETA:   186s[>>>>>>>>>>>                  ] 189/459, 1.5 task/s, elapsed: 129s, ETA:   184s[>>>>>>>>>>>>                 ] 190/459, 1.5 task/s, elapsed: 129s, ETA:   183s[>>>>>>>>>>>>                 ] 191/459, 1.5 task/s, elapsed: 131s, ETA:   184s[>>>>>>>>>>>>                 ] 192/459, 1.5 task/s, elapsed: 131s, ETA:   183s[>>>>>>>>>>>>                 ] 193/459, 1.5 task/s, elapsed: 132s, ETA:   182s[>>>>>>>>>>>>                 ] 194/459, 1.5 task/s, elapsed: 132s, ETA:   180s[>>>>>>>>>>>>                 ] 195/459, 1.5 task/s, elapsed: 134s, ETA:   181s[>>>>>>>>>>>>                 ] 196/459, 1.5 task/s, elapsed: 134s, ETA:   180s[>>>>>>>>>>>>                 ] 197/459, 1.5 task/s, elapsed: 134s, ETA:   178s[>>>>>>>>>>>>                 ] 198/459, 1.5 task/s, elapsed: 135s, ETA:   177s[>>>>>>>>>>>>                 ] 199/459, 1.5 task/s, elapsed: 136s, ETA:   178s[>>>>>>>>>>>>                 ] 200/459, 1.5 task/s, elapsed: 136s, ETA:   176s[>>>>>>>>>>>>                 ] 201/459, 1.5 task/s, elapsed: 136s, ETA:   175s[>>>>>>>>>>>>                 ] 202/459, 1.5 task/s, elapsed: 137s, ETA:   174s[>>>>>>>>>>>>                 ] 203/459, 1.5 task/s, elapsed: 138s, ETA:   175s[>>>>>>>>>>>>                 ] 204/459, 1.5 task/s, elapsed: 139s, ETA:   173s[>>>>>>>>>>>>                 ] 205/459, 1.5 task/s, elapsed: 139s, ETA:   172s[>>>>>>>>>>>>>                ] 206/459, 1.5 task/s, elapsed: 139s, ETA:   171s[>>>>>>>>>>>>>                ] 207/459, 1.5 task/s, elapsed: 141s, ETA:   172s[>>>>>>>>>>>>>                ] 208/459, 1.5 task/s, elapsed: 141s, ETA:   170s[>>>>>>>>>>>>>                ] 209/459, 1.5 task/s, elapsed: 141s, ETA:   169s[>>>>>>>>>>>>>                ] 210/459, 1.5 task/s, elapsed: 142s, ETA:   168s[>>>>>>>>>>>>>                ] 211/459, 1.5 task/s, elapsed: 144s, ETA:   169s[>>>>>>>>>>>>>                ] 212/459, 1.5 task/s, elapsed: 144s, ETA:   167s[>>>>>>>>>>>>>                ] 213/459, 1.5 task/s, elapsed: 144s, ETA:   166s[>>>>>>>>>>>>>                ] 214/459, 1.5 task/s, elapsed: 144s, ETA:   165s[>>>>>>>>>>>>>                ] 215/459, 1.5 task/s, elapsed: 145s, ETA:   165s[>>>>>>>>>>>>>                ] 216/459, 1.5 task/s, elapsed: 146s, ETA:   164s[>>>>>>>>>>>>>                ] 217/459, 1.5 task/s, elapsed: 146s, ETA:   163s[>>>>>>>>>>>>>                ] 218/459, 1.5 task/s, elapsed: 146s, ETA:   162s[>>>>>>>>>>>>>                ] 219/459, 1.5 task/s, elapsed: 148s, ETA:   162s[>>>>>>>>>>>>>                ] 220/459, 1.5 task/s, elapsed: 148s, ETA:   161s[>>>>>>>>>>>>>                ] 221/459, 1.5 task/s, elapsed: 149s, ETA:   160s[>>>>>>>>>>>>>>               ] 222/459, 1.5 task/s, elapsed: 149s, ETA:   159s[>>>>>>>>>>>>>>               ] 223/459, 1.5 task/s, elapsed: 150s, ETA:   159s[>>>>>>>>>>>>>>               ] 224/459, 1.5 task/s, elapsed: 151s, ETA:   158s[>>>>>>>>>>>>>>               ] 225/459, 1.5 task/s, elapsed: 151s, ETA:   157s[>>>>>>>>>>>>>>               ] 226/459, 1.5 task/s, elapsed: 151s, ETA:   156s[>>>>>>>>>>>>>>               ] 227/459, 1.5 task/s, elapsed: 153s, ETA:   156s[>>>>>>>>>>>>>>               ] 228/459, 1.5 task/s, elapsed: 153s, ETA:   155s[>>>>>>>>>>>>>>               ] 229/459, 1.5 task/s, elapsed: 153s, ETA:   154s[>>>>>>>>>>>>>>               ] 230/459, 1.5 task/s, elapsed: 153s, ETA:   153s[>>>>>>>>>>>>>>               ] 231/459, 1.5 task/s, elapsed: 155s, ETA:   153s[>>>>>>>>>>>>>>               ] 232/459, 1.5 task/s, elapsed: 155s, ETA:   152s[>>>>>>>>>>>>>>               ] 233/459, 1.5 task/s, elapsed: 155s, ETA:   151s[>>>>>>>>>>>>>>               ] 234/459, 1.5 task/s, elapsed: 156s, ETA:   150s[>>>>>>>>>>>>>>               ] 235/459, 1.5 task/s, elapsed: 157s, ETA:   150s[>>>>>>>>>>>>>>               ] 236/459, 1.5 task/s, elapsed: 157s, ETA:   149s[>>>>>>>>>>>>>>               ] 237/459, 1.5 task/s, elapsed: 158s, ETA:   148s[>>>>>>>>>>>>>>>              ] 238/459, 1.5 task/s, elapsed: 158s, ETA:   147s[>>>>>>>>>>>>>>>              ] 239/459, 1.5 task/s, elapsed: 159s, ETA:   147s[>>>>>>>>>>>>>>>              ] 240/459, 1.5 task/s, elapsed: 160s, ETA:   146s[>>>>>>>>>>>>>>>              ] 241/459, 1.5 task/s, elapsed: 160s, ETA:   145s[>>>>>>>>>>>>>>>              ] 242/459, 1.5 task/s, elapsed: 160s, ETA:   144s[>>>>>>>>>>>>>>>              ] 243/459, 1.5 task/s, elapsed: 162s, ETA:   144s[>>>>>>>>>>>>>>>              ] 244/459, 1.5 task/s, elapsed: 162s, ETA:   143s[>>>>>>>>>>>>>>>              ] 245/459, 1.5 task/s, elapsed: 162s, ETA:   142s[>>>>>>>>>>>>>>>              ] 246/459, 1.5 task/s, elapsed: 163s, ETA:   141s[>>>>>>>>>>>>>>>              ] 247/459, 1.5 task/s, elapsed: 164s, ETA:   141s[>>>>>>>>>>>>>>>              ] 248/459, 1.5 task/s, elapsed: 165s, ETA:   140s[>>>>>>>>>>>>>>>              ] 249/459, 1.5 task/s, elapsed: 165s, ETA:   139s[>>>>>>>>>>>>>>>              ] 250/459, 1.5 task/s, elapsed: 165s, ETA:   138s[>>>>>>>>>>>>>>>              ] 251/459, 1.5 task/s, elapsed: 167s, ETA:   138s[>>>>>>>>>>>>>>>              ] 252/459, 1.5 task/s, elapsed: 167s, ETA:   137s[>>>>>>>>>>>>>>>              ] 253/459, 1.5 task/s, elapsed: 167s, ETA:   136s[>>>>>>>>>>>>>>>>             ] 254/459, 1.5 task/s, elapsed: 168s, ETA:   135s[>>>>>>>>>>>>>>>>             ] 255/459, 1.5 task/s, elapsed: 169s, ETA:   135s[>>>>>>>>>>>>>>>>             ] 256/459, 1.5 task/s, elapsed: 169s, ETA:   134s[>>>>>>>>>>>>>>>>             ] 257/459, 1.5 task/s, elapsed: 170s, ETA:   133s[>>>>>>>>>>>>>>>>             ] 258/459, 1.5 task/s, elapsed: 170s, ETA:   133s[>>>>>>>>>>>>>>>>             ] 259/459, 1.5 task/s, elapsed: 172s, ETA:   133s[>>>>>>>>>>>>>>>>             ] 260/459, 1.5 task/s, elapsed: 172s, ETA:   132s[>>>>>>>>>>>>>>>>             ] 261/459, 1.5 task/s, elapsed: 172s, ETA:   131s[>>>>>>>>>>>>>>>>             ] 262/459, 1.5 task/s, elapsed: 173s, ETA:   130s[>>>>>>>>>>>>>>>>             ] 263/459, 1.5 task/s, elapsed: 174s, ETA:   130s[>>>>>>>>>>>>>>>>             ] 264/459, 1.5 task/s, elapsed: 174s, ETA:   129s[>>>>>>>>>>>>>>>>             ] 265/459, 1.5 task/s, elapsed: 174s, ETA:   128s[>>>>>>>>>>>>>>>>             ] 266/459, 1.5 task/s, elapsed: 175s, ETA:   127s[>>>>>>>>>>>>>>>>             ] 267/459, 1.5 task/s, elapsed: 176s, ETA:   127s[>>>>>>>>>>>>>>>>             ] 268/459, 1.5 task/s, elapsed: 176s, ETA:   126s[>>>>>>>>>>>>>>>>             ] 269/459, 1.5 task/s, elapsed: 177s, ETA:   125s[>>>>>>>>>>>>>>>>>            ] 270/459, 1.5 task/s, elapsed: 178s, ETA:   124s[>>>>>>>>>>>>>>>>>            ] 271/459, 1.5 task/s, elapsed: 178s, ETA:   124s[>>>>>>>>>>>>>>>>>            ] 272/459, 1.5 task/s, elapsed: 179s, ETA:   123s[>>>>>>>>>>>>>>>>>            ] 273/459, 1.5 task/s, elapsed: 179s, ETA:   122s[>>>>>>>>>>>>>>>>>            ] 274/459, 1.5 task/s, elapsed: 180s, ETA:   121s[>>>>>>>>>>>>>>>>>            ] 275/459, 1.5 task/s, elapsed: 181s, ETA:   121s[>>>>>>>>>>>>>>>>>            ] 276/459, 1.5 task/s, elapsed: 181s, ETA:   120s[>>>>>>>>>>>>>>>>>            ] 277/459, 1.5 task/s, elapsed: 181s, ETA:   119s[>>>>>>>>>>>>>>>>>            ] 278/459, 1.5 task/s, elapsed: 182s, ETA:   119s[>>>>>>>>>>>>>>>>>            ] 279/459, 1.5 task/s, elapsed: 183s, ETA:   118s[>>>>>>>>>>>>>>>>>            ] 280/459, 1.5 task/s, elapsed: 183s, ETA:   117s[>>>>>>>>>>>>>>>>>            ] 281/459, 1.5 task/s, elapsed: 184s, ETA:   116s[>>>>>>>>>>>>>>>>>            ] 282/459, 1.5 task/s, elapsed: 184s, ETA:   116s[>>>>>>>>>>>>>>>>>            ] 283/459, 1.5 task/s, elapsed: 186s, ETA:   115s[>>>>>>>>>>>>>>>>>            ] 284/459, 1.5 task/s, elapsed: 186s, ETA:   115s[>>>>>>>>>>>>>>>>>>           ] 285/459, 1.5 task/s, elapsed: 186s, ETA:   114s[>>>>>>>>>>>>>>>>>>           ] 286/459, 1.5 task/s, elapsed: 188s, ETA:   113s[>>>>>>>>>>>>>>>>>>           ] 287/459, 1.5 task/s, elapsed: 188s, ETA:   113s[>>>>>>>>>>>>>>>>>>           ] 288/459, 1.5 task/s, elapsed: 188s, ETA:   112s[>>>>>>>>>>>>>>>>>>           ] 289/459, 1.5 task/s, elapsed: 188s, ETA:   111s[>>>>>>>>>>>>>>>>>>           ] 290/459, 1.5 task/s, elapsed: 190s, ETA:   111s[>>>>>>>>>>>>>>>>>>           ] 291/459, 1.5 task/s, elapsed: 190s, ETA:   110s[>>>>>>>>>>>>>>>>>>           ] 292/459, 1.5 task/s, elapsed: 191s, ETA:   109s[>>>>>>>>>>>>>>>>>>           ] 293/459, 1.5 task/s, elapsed: 191s, ETA:   108s[>>>>>>>>>>>>>>>>>>           ] 294/459, 1.5 task/s, elapsed: 193s, ETA:   108s[>>>>>>>>>>>>>>>>>>           ] 295/459, 1.5 task/s, elapsed: 193s, ETA:   107s[>>>>>>>>>>>>>>>>>>           ] 296/459, 1.5 task/s, elapsed: 193s, ETA:   106s[>>>>>>>>>>>>>>>>>>           ] 297/459, 1.5 task/s, elapsed: 194s, ETA:   106s[>>>>>>>>>>>>>>>>>>           ] 298/459, 1.5 task/s, elapsed: 195s, ETA:   105s[>>>>>>>>>>>>>>>>>>           ] 299/459, 1.5 task/s, elapsed: 195s, ETA:   105s[>>>>>>>>>>>>>>>>>>           ] 300/459, 1.5 task/s, elapsed: 196s, ETA:   104s[>>>>>>>>>>>>>>>>>>>          ] 301/459, 1.5 task/s, elapsed: 196s, ETA:   103s[>>>>>>>>>>>>>>>>>>>          ] 302/459, 1.5 task/s, elapsed: 198s, ETA:   103s[>>>>>>>>>>>>>>>>>>>          ] 303/459, 1.5 task/s, elapsed: 198s, ETA:   102s[>>>>>>>>>>>>>>>>>>>          ] 304/459, 1.5 task/s, elapsed: 198s, ETA:   101s[>>>>>>>>>>>>>>>>>>>          ] 305/459, 1.5 task/s, elapsed: 198s, ETA:   100s[>>>>>>>>>>>>>>>>>>>          ] 306/459, 1.5 task/s, elapsed: 200s, ETA:   100s[>>>>>>>>>>>>>>>>>>>          ] 307/459, 1.5 task/s, elapsed: 200s, ETA:    99s[>>>>>>>>>>>>>>>>>>>          ] 308/459, 1.5 task/s, elapsed: 200s, ETA:    98s[>>>>>>>>>>>>>>>>>>>          ] 309/459, 1.5 task/s, elapsed: 201s, ETA:    97s[>>>>>>>>>>>>>>>>>>>          ] 310/459, 1.5 task/s, elapsed: 202s, ETA:    97s[>>>>>>>>>>>>>>>>>>>          ] 311/459, 1.5 task/s, elapsed: 203s, ETA:    96s[>>>>>>>>>>>>>>>>>>>          ] 312/459, 1.5 task/s, elapsed: 203s, ETA:    96s[>>>>>>>>>>>>>>>>>>>          ] 313/459, 1.5 task/s, elapsed: 203s, ETA:    95s[>>>>>>>>>>>>>>>>>>>          ] 314/459, 1.5 task/s, elapsed: 205s, ETA:    95s[>>>>>>>>>>>>>>>>>>>          ] 315/459, 1.5 task/s, elapsed: 206s, ETA:    94s[>>>>>>>>>>>>>>>>>>>          ] 316/459, 1.5 task/s, elapsed: 206s, ETA:    93s[>>>>>>>>>>>>>>>>>>>>         ] 317/459, 1.5 task/s, elapsed: 206s, ETA:    92s[>>>>>>>>>>>>>>>>>>>>         ] 318/459, 1.5 task/s, elapsed: 207s, ETA:    92s[>>>>>>>>>>>>>>>>>>>>         ] 319/459, 1.5 task/s, elapsed: 208s, ETA:    91s[>>>>>>>>>>>>>>>>>>>>         ] 320/459, 1.5 task/s, elapsed: 208s, ETA:    90s[>>>>>>>>>>>>>>>>>>>>         ] 321/459, 1.5 task/s, elapsed: 208s, ETA:    90s[>>>>>>>>>>>>>>>>>>>>         ] 322/459, 1.5 task/s, elapsed: 210s, ETA:    89s[>>>>>>>>>>>>>>>>>>>>         ] 323/459, 1.5 task/s, elapsed: 210s, ETA:    88s[>>>>>>>>>>>>>>>>>>>>         ] 324/459, 1.5 task/s, elapsed: 210s, ETA:    88s[>>>>>>>>>>>>>>>>>>>>         ] 325/459, 1.5 task/s, elapsed: 210s, ETA:    87s[>>>>>>>>>>>>>>>>>>>>         ] 326/459, 1.5 task/s, elapsed: 212s, ETA:    86s[>>>>>>>>>>>>>>>>>>>>         ] 327/459, 1.5 task/s, elapsed: 212s, ETA:    86s[>>>>>>>>>>>>>>>>>>>>         ] 328/459, 1.5 task/s, elapsed: 212s, ETA:    85s[>>>>>>>>>>>>>>>>>>>>         ] 329/459, 1.5 task/s, elapsed: 213s, ETA:    84s[>>>>>>>>>>>>>>>>>>>>         ] 330/459, 1.5 task/s, elapsed: 214s, ETA:    84s[>>>>>>>>>>>>>>>>>>>>         ] 331/459, 1.5 task/s, elapsed: 214s, ETA:    83s[>>>>>>>>>>>>>>>>>>>>         ] 332/459, 1.5 task/s, elapsed: 215s, ETA:    82s[>>>>>>>>>>>>>>>>>>>>>        ] 333/459, 1.5 task/s, elapsed: 215s, ETA:    81s[>>>>>>>>>>>>>>>>>>>>>        ] 334/459, 1.5 task/s, elapsed: 216s, ETA:    81s[>>>>>>>>>>>>>>>>>>>>>        ] 335/459, 1.5 task/s, elapsed: 216s, ETA:    80s[>>>>>>>>>>>>>>>>>>>>>        ] 336/459, 1.5 task/s, elapsed: 217s, ETA:    80s[>>>>>>>>>>>>>>>>>>>>>        ] 337/459, 1.5 task/s, elapsed: 218s, ETA:    79s[>>>>>>>>>>>>>>>>>>>>>        ] 338/459, 1.5 task/s, elapsed: 219s, ETA:    78s[>>>>>>>>>>>>>>>>>>>>>        ] 339/459, 1.5 task/s, elapsed: 219s, ETA:    77s[>>>>>>>>>>>>>>>>>>>>>        ] 340/459, 1.5 task/s, elapsed: 220s, ETA:    77s[>>>>>>>>>>>>>>>>>>>>>        ] 341/459, 1.6 task/s, elapsed: 220s, ETA:    76s[>>>>>>>>>>>>>>>>>>>>>        ] 342/459, 1.5 task/s, elapsed: 221s, ETA:    76s[>>>>>>>>>>>>>>>>>>>>>        ] 343/459, 1.6 task/s, elapsed: 221s, ETA:    75s[>>>>>>>>>>>>>>>>>>>>>        ] 344/459, 1.5 task/s, elapsed: 222s, ETA:    74s[>>>>>>>>>>>>>>>>>>>>>        ] 345/459, 1.6 task/s, elapsed: 222s, ETA:    73s[>>>>>>>>>>>>>>>>>>>>>        ] 346/459, 1.5 task/s, elapsed: 223s, ETA:    73s[>>>>>>>>>>>>>>>>>>>>>        ] 347/459, 1.6 task/s, elapsed: 224s, ETA:    72s[>>>>>>>>>>>>>>>>>>>>>        ] 348/459, 1.6 task/s, elapsed: 224s, ETA:    72s[>>>>>>>>>>>>>>>>>>>>>>       ] 349/459, 1.6 task/s, elapsed: 224s, ETA:    71s[>>>>>>>>>>>>>>>>>>>>>>       ] 350/459, 1.6 task/s, elapsed: 226s, ETA:    70s[>>>>>>>>>>>>>>>>>>>>>>       ] 351/459, 1.6 task/s, elapsed: 226s, ETA:    69s[>>>>>>>>>>>>>>>>>>>>>>       ] 352/459, 1.6 task/s, elapsed: 227s, ETA:    69s[>>>>>>>>>>>>>>>>>>>>>>       ] 353/459, 1.6 task/s, elapsed: 227s, ETA:    68s[>>>>>>>>>>>>>>>>>>>>>>       ] 354/459, 1.6 task/s, elapsed: 228s, ETA:    68s[>>>>>>>>>>>>>>>>>>>>>>       ] 355/459, 1.6 task/s, elapsed: 228s, ETA:    67s[>>>>>>>>>>>>>>>>>>>>>>       ] 356/459, 1.6 task/s, elapsed: 229s, ETA:    66s[>>>>>>>>>>>>>>>>>>>>>>       ] 357/459, 1.6 task/s, elapsed: 229s, ETA:    66s[>>>>>>>>>>>>>>>>>>>>>>       ] 358/459, 1.6 task/s, elapsed: 230s, ETA:    65s[>>>>>>>>>>>>>>>>>>>>>>       ] 359/459, 1.6 task/s, elapsed: 230s, ETA:    64s[>>>>>>>>>>>>>>>>>>>>>>       ] 360/459, 1.6 task/s, elapsed: 232s, ETA:    64s[>>>>>>>>>>>>>>>>>>>>>>       ] 361/459, 1.6 task/s, elapsed: 232s, ETA:    63s[>>>>>>>>>>>>>>>>>>>>>>       ] 362/459, 1.6 task/s, elapsed: 232s, ETA:    62s[>>>>>>>>>>>>>>>>>>>>>>       ] 363/459, 1.6 task/s, elapsed: 233s, ETA:    62s[>>>>>>>>>>>>>>>>>>>>>>       ] 364/459, 1.6 task/s, elapsed: 235s, ETA:    61s[>>>>>>>>>>>>>>>>>>>>>>>      ] 365/459, 1.6 task/s, elapsed: 235s, ETA:    60s[>>>>>>>>>>>>>>>>>>>>>>>      ] 366/459, 1.6 task/s, elapsed: 235s, ETA:    60s[>>>>>>>>>>>>>>>>>>>>>>>      ] 367/459, 1.6 task/s, elapsed: 235s, ETA:    59s[>>>>>>>>>>>>>>>>>>>>>>>      ] 368/459, 1.6 task/s, elapsed: 237s, ETA:    59s[>>>>>>>>>>>>>>>>>>>>>>>      ] 369/459, 1.6 task/s, elapsed: 237s, ETA:    58s[>>>>>>>>>>>>>>>>>>>>>>>      ] 370/459, 1.6 task/s, elapsed: 237s, ETA:    57s[>>>>>>>>>>>>>>>>>>>>>>>      ] 371/459, 1.6 task/s, elapsed: 238s, ETA:    56s[>>>>>>>>>>>>>>>>>>>>>>>      ] 372/459, 1.6 task/s, elapsed: 239s, ETA:    56s[>>>>>>>>>>>>>>>>>>>>>>>      ] 373/459, 1.6 task/s, elapsed: 239s, ETA:    55s[>>>>>>>>>>>>>>>>>>>>>>>      ] 374/459, 1.6 task/s, elapsed: 240s, ETA:    54s[>>>>>>>>>>>>>>>>>>>>>>>      ] 375/459, 1.6 task/s, elapsed: 240s, ETA:    54s[>>>>>>>>>>>>>>>>>>>>>>>      ] 376/459, 1.6 task/s, elapsed: 242s, ETA:    53s[>>>>>>>>>>>>>>>>>>>>>>>      ] 377/459, 1.6 task/s, elapsed: 242s, ETA:    53s[>>>>>>>>>>>>>>>>>>>>>>>      ] 378/459, 1.6 task/s, elapsed: 242s, ETA:    52s[>>>>>>>>>>>>>>>>>>>>>>>      ] 379/459, 1.6 task/s, elapsed: 242s, ETA:    51s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 380/459, 1.6 task/s, elapsed: 244s, ETA:    51s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 381/459, 1.6 task/s, elapsed: 244s, ETA:    50s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 382/459, 1.6 task/s, elapsed: 244s, ETA:    49s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 383/459, 1.6 task/s, elapsed: 244s, ETA:    49s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 384/459, 1.6 task/s, elapsed: 246s, ETA:    48s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 385/459, 1.6 task/s, elapsed: 246s, ETA:    47s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 386/459, 1.6 task/s, elapsed: 246s, ETA:    47s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 387/459, 1.6 task/s, elapsed: 247s, ETA:    46s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 388/459, 1.6 task/s, elapsed: 248s, ETA:    45s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 389/459, 1.6 task/s, elapsed: 248s, ETA:    45s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 390/459, 1.6 task/s, elapsed: 249s, ETA:    44s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 391/459, 1.6 task/s, elapsed: 249s, ETA:    43s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 392/459, 1.6 task/s, elapsed: 250s, ETA:    43s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 393/459, 1.6 task/s, elapsed: 251s, ETA:    42s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 394/459, 1.6 task/s, elapsed: 251s, ETA:    41s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 395/459, 1.6 task/s, elapsed: 252s, ETA:    41s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 396/459, 1.6 task/s, elapsed: 253s, ETA:    40s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 397/459, 1.6 task/s, elapsed: 253s, ETA:    40s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 398/459, 1.6 task/s, elapsed: 253s, ETA:    39s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 399/459, 1.6 task/s, elapsed: 255s, ETA:    38s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 400/459, 1.6 task/s, elapsed: 255s, ETA:    38s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 401/459, 1.6 task/s, elapsed: 256s, ETA:    37s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 402/459, 1.6 task/s, elapsed: 256s, ETA:    36s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 403/459, 1.6 task/s, elapsed: 258s, ETA:    36s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 404/459, 1.6 task/s, elapsed: 258s, ETA:    35s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 405/459, 1.6 task/s, elapsed: 258s, ETA:    34s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 406/459, 1.6 task/s, elapsed: 259s, ETA:    34s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 407/459, 1.6 task/s, elapsed: 260s, ETA:    33s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 408/459, 1.6 task/s, elapsed: 260s, ETA:    33s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 409/459, 1.6 task/s, elapsed: 261s, ETA:    32s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 410/459, 1.6 task/s, elapsed: 261s, ETA:    31s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 411/459, 1.6 task/s, elapsed: 262s, ETA:    31s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 412/459, 1.6 task/s, elapsed: 263s, ETA:    30s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 413/459, 1.6 task/s, elapsed: 263s, ETA:    29s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 414/459, 1.6 task/s, elapsed: 263s, ETA:    29s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 415/459, 1.6 task/s, elapsed: 265s, ETA:    28s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 416/459, 1.6 task/s, elapsed: 265s, ETA:    27s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 417/459, 1.6 task/s, elapsed: 265s, ETA:    27s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 418/459, 1.6 task/s, elapsed: 266s, ETA:    26s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 419/459, 1.6 task/s, elapsed: 267s, ETA:    25s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 420/459, 1.6 task/s, elapsed: 268s, ETA:    25s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 421/459, 1.6 task/s, elapsed: 268s, ETA:    24s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 422/459, 1.6 task/s, elapsed: 268s, ETA:    24s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 423/459, 1.6 task/s, elapsed: 269s, ETA:    23s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 424/459, 1.6 task/s, elapsed: 270s, ETA:    22s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 425/459, 1.6 task/s, elapsed: 270s, ETA:    22s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 426/459, 1.6 task/s, elapsed: 270s, ETA:    21s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 427/459, 1.6 task/s, elapsed: 273s, ETA:    20s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 428/459, 1.6 task/s, elapsed: 273s, ETA:    20s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 429/459, 1.6 task/s, elapsed: 273s, ETA:    19s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 430/459, 1.6 task/s, elapsed: 274s, ETA:    18s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 431/459, 1.6 task/s, elapsed: 275s, ETA:    18s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 432/459, 1.6 task/s, elapsed: 275s, ETA:    17s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 433/459, 1.6 task/s, elapsed: 276s, ETA:    17s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 434/459, 1.6 task/s, elapsed: 276s, ETA:    16s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 435/459, 1.6 task/s, elapsed: 278s, ETA:    15s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 436/459, 1.6 task/s, elapsed: 278s, ETA:    15s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 437/459, 1.6 task/s, elapsed: 278s, ETA:    14s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 438/459, 1.6 task/s, elapsed: 278s, ETA:    13s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 439/459, 1.6 task/s, elapsed: 280s, ETA:    13s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 440/459, 1.6 task/s, elapsed: 280s, ETA:    12s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 441/459, 1.6 task/s, elapsed: 280s, ETA:    11s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 442/459, 1.6 task/s, elapsed: 281s, ETA:    11s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 443/459, 1.6 task/s, elapsed: 282s, ETA:    10s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 444/459, 1.6 task/s, elapsed: 282s, ETA:    10s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 445/459, 1.6 task/s, elapsed: 282s, ETA:     9s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 446/459, 1.6 task/s, elapsed: 283s, ETA:     8s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 447/459, 1.6 task/s, elapsed: 284s, ETA:     8s[>2025-04-19 18:53:07,760 - pyskl - INFO - [array([7.8507158e-04, 7.1464938e-01, 3.2880771e-04, 7.2691916e-04,
+       2.8145471e-01, 2.0551307e-03], dtype=float32), array([3.9587867e-01, 1.9546066e-04, 2.9000009e-06, 6.0391647e-01,
+       5.8822561e-06, 6.4886501e-07], dtype=float32), array([4.4032023e-03, 2.4947481e-01, 5.6914327e-04, 6.4983772e-04,
+       6.7673248e-01, 6.8170547e-02], dtype=float32), array([9.2369634e-01, 9.7453590e-12, 1.2458869e-10, 1.9408638e-07,
+       1.8148129e-06, 7.6301664e-02], dtype=float32), array([9.9821204e-01, 1.5317395e-06, 2.8969096e-08, 7.8868133e-04,
+       1.9873783e-04, 7.9894671e-04], dtype=float32), array([0.00419781, 0.7780914 , 0.10918023, 0.00335719, 0.0652221 ,
+       0.03995135], dtype=float32), array([0.00521371, 0.8841799 , 0.03024158, 0.00297889, 0.04993972,
+       0.02744619], dtype=float32), array([1.5354777e-02, 8.1544864e-04, 1.2751283e-06, 9.8382789e-01,
+       6.6001638e-07, 9.2954595e-09], dtype=float32), array([0.00377464, 0.1889558 , 0.42077628, 0.0026872 , 0.22794592,
+       0.15586014], dtype=float32), array([9.9991477e-01, 3.2488107e-10, 1.5320236e-09, 1.7131359e-05,
+       3.4031721e-08, 6.8076908e-05], dtype=float32), array([9.0894634e-03, 4.9071959e-03, 1.4980668e-03, 1.3451277e-04,
+       4.5936987e-01, 5.2500099e-01], dtype=float32), array([9.6994145e-06, 4.6807281e-03, 9.9196815e-01, 2.5998263e-04,
+       2.4621207e-03, 6.1932963e-04], dtype=float32), array([5.8285776e-03, 6.0518938e-03, 7.5388880e-04, 1.2361674e-04,
+       5.8343345e-01, 4.0380859e-01], dtype=float32), array([9.9902087e-01, 2.2319578e-07, 3.3154045e-08, 5.8575859e-04,
+       1.8778781e-05, 3.7434208e-04], dtype=float32), array([2.2473808e-03, 1.6587219e-05, 8.9325789e-05, 2.9437801e-06,
+       6.1274774e-02, 9.3636906e-01], dtype=float32), array([1.1524381e-05, 3.1776677e-04, 9.9097508e-01, 8.9167799e-05,
+       4.7551738e-03, 3.8512468e-03], dtype=float32), array([1.52242808e-02, 1.77598726e-02, 2.96191516e-04, 9.66605604e-01,
+       1.12081725e-04, 2.04124058e-06], dtype=float32), array([4.0572840e-03, 3.3287817e-04, 1.3419969e-03, 3.1890348e-05,
+       2.2062337e-01, 7.7361256e-01], dtype=float32), array([1.5827034e-03, 2.5040544e-08, 1.1205530e-07, 2.5624161e-08,
+       5.1552434e-03, 9.9326181e-01], dtype=float32), array([5.7721836e-06, 8.8813257e-01, 3.1771101e-08, 1.3237237e-04,
+       1.1172805e-01, 1.2132576e-06], dtype=float32), array([4.0701404e-04, 1.6725259e-10, 2.3160391e-08, 6.4256883e-10,
+       2.2568289e-04, 9.9936736e-01], dtype=float32), array([9.8639077e-01, 2.3138423e-06, 4.9113231e-07, 2.7075471e-04,
+       7.6468912e-04, 1.2570912e-02], dtype=float32), array([3.8813794e-04, 8.4893030e-01, 1.4655509e-04, 7.4928475e-04,
+       1.4878736e-01, 9.9840225e-04], dtype=float32), array([0.00369231, 0.22107421, 0.12463621, 0.00273444, 0.47100076,
+       0.17686209], dtype=float32), array([5.7855388e-05, 8.1350344e-01, 3.1666234e-04, 1.0178857e-03,
+       1.8492754e-01, 1.7663000e-04], dtype=float32), array([3.6450585e-03, 1.3312290e-05, 6.6847380e-05, 1.8618870e-06,
+       3.5420079e-02, 9.6085292e-01], dtype=float32), array([9.9310774e-01, 3.2448067e-06, 1.6304919e-07, 5.0795742e-04,
+       5.4855290e-04, 5.8324188e-03], dtype=float32), array([5.8257108e-04, 8.3255720e-01, 9.8947412e-04, 1.1939999e-03,
+       1.6224030e-01, 2.4364870e-03], dtype=float32), array([2.77497984e-05, 1.44952675e-02, 9.72793221e-01, 7.22839904e-04,
+       1.06330309e-02, 1.32791151e-03], dtype=float32), array([1.47644405e-05, 3.20234941e-03, 9.91524041e-01, 2.48112367e-04,
+       3.64109688e-03, 1.36965013e-03], dtype=float32), array([9.107518e-03, 3.856916e-03, 4.251996e-04, 8.205631e-05,
+       5.428323e-01, 4.436960e-01], dtype=float32), array([2.15285290e-05, 8.25680733e-01, 6.43325848e-07, 3.17240076e-04,
+       1.73968524e-01, 1.13435835e-05], dtype=float32), array([0.0012187 , 0.10333442, 0.659439  , 0.00259135, 0.17321804,
+       0.06019844], dtype=float32), array([2.6728760e-03, 9.9741437e-06, 1.4211159e-05, 1.9104959e-06,
+       1.3610038e-01, 8.6120063e-01], dtype=float32), array([9.9999344e-01, 2.5928072e-14, 1.0735054e-13, 5.1104621e-07,
+       3.0207456e-10, 6.0464595e-06], dtype=float32), array([1.3536132e-04, 8.5871267e-01, 4.9008495e-06, 3.5021998e-04,
+       1.4066568e-01, 1.3113442e-04], dtype=float32), array([6.4901476e-05, 2.6960611e-02, 9.5820707e-01, 8.3226006e-04,
+       1.1317165e-02, 2.6179969e-03], dtype=float32), array([0.00337573, 0.43882534, 0.00389726, 0.00141141, 0.5054733 ,
+       0.047017  ], dtype=float32), array([2.7419074e-04, 2.0267460e-02, 9.3608421e-01, 7.4108224e-04,
+       2.4482017e-02, 1.8151119e-02], dtype=float32), array([3.7915073e-04, 9.8407030e-02, 8.5574514e-01, 1.5111621e-03,
+       2.9884607e-02, 1.4072943e-02], dtype=float32), array([7.2401804e-06, 3.3368312e-03, 9.9390870e-01, 2.4610467e-04,
+       2.0242373e-03, 4.7694892e-04], dtype=float32), array([0.00067521, 0.4920044 , 0.4042781 , 0.00228612, 0.08863009,
+       0.01212615], dtype=float32), array([3.3628521e-04, 1.0851530e-01, 8.4105569e-01, 1.8821274e-03,
+       3.6797326e-02, 1.1413223e-02], dtype=float32), array([9.7455218e-04, 7.4892834e-02, 2.1589056e-05, 2.1819700e-04,
+       9.1645432e-01, 7.4385218e-03], dtype=float32), array([5.2216297e-01, 7.2917475e-14, 9.8339592e-12, 2.9018044e-09,
+       3.5044141e-07, 4.7783670e-01], dtype=float32), array([5.0553218e-03, 4.4820299e-03, 9.7052334e-03, 2.3219774e-04,
+       4.5600367e-01, 5.2452159e-01], dtype=float32), array([6.9787162e-03, 4.8818855e-04, 4.7644513e-04, 2.4934314e-05,
+       2.4772325e-01, 7.4430853e-01], dtype=float32), array([9.8763955e-01, 2.3557746e-04, 5.6766180e-06, 4.7115176e-03,
+       3.7818761e-03, 3.6258397e-03], dtype=float32), array([7.6651986e-04, 3.1787556e-01, 2.3088635e-06, 3.4266117e-04,
+       6.7999756e-01, 1.0154193e-03], dtype=float32), array([0.00110586, 0.7500104 , 0.08927586, 0.00276219, 0.14123502,
+       0.01561071], dtype=float32), array([5.8111193e-04, 5.8959466e-01, 2.4530463e-01, 4.1687414e-03,
+       1.5029648e-01, 1.0054369e-02], dtype=float32), array([3.0828703e-03, 1.8640550e-05, 1.0913833e-04, 2.7123347e-06,
+       5.0032206e-02, 9.4675446e-01], dtype=float32), array([3.1585289e-05, 1.3588922e-02, 9.7848666e-01, 5.0156959e-04,
+       5.7621119e-03, 1.6291700e-03], dtype=float32), array([2.0851110e-05, 8.6286795e-01, 2.5170289e-08, 1.1252344e-04,
+       1.3699378e-01, 4.8718962e-06], dtype=float32), array([4.7602889e-06, 1.8555637e-03, 9.9623626e-01, 1.8998104e-04,
+       1.3988846e-03, 3.1460609e-04], dtype=float32), array([9.9083418e-01, 3.6583494e-06, 5.0558032e-07, 6.4690335e-04,
+       4.8450046e-04, 8.0303038e-03], dtype=float32), array([6.2071984e-03, 2.8667722e-05, 4.5545781e-07, 9.9376363e-01,
+       1.9346196e-08, 4.2910350e-10], dtype=float32), array([9.9992907e-01, 2.9331787e-10, 1.5398828e-09, 5.3611300e-05,
+       3.9517428e-08, 1.7292323e-05], dtype=float32), array([2.6939091e-05, 8.9623127e-03, 9.8514241e-01, 4.4545633e-04,
+       4.1650645e-03, 1.2577773e-03], dtype=float32), array([5.0582580e-04, 2.1918884e-01, 7.1153665e-01, 2.3161608e-03,
+       5.2875038e-02, 1.3577490e-02], dtype=float32), array([4.8213513e-03, 2.7635526e-03, 6.6723814e-04, 8.7702363e-05,
+       5.1493639e-01, 4.7672376e-01], dtype=float32), array([5.5909640e-04, 6.9867021e-01, 9.3313711e-06, 5.0150591e-04,
+       2.9950491e-01, 7.5495226e-04], dtype=float32), array([7.3768478e-04, 5.7516354e-01, 1.6261989e-05, 5.2983075e-04,
+       4.2199406e-01, 1.5586263e-03], dtype=float32), array([5.7898313e-05, 3.5912167e-02, 9.4768298e-01, 8.9530175e-04,
+       1.3043779e-02, 2.4079864e-03], dtype=float32), array([9.9886030e-01, 1.2389494e-07, 5.9469187e-08, 6.7096972e-04,
+       1.3885624e-05, 4.5473524e-04], dtype=float32), array([0.00263131, 0.86007357, 0.0385001 , 0.00247082, 0.07459219,
+       0.02173206], dtype=float32), array([6.4089499e-02, 2.2363842e-05, 1.1136381e-07, 9.3588799e-01,
+       3.5290931e-08, 1.8939597e-09], dtype=float32), array([0.01756816, 0.6061999 , 0.00102575, 0.00270676, 0.30578277,
+       0.06671666], dtype=float32), array([5.9050020e-02, 1.1776768e-03, 6.9230878e-06, 9.3976110e-01,
+       4.0977388e-06, 1.6127187e-07], dtype=float32), array([5.4307928e-04, 9.0114564e-01, 8.8910566e-04, 1.5932368e-03,
+       9.4550394e-02, 1.2785330e-03], dtype=float32), array([9.9884444e-01, 1.3823277e-09, 1.7140395e-09, 1.2722373e-05,
+       3.8773719e-06, 1.1389208e-03], dtype=float32), array([7.68630067e-03, 1.76734594e-03, 1.06960295e-04, 4.19840144e-05,
+       6.17334843e-01, 3.73062581e-01], dtype=float32), array([9.8241276e-01, 3.8863929e-11, 1.3141557e-10, 6.4870534e-07,
+       3.7738635e-06, 1.7582903e-02], dtype=float32), array([9.99957502e-01, 1.07923185e-13, 2.50832254e-12, 6.16085970e-07,
+       2.33647013e-09, 4.18601376e-05], dtype=float32), array([6.0584303e-03, 3.0045546e-04, 1.8317209e-06, 4.7864332e-06,
+       5.9938509e-02, 9.3369597e-01], dtype=float32), array([0.00174266, 0.7854969 , 0.02035155, 0.00239998, 0.17438127,
+       0.01562762], dtype=float32), array([3.4606757e-04, 1.4859141e-01, 7.9336238e-01, 2.0988800e-03,
+       4.4371199e-02, 1.1230043e-02], dtype=float32), array([0.00053942, 0.3008102 , 0.5355844 , 0.00321383, 0.1480224 ,
+       0.01182986], dtype=float32), array([9.0764922e-01, 7.2972548e-09, 3.1546374e-08, 4.8741354e-06,
+       1.0161856e-04, 9.2244297e-02], dtype=float32), array([0.00536452, 0.8803796 , 0.03302598, 0.00299223, 0.04974804,
+       0.02848968], dtype=float32), array([2.3955945e-03, 8.6389191e-06, 6.4605860e-07, 9.9759513e-01,
+       4.3404333e-09, 7.6986639e-11], dtype=float32), array([0.00560679, 0.85149765, 0.049795  , 0.00295765, 0.0520405 ,
+       0.03810244], dtype=float32), array([6.9849282e-03, 3.4860530e-04, 1.1349392e-05, 9.9265444e-01,
+       6.6510341e-07, 1.1952747e-08], dtype=float32), array([1.2408231e-03, 3.3593532e-02, 1.4945565e-06, 1.5377377e-04,
+       9.6243364e-01, 2.5767812e-03], dtype=float32), array([1.5919282e-03, 2.2259937e-06, 1.4134146e-04, 1.0609058e-06,
+       2.3106677e-02, 9.7515678e-01], dtype=float32), array([6.7083997e-04, 6.5396778e-02, 1.9873262e-06, 1.6311801e-04,
+       9.3209040e-01, 1.6768578e-03], dtype=float32), array([4.2636581e-03, 2.9757369e-04, 1.7612436e-03, 2.9804203e-05,
+       1.9230804e-01, 8.0133975e-01], dtype=float32), array([2.8013340e-03, 1.2200059e-05, 1.0231017e-04, 2.8458842e-06,
+       1.0633402e-01, 8.9074725e-01], dtype=float32), array([7.7909926e-06, 8.1644344e-01, 3.1587908e-07, 2.6821170e-04,
+       1.8327628e-01, 3.9331239e-06], dtype=float32), array([2.9339076e-03, 1.7842502e-05, 3.5173580e-06, 9.9704474e-01,
+       2.8692332e-08, 6.6003508e-10], dtype=float32), array([3.0593779e-03, 2.7731920e-02, 3.2300777e-05, 1.5864402e-04,
+       9.3945259e-01, 2.9565264e-02], dtype=float32), array([3.7488205e-06, 9.0866661e-01, 7.3460003e-09, 1.0324048e-04,
+       9.1225900e-02, 4.5092210e-07], dtype=float32), array([6.7458891e-06, 9.2163068e-01, 8.7613489e-10, 5.7318266e-05,
+       7.8304797e-02, 5.0466468e-07], dtype=float32), array([0.01355348, 0.7071936 , 0.00072171, 0.00292115, 0.2353193 ,
+       0.0402907 ], dtype=float32), array([2.4281600e-05, 8.1422228e-01, 2.8289194e-06, 7.4268266e-04,
+       1.8499593e-01, 1.2038040e-05], dtype=float32), array([8.7195214e-05, 8.6564636e-01, 1.4172900e-06, 2.9707953e-04,
+       1.3391533e-01, 5.2577638e-05], dtype=float32), array([0.00248947, 0.5014176 , 0.00072257, 0.00109891, 0.47606865,
+       0.01820281], dtype=float32), array([3.8408358e-03, 1.5709701e-04, 2.9424578e-04, 1.3957803e-05,
+       1.9492579e-01, 8.0076808e-01], dtype=float32), array([1.0837964e-05, 8.8449156e-01, 3.3701107e-07, 2.2368590e-04,
+       1.1526921e-01, 4.4077451e-06], dtype=float32), array([1.8998852e-04, 7.1996629e-01, 2.5815385e-07, 2.2168914e-04,
+       2.7952945e-01, 9.2318245e-05], dtype=float32), array([2.1042575e-03, 3.3346030e-01, 2.3222803e-05, 4.7340020e-04,
+       6.5711147e-01, 6.8273330e-03], dtype=float32), array([0.00280164, 0.5709693 , 0.22074084, 0.00317935, 0.1525969 ,
+       0.04971203], dtype=float32), array([0.00086406, 0.08144607, 0.8039967 , 0.00169399, 0.06799749,
+       0.04400173], dtype=float32), array([6.8720474e-06, 7.9777998e-01, 1.7702522e-06, 4.0038419e-04,
+       2.0180593e-01, 5.1084826e-06], dtype=float32), array([3.3606782e-05, 2.3620471e-02, 9.6024799e-01, 9.3079609e-04,
+       1.3694497e-02, 1.4727233e-03], dtype=float32), array([0.00471266, 0.07316051, 0.14581151, 0.00163236, 0.57155544,
+       0.20312758], dtype=float32), array([9.9995118e-01, 2.6662580e-10, 9.9958408e-10, 1.4677821e-05,
+       1.6332587e-08, 3.4096596e-05], dtype=float32), array([4.2491239e-03, 6.4239437e-05, 1.0927918e-06, 9.9568552e-01,
+       6.4346295e-08, 7.3115175e-10], dtype=float32), array([0.00423817, 0.93246424, 0.00789294, 0.00289276, 0.04142706,
+       0.01108487], dtype=float32), array([2.9856325e-04, 2.5755327e-11, 1.5537337e-08, 2.4695410e-10,
+       1.2400652e-04, 9.9957746e-01], dtype=float32), array([0.00939333, 0.16217038, 0.00897914, 0.00110677, 0.57071435,
+       0.24763604], dtype=float32), array([4.1876157e-04, 2.2605253e-02, 8.9783585e-01, 8.7879022e-04,
+       4.3322235e-02, 3.4939110e-02], dtype=float32), array([9.9994594e-01, 1.9795309e-12, 1.6319614e-12, 1.1053620e-06,
+       1.0575900e-08, 5.2963394e-05], dtype=float32), array([5.1485607e-03, 1.2058212e-02, 1.7973440e-02, 4.8926333e-04,
+       6.0678285e-01, 3.5754770e-01], dtype=float32), array([1.7609309e-04, 3.4118459e-02, 2.2667716e-06, 2.0268287e-04,
+       9.6506232e-01, 4.3815482e-04], dtype=float32), array([9.5507985e-01, 2.1925934e-04, 1.7248773e-05, 2.6833261e-03,
+       1.1144620e-02, 3.0855775e-02], dtype=float32), array([6.3375230e-03, 1.0809049e-03, 1.3795665e-03, 5.9011603e-05,
+       2.8411746e-01, 7.0702559e-01], dtype=float32), array([3.7340267e-04, 1.2947677e-01, 8.0016273e-01, 2.1723337e-03,
+       5.5803712e-02, 1.2011076e-02], dtype=float32), array([8.8940365e-03, 4.3767700e-03, 6.1221910e-04, 9.9136319e-05,
+       5.0051796e-01, 4.8549986e-01], dtype=float32), array([7.7380397e-04, 8.1491899e-01, 2.9004240e-02, 2.1785360e-03,
+       1.4559136e-01, 7.5330823e-03], dtype=float32), array([9.8360103e-01, 3.1577603e-12, 8.7995271e-11, 2.2297398e-07,
+       8.0923820e-07, 1.6397892e-02], dtype=float32), array([0.00890561, 0.06767195, 0.00894513, 0.00086859, 0.6314635 ,
+       0.28214523], dtype=float32), array([4.1721421e-04, 3.8135727e-07, 6.9971031e-07, 9.9958175e-01,
+       3.4556241e-10, 6.5059633e-12], dtype=float32), array([1.5863814e-04, 5.0670829e-02, 9.2487508e-01, 1.0179920e-03,
+       1.6476013e-02, 6.8014795e-03], dtype=float32), array([1.0085775e-03, 4.4458875e-07, 3.3949910e-08, 9.9899101e-01,
+       1.0627460e-10, 1.3649589e-12], dtype=float32), array([4.5906734e-03, 1.1376590e-05, 1.2869877e-07, 9.9539775e-01,
+       3.4585053e-09, 5.4884330e-11], dtype=float32), array([1.7126993e-04, 7.4952906e-01, 1.4704418e-06, 2.9660852e-04,
+       2.4985035e-01, 1.5123221e-04], dtype=float32), array([0.00508968, 0.17424326, 0.12968174, 0.00226042, 0.50330484,
+       0.18542014], dtype=float32), array([1.8978286e-04, 8.1157476e-02, 8.6956024e-01, 1.8968128e-03,
+       4.0282179e-02, 6.9135143e-03], dtype=float32), array([1.0573947e-02, 6.0197837e-03, 2.3781537e-05, 9.8336089e-01,
+       2.1427593e-05, 1.6764157e-07], dtype=float32), array([3.2003627e-05, 1.3815515e-02, 9.7637618e-01, 5.7150191e-04,
+       7.4931444e-03, 1.7116722e-03], dtype=float32), array([5.0086249e-03, 7.0440069e-02, 4.8299934e-04, 4.7536264e-04,
+       8.5005188e-01, 7.3540986e-02], dtype=float32), array([1.4622251e-05, 7.2094214e-01, 1.1571955e-06, 4.4065938e-04,
+       2.7858993e-01, 1.1512985e-05], dtype=float32), array([4.9253413e-03, 3.3004908e-05, 3.4946129e-07, 9.9504131e-01,
+       2.1963299e-08, 2.4270705e-10], dtype=float32), array([5.3545148e-03, 9.3012735e-05, 1.0633592e-04, 9.1785068e-06,
+       2.0106390e-01, 7.9337305e-01], dtype=float32), array([1.4457449e-03, 9.9054113e-02, 1.3782486e-03, 8.6194597e-04,
+       8.7732452e-01, 1.9935474e-02], dtype=float32), array([9.9362868e-01, 1.5886894e-07, 1.4915429e-07, 1.1069841e-04,
+       1.3061006e-04, 6.1296979e-03], dtype=float32), array([8.20916053e-03, 1.18292655e-05, 2.46687932e-07, 9.91778791e-01,
+       7.13893611e-09, 1.94290847e-10], dtype=float32), array([0.00166664, 0.18837376, 0.27184793, 0.00244684, 0.48701307,
+       0.04865178], dtype=float32), array([1.7747259e-05, 7.3161680e-01, 4.8093591e-07, 3.2564439e-04,
+       2.6803142e-01, 7.9972469e-06], dtype=float32), array([1.0526152e-05, 3.1999976e-03, 9.9372560e-01, 2.7051542e-04,
+       2.1899489e-03, 6.0337706e-04], dtype=float32), array([1.1837278e-03, 2.2345216e-06, 8.3973416e-04, 2.3225764e-06,
+       4.5771450e-02, 9.5220059e-01], dtype=float32), array([4.7041053e-06, 8.7289256e-01, 6.0311883e-08, 1.7359064e-04,
+       1.2692781e-01, 1.2592272e-06], dtype=float32), array([3.6491253e-04, 6.0297477e-01, 1.6412821e-01, 5.6996117e-03,
+       2.2253089e-01, 4.3016444e-03], dtype=float32), array([2.9809219e-03, 6.3330075e-04, 1.5886743e-04, 9.9622357e-01,
+       3.2564237e-06, 5.4908099e-08], dtype=float32), array([1.8550799e-03, 3.2547523e-05, 1.8698765e-05, 9.9809361e-01,
+       5.6616670e-08, 1.2453452e-09], dtype=float32), array([9.9652398e-01, 3.3424737e-06, 7.4335539e-08, 3.2342251e-03,
+       4.5104320e-05, 1.9329764e-04], dtype=float32), array([9.9129695e-01, 1.1372252e-06, 2.8824294e-07, 1.8986942e-04,
+       3.8077912e-04, 8.1310300e-03], dtype=float32), array([8.8685563e-05, 3.3875324e-02, 9.5146954e-01, 8.3696487e-04,
+       1.0125326e-02, 3.6042265e-03], dtype=float32), array([9.9993604e-01, 1.8679920e-11, 4.4712306e-10, 5.2772752e-06,
+       2.0815961e-08, 5.8700618e-05], dtype=float32), array([6.1974271e-05, 3.1601626e-02, 9.5142519e-01, 9.0578478e-04,
+       1.3276532e-02, 2.7289826e-03], dtype=float32), array([9.9982846e-01, 7.5555295e-10, 2.8637646e-09, 1.1984329e-05,
+       7.8654423e-08, 1.5946142e-04], dtype=float32), array([4.2160809e-06, 8.4091443e-01, 4.9182308e-08, 2.4000830e-04,
+       1.5884040e-01, 9.0276370e-07], dtype=float32), array([3.2602911e-06, 8.9683849e-01, 2.1440625e-08, 1.2462189e-04,
+       1.0303310e-01, 5.4381002e-07], dtype=float32), array([6.5281859e-04, 5.4869592e-02, 3.0317882e-03, 1.0527276e-03,
+       9.2866129e-01, 1.1731772e-02], dtype=float32), array([1.0007870e-02, 1.8188354e-03, 3.0816600e-04, 4.7846181e-05,
+       2.7452430e-01, 7.1329302e-01], dtype=float32), array([4.7296435e-03, 8.0412620e-04, 9.7834680e-04, 5.0672690e-05,
+       3.6666572e-01, 6.2677151e-01], dtype=float32), array([9.9911100e-01, 5.0069514e-07, 1.4426004e-08, 2.6423356e-04,
+       5.3978289e-05, 5.7025993e-04], dtype=float32), array([9.8154783e-01, 1.1705626e-04, 2.1737148e-06, 1.6248882e-02,
+       8.2692917e-04, 1.2571043e-03], dtype=float32), array([8.1461025e-03, 6.2484891e-05, 5.2149852e-07, 9.9179089e-01,
+       5.9420564e-08, 1.1711908e-09], dtype=float32), array([1.9264519e-03, 8.2887965e-01, 7.6090895e-05, 1.8769071e-03,
+       1.6552866e-01, 1.7121996e-03], dtype=float32), array([4.0379196e-04, 1.6774806e-01, 1.0559422e-06, 2.3359653e-04,
+       8.3106881e-01, 5.4469099e-04], dtype=float32), array([7.9184292e-06, 8.8053799e-01, 2.3357111e-07, 2.1291734e-04,
+       1.1923788e-01, 3.0191802e-06], dtype=float32), array([0.00089131, 0.48462468, 0.37325987, 0.00351665, 0.11898885,
+       0.01871865], dtype=float32), array([2.9655322e-04, 8.3379978e-01, 5.2508376e-06, 3.8321596e-04,
+       1.6520123e-01, 3.1401997e-04], dtype=float32), array([9.69666429e-03, 1.09411767e-02, 1.12619404e-04, 1.07645130e-04,
+       6.62488163e-01, 3.16653728e-01], dtype=float32), array([9.9978983e-01, 1.9707194e-09, 1.7683731e-10, 2.0659043e-04,
+       1.3239901e-07, 3.5048049e-06], dtype=float32), array([2.8812631e-03, 1.5421654e-05, 7.4637217e-05, 1.9261074e-06,
+       3.5011798e-02, 9.6201497e-01], dtype=float32), array([1.0051607e-05, 7.1887714e-01, 4.1402245e-06, 5.1772344e-04,
+       2.8058144e-01, 9.5287178e-06], dtype=float32), array([2.1231244e-03, 5.2460604e-05, 5.5502364e-06, 9.9781877e-01,
+       9.1296847e-08, 1.1305066e-09], dtype=float32), array([3.3214618e-03, 3.3621499e-01, 4.2765075e-04, 7.7538629e-04,
+       6.3031191e-01, 2.8948665e-02], dtype=float32), array([2.4417445e-02, 2.5421607e-03, 1.1736628e-05, 9.7302228e-01,
+       6.2794384e-06, 1.3744231e-07], dtype=float32), array([4.4134441e-03, 3.9569150e-05, 5.7159225e-05, 4.1402659e-06,
+       1.2623976e-01, 8.6924595e-01], dtype=float32), array([9.9887115e-01, 5.2460990e-08, 5.3725017e-07, 1.0703955e-03,
+       9.1152435e-07, 5.6954752e-05], dtype=float32), array([5.9174176e-04, 6.5204304e-01, 2.0736779e-05, 5.4758292e-04,
+       3.4578559e-01, 1.0112879e-03], dtype=float32), array([1.4493602e-06, 1.3928332e-04, 9.9866861e-01, 5.8744401e-05,
+       8.4087776e-04, 2.9106752e-04], dtype=float32), array([1.3122269e-03, 1.9960972e-07, 4.1790577e-06, 9.6161763e-08,
+       7.9417881e-03, 9.9074155e-01], dtype=float32), array([4.7602761e-03, 1.1324558e-02, 2.7850241e-04, 1.5931520e-04,
+       7.9972363e-01, 1.8375367e-01], dtype=float32), array([9.9968207e-01, 3.4519545e-09, 8.5621060e-08, 2.6259088e-04,
+       3.5791970e-07, 5.4891581e-05], dtype=float32), array([2.87447870e-03, 5.31444931e-03, 9.47907392e-05, 1.01596015e-04,
+       9.07886505e-01, 8.37281868e-02], dtype=float32), array([9.4708103e-01, 4.4996216e-12, 1.0685641e-10, 1.3460087e-07,
+       1.5723641e-06, 5.2917171e-02], dtype=float32), array([7.8146020e-04, 4.6111204e-09, 4.7238265e-07, 1.0219324e-08,
+       1.7129955e-03, 9.9750501e-01], dtype=float32), array([3.9181108e-05, 1.1401135e-02, 9.7711533e-01, 5.2024453e-04,
+       8.5365530e-03, 2.3875630e-03], dtype=float32), array([4.2131850e-03, 2.8426626e-05, 5.0408795e-05, 2.8281468e-06,
+       6.6337183e-02, 9.2936802e-01], dtype=float32), array([5.3743888e-03, 4.8986566e-04, 5.7132179e-06, 9.9412900e-01,
+       1.0520253e-06, 8.3479366e-09], dtype=float32), array([1.3681458e-03, 6.9744026e-05, 9.0957310e-06, 9.9855292e-01,
+       1.2993632e-07, 1.3000468e-09], dtype=float32), array([9.9988478e-01, 1.0855236e-09, 4.1081298e-11, 1.0898420e-04,
+       8.7081972e-08, 6.1008095e-06], dtype=float32), array([3.0546824e-02, 3.2117832e-04, 1.1456902e-06, 9.6913022e-01,
+       5.8735520e-07, 1.3077167e-08], dtype=float32), array([9.9504310e-01, 2.0609583e-05, 3.8409112e-07, 1.3209501e-03,
+       7.9962687e-04, 2.8153071e-03], dtype=float32), array([3.1352972e-06, 1.2415014e-03, 9.9735528e-01, 1.5601573e-04,
+       1.0238712e-03, 2.2023637e-04], dtype=float32), array([6.7239613e-03, 1.7438148e-03, 1.6472930e-03, 8.5549065e-05,
+       3.8585097e-01, 6.0394847e-01], dtype=float32), array([8.7188513e-05, 4.5693633e-01, 2.8572163e-07, 3.3774873e-04,
+       5.4258949e-01, 4.8957281e-05], dtype=float32), array([9.9998015e-01, 3.1319749e-11, 1.6191529e-10, 4.4498493e-06,
+       3.6157084e-09, 1.5421754e-05], dtype=float32), array([9.9981827e-01, 1.9045201e-09, 3.3518262e-08, 1.1625785e-04,
+       2.0783455e-07, 6.5319728e-05], dtype=float32), array([2.1969818e-05, 8.2092142e-01, 8.6455202e-07, 3.4767584e-04,
+       1.7869493e-01, 1.3209879e-05], dtype=float32), array([6.8135600e-04, 7.6086879e-01, 5.9547334e-04, 1.1867352e-03,
+       2.3402266e-01, 2.6449305e-03], dtype=float32), array([4.2672725e-03, 1.6541193e-01, 1.7069106e-03, 7.3179195e-04,
+       7.3214120e-01, 9.5740825e-02], dtype=float32), array([4.0606544e-03, 2.2068196e-05, 6.8429000e-07, 9.9591655e-01,
+       1.2910969e-08, 2.8455202e-10], dtype=float32), array([9.7527489e-04, 1.7236921e-07, 9.9797788e-09, 9.9902457e-01,
+       1.9954295e-11, 2.8299861e-13], dtype=float32), array([4.9462030e-04, 3.2481235e-02, 8.8618910e-01, 1.0292152e-03,
+       4.5528311e-02, 3.4277510e-02], dtype=float32), array([2.8040395e-03, 1.5736565e-05, 1.5240315e-05, 1.0825087e-06,
+       7.0673884e-03, 9.9009651e-01], dtype=float32), array([9.9958819e-01, 9.1754275e-09, 2.0832071e-07, 3.5576528e-04,
+       3.8734979e-07, 5.5412169e-05], dtype=float32), array([1.4818509e-05, 5.5313110e-03, 9.8908758e-01, 3.5411544e-04,
+       4.0784627e-03, 9.3365990e-04], dtype=float32), array([1.9678341e-03, 1.1256310e-06, 7.9856736e-06, 2.5378321e-07,
+       1.0057875e-02, 9.8796493e-01], dtype=float32), array([5.5650435e-03, 5.4282607e-03, 2.9404347e-03, 1.9247225e-04,
+       6.3548958e-01, 3.5038424e-01], dtype=float32), array([9.9682808e-01, 3.9980599e-11, 6.3040795e-11, 1.1213419e-06,
+       1.4005998e-06, 3.1694528e-03], dtype=float32), array([1.4213997e-05, 5.3877435e-03, 9.8995858e-01, 2.8151658e-04,
+       3.3805843e-03, 9.7743422e-04], dtype=float32), array([5.5711524e-04, 1.6018108e-01, 7.7237850e-01, 2.0810843e-03,
+       4.6591580e-02, 1.8210694e-02], dtype=float32), array([7.4816630e-03, 4.7649746e-04, 7.5424665e-05, 1.8232386e-05,
+       3.9268914e-01, 5.9925902e-01], dtype=float32), array([0.00361137, 0.9303055 , 0.00786   , 0.00245603, 0.04452409,
+       0.01124297], dtype=float32), array([9.9998039e-01, 3.4382545e-11, 5.1255332e-12, 1.3039945e-05,
+       2.0294408e-08, 6.6398579e-06], dtype=float32), array([2.6472553e-03, 7.8257499e-04, 1.5669797e-03, 6.1642488e-05,
+       4.2473203e-01, 5.7020962e-01], dtype=float32), array([1.5474814e-04, 2.4971700e-01, 2.3371958e-04, 1.4680651e-03,
+       7.4791068e-01, 5.1584485e-04], dtype=float32), array([6.8568238e-03, 4.9436197e-04, 3.9710816e-05, 1.6273361e-05,
+       4.6006593e-01, 5.3252691e-01], dtype=float32), array([1.5151581e-03, 1.4808542e-02, 1.3078124e-05, 1.0954338e-04,
+       9.7061169e-01, 1.2942046e-02], dtype=float32), array([0.0077503 , 0.18019395, 0.00434898, 0.0010022 , 0.64308643,
+       0.16361813], dtype=float32), array([8.8839413e-04, 5.7880968e-01, 2.4744624e-05, 5.0132186e-04,
+       4.1732541e-01, 2.4505090e-03], dtype=float32), array([6.0896869e-03, 5.3659525e-05, 3.1485160e-07, 9.9385625e-01,
+       3.6762852e-08, 3.8423048e-10], dtype=float32), array([4.7290395e-03, 2.9208502e-03, 1.5570211e-02, 1.9665954e-04,
+       3.6405349e-01, 6.1252975e-01], dtype=float32), array([9.9624938e-01, 2.7411929e-07, 1.0297038e-08, 3.7442725e-03,
+       1.8190646e-06, 4.2073011e-06], dtype=float32), array([9.9579567e-01, 7.5676021e-11, 1.1294062e-10, 2.0678774e-06,
+       1.5760988e-06, 4.2007184e-03], dtype=float32), array([9.9440813e-01, 1.1963422e-05, 1.9315401e-06, 4.1757035e-03,
+       1.5331017e-04, 1.2489269e-03], dtype=float32), array([3.4056590e-03, 1.2987446e-05, 6.1193066e-05, 1.8852294e-06,
+       4.4230040e-02, 9.5228827e-01], dtype=float32), array([1.1452381e-03, 2.7532349e-06, 1.4839881e-06, 9.9885046e-01,
+       2.1933828e-09, 5.3385667e-11], dtype=float32), array([5.8374386e-03, 3.3176731e-02, 6.3808123e-04, 3.0659215e-04,
+       8.4803277e-01, 1.1200841e-01], dtype=float32), array([1.13396694e-04, 2.90489234e-02, 9.51432347e-01, 8.04602751e-04,
+       1.33701414e-02, 5.23052318e-03], dtype=float32), array([9.8405355e-01, 5.5573042e-07, 2.9172893e-08, 1.5942080e-02,
+       1.3090763e-06, 2.5295151e-06], dtype=float32), array([8.0107542e-04, 4.9750540e-01, 5.8880169e-06, 3.5699728e-04,
+       4.9958181e-01, 1.7488491e-03], dtype=float32), array([8.9706066e-07, 3.0361462e-04, 9.9904978e-01, 7.0396571e-05,
+       4.7907777e-04, 9.6248004e-05], dtype=float32), array([1.0378718e-03, 6.6150486e-01, 5.8765057e-04, 1.1579235e-03,
+       3.3029374e-01, 5.4179723e-03], dtype=float32), array([3.87321110e-03, 2.07163670e-04, 1.31874785e-05, 9.95905995e-01,
+       5.29888325e-07, 8.31888336e-09], dtype=float32), array([2.9416738e-06, 1.3000969e-03, 9.9726403e-01, 1.4681299e-04,
+       1.0579529e-03, 2.2821462e-04], dtype=float32), array([2.0663438e-05, 9.0453285e-01, 3.7391581e-07, 1.9600599e-04,
+       9.5241606e-02, 8.4976591e-06], dtype=float32), array([9.1221709e-06, 3.4771040e-03, 9.9278909e-01, 2.8044585e-04,
+       2.8271310e-03, 6.1712658e-04], dtype=float32), array([0.00291944, 0.25679493, 0.03630023, 0.00222682, 0.59768355,
+       0.10407507], dtype=float32), array([9.9064207e-01, 2.4159376e-06, 2.1974243e-07, 4.6408051e-04,
+       5.9752865e-04, 8.2936957e-03], dtype=float32), array([9.83994007e-01, 5.94572725e-07, 3.26193117e-07, 1.09668494e-04,
+       3.90376284e-04, 1.55050475e-02], dtype=float32), array([1.0321020e-03, 4.0754423e-01, 4.2731572e-05, 6.1260816e-04,
+       5.8783215e-01, 2.9361923e-03], dtype=float32), array([1.5060807e-03, 1.4517888e-02, 3.5618600e-06, 7.6251010e-05,
+       9.7285271e-01, 1.1043484e-02], dtype=float32), array([8.7137142e-04, 1.5765581e-01, 1.6856309e-04, 5.8051990e-04,
+       8.3531106e-01, 5.4126601e-03], dtype=float32), array([7.4807554e-03, 1.3229826e-02, 6.7484909e-04, 2.0224846e-04,
+       7.5246662e-01, 2.2594579e-01], dtype=float32), array([9.9555645e-03, 8.0824886e-03, 1.7571371e-03, 1.4923756e-04,
+       2.8998119e-01, 6.9007438e-01], dtype=float32), array([8.7970830e-06, 9.2260832e-01, 1.8291319e-08, 1.3342813e-04,
+       7.7248298e-02, 1.2064693e-06], dtype=float32), array([6.5826328e-04, 1.8925648e-02, 3.9048490e-04, 5.5340043e-04,
+       9.7084457e-01, 8.6276410e-03], dtype=float32), array([8.1167855e-06, 7.6403427e-01, 2.3517039e-06, 4.5634393e-04,
+       2.3549366e-01, 5.2450014e-06], dtype=float32), array([1.8145234e-03, 2.9103009e-02, 7.7837518e-05, 2.2865995e-04,
+       9.4793981e-01, 2.0836173e-02], dtype=float32), array([2.2826616e-04, 8.5725802e-01, 2.2095097e-04, 8.7743514e-04,
+       1.4083505e-01, 5.8034447e-04], dtype=float32), array([1.2872959e-04, 4.7808386e-02, 9.3036157e-01, 1.0256011e-03,
+       1.5198186e-02, 5.4774950e-03], dtype=float32), array([8.45162850e-03, 1.43682435e-02, 7.89037906e-04, 1.98773501e-04,
+       7.19788015e-01, 2.56404310e-01], dtype=float32), array([0.00202504, 0.5784317 , 0.09722133, 0.00383303, 0.28316674,
+       0.0353221 ], dtype=float32), array([9.9979842e-01, 1.2299458e-08, 2.3401245e-08, 7.7215111e-05,
+       3.0797079e-07, 1.2408481e-04], dtype=float32), array([1.0828954e-06, 5.6728441e-04, 9.9873585e-01, 9.6485128e-05,
+       5.1137881e-04, 8.7916211e-05], dtype=float32), array([9.9078625e-01, 5.8798680e-05, 9.9420151e-07, 7.3447092e-03,
+       8.1527542e-04, 9.9397171e-04], dtype=float32), array([1.3480250e-04, 4.5396414e-02, 9.3290991e-01, 9.5490890e-04,
+       1.5066424e-02, 5.5374876e-03], dtype=float32), array([1.9477636e-03, 1.0045448e-04, 9.6718859e-06, 9.9794179e-01,
+       2.6766097e-07, 3.0436120e-09], dtype=float32), array([1.1603395e-03, 4.9355203e-01, 9.4305331e-05, 6.9960830e-04,
+       4.9965993e-01, 4.8337984e-03], dtype=float32), array([1.5454551e-05, 8.7768787e-01, 2.6547022e-07, 2.3162591e-04,
+       1.2205932e-01, 5.4933494e-06], dtype=float32), array([1.2354148e-04, 8.2533377e-01, 1.0189614e-06, 2.5783788e-04,
+       1.7420304e-01, 8.0692778e-05], dtype=float32), array([2.3983566e-02, 3.7035285e-04, 8.5399997e-06, 9.7563440e-01,
+       3.0649558e-06, 7.6107732e-08], dtype=float32), array([2.4200464e-02, 3.1835624e-04, 7.3499308e-07, 9.7548002e-01,
+       5.1000580e-07, 7.9257116e-09], dtype=float32), array([1.5768052e-04, 4.5605564e-01, 3.6914906e-01, 9.0958839e-03,
+       1.6397126e-01, 1.5704815e-03], dtype=float32), array([4.4385387e-04, 1.9771060e-01, 6.8782127e-01, 3.0208682e-03,
+       9.8816790e-02, 1.2186627e-02], dtype=float32), array([1.3580334e-03, 1.7980842e-01, 3.8419998e-06, 2.1827231e-04,
+       8.1306028e-01, 5.5511384e-03], dtype=float32), array([9.9666673e-01, 3.1866298e-06, 2.7256743e-07, 2.5498029e-03,
+       9.0219699e-05, 6.8976328e-04], dtype=float32), array([1.0498761e-02, 1.0480409e-02, 3.6724508e-03, 2.1072326e-04,
+       3.2282293e-01, 6.5231478e-01], dtype=float32), array([9.83540833e-01, 1.22516326e-08, 9.28578192e-09, 1.18944545e-05,
+       2.42055321e-05, 1.64230727e-02], dtype=float32), array([2.1165608e-01, 1.8366352e-03, 1.3043365e-05, 7.8645724e-01,
+       3.4219560e-05, 2.7573549e-06], dtype=float32), array([8.1207421e-05, 2.9780770e-02, 9.5149368e-01, 8.8171224e-04,
+       1.4029509e-02, 3.7331965e-03], dtype=float32), array([9.9923909e-01, 1.0425671e-08, 5.9875919e-07, 2.9303812e-04,
+       1.5156202e-06, 4.6583728e-04], dtype=float32), array([1.5904162e-04, 7.2047347e-01, 4.8432234e-03, 2.2927148e-03,
+       2.7123758e-01, 9.9402154e-04], dtype=float32), array([0.0055281 , 0.2055748 , 0.00146385, 0.00081022, 0.7318641 ,
+       0.05475895], dtype=float32), array([0.00206105, 0.6500007 , 0.05209707, 0.00311312, 0.26333463,
+       0.02939346], dtype=float32), array([0.00486182, 0.89825743, 0.02198879, 0.00285303, 0.04961048,
+       0.0224284 ], dtype=float32), array([1.2838212e-04, 8.8361800e-01, 7.2023863e-06, 3.6324249e-04,
+       1.1575337e-01, 1.2982567e-04], dtype=float32), array([4.6317331e-03, 1.8719524e-05, 3.7720340e-06, 1.9383626e-06,
+       2.8098303e-01, 7.1436083e-01], dtype=float32), array([5.0494531e-03, 1.9237984e-02, 3.3067339e-04, 1.7687301e-04,
+       6.8430823e-01, 2.9089686e-01], dtype=float32), array([4.2168027e-05, 1.6575124e-02, 9.7458947e-01, 6.0439954e-04,
+       6.2636705e-03, 1.9252131e-03], dtype=float32), array([3.8032345e-03, 7.5918992e-06, 4.6283917e-06, 7.1549692e-07,
+       3.9166134e-02, 9.5701772e-01], dtype=float32), array([0.00127279, 0.5085287 , 0.29572415, 0.00355917, 0.16552924,
+       0.0253859 ], dtype=float32), array([4.37412877e-03, 1.21424375e-04, 2.25849408e-06, 9.95502114e-01,
+       1.23254750e-07, 1.83129534e-09], dtype=float32), array([2.0241447e-05, 3.7745719e-03, 9.8944014e-01, 3.2855911e-04,
+       4.8719738e-03, 1.5645648e-03], dtype=float32), array([7.3630409e-03, 1.9985535e-03, 5.8092171e-04, 6.6238943e-05,
+       5.2929324e-01, 4.6069810e-01], dtype=float32), array([7.8233201e-03, 1.1303882e-02, 2.0151176e-03, 2.3072018e-04,
+       5.6993961e-01, 4.0868735e-01], dtype=float32), array([6.9342456e-03, 2.0251670e-03, 1.0586142e-03, 7.1022223e-05,
+       3.4898081e-01, 6.4093012e-01], dtype=float32), array([4.8259244e-06, 8.5065395e-01, 9.8205327e-08, 2.1951953e-04,
+       1.4912023e-01, 1.4242518e-06], dtype=float32), array([4.2257881e-05, 1.7361209e-02, 9.7182447e-01, 6.0840207e-04,
+       8.0150384e-03, 2.1485891e-03], dtype=float32), array([9.9548048e-01, 9.8170340e-06, 2.8310157e-07, 1.6967215e-03,
+       5.9367059e-04, 2.2190753e-03], dtype=float32), array([9.9996853e-01, 1.1638795e-10, 9.8394860e-12, 2.6208683e-05,
+       2.4344795e-08, 5.1847610e-06], dtype=float32), array([1.7429466e-03, 3.8171612e-02, 1.4572161e-06, 8.6451815e-05,
+       9.5232087e-01, 7.6766782e-03], dtype=float32), array([2.5692271e-04, 7.2259687e-02, 8.9302009e-01, 1.2541000e-03,
+       2.2803705e-02, 1.0405552e-02], dtype=float32), array([8.3673431e-04, 7.1221459e-01, 1.6713860e-04, 7.8831613e-04,
+       2.8300878e-01, 2.9844907e-03], dtype=float32), array([3.8180624e-03, 9.8636501e-06, 4.0435025e-05, 1.4965265e-06,
+       5.6678664e-02, 9.3945163e-01], dtype=float32), array([5.6790304e-03, 1.2221008e-01, 9.0600498e-04, 5.8874994e-04,
+       7.8003842e-01, 9.0577751e-02], dtype=float32), array([9.7049040e-01, 7.4366928e-04, 5.1232864e-06, 4.3235305e-03,
+       1.3599619e-02, 1.0837624e-02], dtype=float32), array([9.4443234e-03, 1.7664485e-03, 1.0234277e-05, 9.8877543e-01,
+       3.5510791e-06, 4.3461768e-08], dtype=float32), array([1.3684782e-03, 1.4534713e-07, 2.0246446e-06, 6.6317412e-08,
+       1.0361633e-02, 9.8826760e-01], dtype=float32), array([3.4610705e-06, 8.9258999e-01, 1.0262901e-08, 1.0687537e-04,
+       1.0729914e-01, 5.4158312e-07], dtype=float32), array([9.9979633e-01, 1.0620657e-13, 2.1341429e-12, 1.3579206e-07,
+       5.5026872e-09, 2.0359525e-04], dtype=float32), array([1.7751923e-03, 5.1089813e-05, 3.7024805e-05, 9.9813664e-01,
+       1.5569324e-07, 4.0741406e-09], dtype=float32), array([1.3463282e-05, 7.7675349e-01, 1.0966486e-06, 4.1445121e-04,
+       2.2280769e-01, 9.8483797e-06], dtype=float32), array([5.1528173e-03, 9.3082686e-05, 1.5438961e-04, 7.3016504e-06,
+       9.5745780e-02, 8.9884663e-01], dtype=float32), array([3.92402690e-05, 8.85482788e-01, 2.33882224e-06, 3.09421273e-04,
+       1.14136614e-01, 2.95862410e-05], dtype=float32), array([6.526613e-05, 2.428698e-02, 9.643527e-01, 6.849521e-04,
+       7.878786e-03, 2.731242e-03], dtype=float32), array([2.52635255e-05, 1.02681955e-02, 9.83551681e-01, 4.02258156e-04,
+       4.43475554e-03, 1.31785520e-03], dtype=float32), array([0.00160609, 0.1164572 , 0.6633364 , 0.00239878, 0.14783025,
+       0.06837133], dtype=float32), array([1.3710491e-04, 9.1218150e-01, 2.3046366e-06, 3.3532569e-04,
+       8.7275475e-02, 6.8284884e-05], dtype=float32), array([9.9694699e-01, 4.4778750e-07, 3.1662179e-08, 2.2652412e-04,
+       1.6816634e-04, 2.6577699e-03], dtype=float32), array([2.8578336e-03, 1.9274310e-04, 6.2055451e-06, 9.9694294e-01,
+       4.0047635e-07, 2.7951343e-09], dtype=float32), array([9.0151569e-03, 6.2176636e-03, 9.2131319e-04, 1.2589531e-04,
+       6.0852188e-01, 3.7519810e-01], dtype=float32), array([1.7868268e-05, 5.6540328e-03, 9.8899233e-01, 2.9489136e-04,
+       3.8411741e-03, 1.1996415e-03], dtype=float32), array([9.9602902e-01, 1.6843342e-10, 2.5746047e-10, 1.4781743e-06,
+       2.6068385e-06, 3.9668246e-03], dtype=float32), array([0.00126519, 0.65103465, 0.00174814, 0.00140052, 0.33731863,
+       0.0072329 ], dtype=float32), array([1.8650927e-03, 2.3282485e-07, 1.6437501e-06, 7.6349089e-08,
+       8.7948693e-03, 9.8933810e-01], dtype=float32), array([2.2888999e-04, 5.6730207e-02, 9.0695852e-01, 1.1249017e-03,
+       2.4394885e-02, 1.0562653e-02], dtype=float32), array([3.7178011e-03, 1.1819962e-04, 1.1082740e-06, 9.9616271e-01,
+       1.6541053e-07, 9.9607778e-10], dtype=float32), array([1.1520039e-04, 8.3640045e-01, 2.1365736e-07, 2.1837962e-04,
+       1.6322397e-01, 4.1850515e-05], dtype=float32), array([3.6522335e-05, 9.3142194e-01, 2.8385153e-07, 1.5793473e-04,
+       6.8370245e-02, 1.2979837e-05], dtype=float32), array([1.66482685e-04, 4.14795071e-01, 1.63681634e-07, 1.98612179e-04,
+       5.84735632e-01, 1.04046536e-04], dtype=float32), array([4.6148393e-04, 6.5093631e-01, 9.6382337e-06, 3.5212209e-04,
+       3.4729344e-01, 9.4699115e-04], dtype=float32), array([4.8987252e-01, 3.5146563e-04, 9.6787799e-06, 5.0969082e-01,
+       6.7128116e-05, 8.4402973e-06], dtype=float32), array([1.5151772e-03, 1.9776278e-05, 1.8515757e-06, 9.9846315e-01,
+       1.5707247e-08, 2.4734195e-10], dtype=float32), array([0.00215364, 0.8679175 , 0.03067662, 0.00226201, 0.07971817,
+       0.01727207], dtype=float32), array([1.7763207e-03, 2.4047574e-06, 1.2959217e-05, 4.4089830e-07,
+       1.4653268e-02, 9.8355466e-01], dtype=float32), array([0.00498347, 0.8934867 , 0.02409901, 0.00284091, 0.04985622,
+       0.02473368], dtype=float32), array([2.9724100e-04, 8.4512532e-01, 6.6931789e-05, 5.6767056e-04,
+       1.5327583e-01, 6.6703133e-04], dtype=float32), array([9.9194622e-01, 5.0882672e-06, 8.4953518e-07, 5.4864172e-04,
+       6.2801433e-04, 6.8712453e-03], dtype=float32), array([3.8216167e-04, 1.0120602e-01, 1.9098989e-04, 7.0226449e-04,
+       8.9501256e-01, 2.5059842e-03], dtype=float32), array([9.9985790e-01, 2.2614369e-10, 4.2289097e-09, 1.2460536e-04,
+       4.3825391e-08, 1.7382412e-05], dtype=float32), array([2.7694700e-06, 9.1618711e-01, 1.5980016e-09, 6.4377666e-05,
+       8.3745539e-02, 2.7236439e-07], dtype=float32), array([4.4272348e-04, 3.4486533e-10, 5.5891366e-08, 1.2131595e-09,
+       3.4828269e-04, 9.9920893e-01], dtype=float32), array([0.00881388, 0.03261159, 0.00771101, 0.00057947, 0.5769084 ,
+       0.37337562], dtype=float32), array([0.00387169, 0.9057109 , 0.01628498, 0.00260619, 0.05380849,
+       0.01771775], dtype=float32), array([1.3353097e-02, 3.4236538e-05, 4.1230660e-07, 9.8661214e-01,
+       2.6556590e-08, 6.9655359e-10], dtype=float32), array([9.8166364e-01, 1.3436378e-10, 3.6758871e-10, 2.5523416e-06,
+       1.8635048e-06, 1.8331926e-02], dtype=float32), array([9.9684870e-01, 1.1327137e-07, 6.2488996e-09, 3.1451974e-03,
+       8.2530613e-07, 5.1816824e-06], dtype=float32), array([0.00941622, 0.09880513, 0.00299631, 0.00074067, 0.6988888 ,
+       0.18915288], dtype=float32), array([1.0916658e-04, 8.7055951e-01, 1.5110035e-06, 2.9958595e-04,
+       1.2897682e-01, 5.3369597e-05], dtype=float32), array([6.9724723e-05, 2.2231257e-02, 9.6416581e-01, 6.6079403e-04,
+       9.3374169e-03, 3.5350786e-03], dtype=float32), array([7.3960572e-03, 2.9030694e-02, 8.3536835e-04, 3.0403331e-04,
+       7.7200639e-01, 1.9042751e-01], dtype=float32), array([3.9458643e-03, 1.0197245e-03, 1.0511020e-02, 1.1705330e-04,
+       3.4166414e-01, 6.4274222e-01], dtype=float32), array([3.2604719e-04, 1.0219473e-01, 8.5382074e-01, 1.6150296e-03,
+       3.0199064e-02, 1.1844401e-02], dtype=float32), array([1.8009239e-04, 8.2423842e-01, 3.1529629e-04, 9.4952987e-04,
+       1.7379151e-01, 5.2518648e-04], dtype=float32), array([2.6087178e-04, 4.5135287e-09, 2.1885906e-05, 2.6897840e-08,
+       1.5363144e-03, 9.9818099e-01], dtype=float32), array([1.9630228e-05, 8.9162779e-01, 4.6439808e-07, 2.0030835e-04,
+       1.0814265e-01, 9.1846914e-06], dtype=float32), array([9.9900228e-01, 6.9695204e-08, 1.3706255e-08, 9.5775194e-04,
+       2.3696405e-06, 3.7531201e-05], dtype=float32), array([4.4299496e-04, 1.3202523e-01, 8.1985992e-01, 1.6773035e-03,
+       3.1625520e-02, 1.4369133e-02], dtype=float32), array([4.5139604e-05, 1.4855729e-02, 9.7512382e-01, 5.3998351e-04,
+       6.9644335e-03, 2.4710414e-03], dtype=float32), array([5.1705108e-04, 7.1817333e-01, 7.4160751e-05, 5.4286269e-04,
+       2.7918312e-01, 1.5095243e-03], dtype=float32), array([6.3419437e-05, 1.5878456e-02, 9.7131962e-01, 5.5375893e-04,
+       8.7595284e-03, 3.4252037e-03], dtype=float32), array([6.2380238e-03, 9.7229339e-02, 3.7107873e-04, 4.6106605e-04,
+       8.0677843e-01, 8.8922031e-02], dtype=float32), array([1.0622379e-04, 7.8633034e-01, 1.1886283e-06, 3.2107206e-04,
+       2.1316646e-01, 7.4728821e-05], dtype=float32), array([1.1485802e-05, 3.3568521e-03, 9.9309111e-01, 2.4339424e-04,
+       2.4908620e-03, 8.0634933e-04], dtype=float32), array([5.6421394e-03, 3.5937663e-04, 5.7189918e-05, 1.8518766e-05,
+       4.2768344e-01, 5.6623936e-01], dtype=float32), array([9.9728423e-01, 3.4337259e-07, 1.3122488e-08, 2.6773750e-03,
+       4.0767336e-06, 3.4005225e-05], dtype=float32), array([2.7358163e-05, 1.2097607e-02, 9.8134196e-01, 4.6916446e-04,
+       4.7050412e-03, 1.3589537e-03], dtype=float32), array([9.9930745e-01, 1.7715303e-08, 1.1585325e-07, 6.3882302e-04,
+       7.6575134e-07, 5.2752090e-05], dtype=float32), array([3.6590656e-03, 7.2458206e-05, 5.5145551e-06, 2.3723803e-06,
+       1.2756188e-02, 9.8350447e-01], dtype=float32), array([9.9924910e-01, 2.0716147e-08, 2.1124344e-09, 7.2560937e-04,
+       1.3348250e-06, 2.3946390e-05], dtype=float32), array([1.9353249e-03, 3.7578786e-06, 2.4466704e-07, 9.9806070e-01,
+       1.3907423e-09, 2.4563185e-11], dtype=float32), array([0.00321209, 0.8905185 , 0.0227307 , 0.00228649, 0.06065045,
+       0.02060186], dtype=float32), array([1.0391675e-05, 8.2686549e-01, 6.6050677e-07, 3.1242528e-04,
+       1.7280535e-01, 5.6961553e-06], dtype=float32), array([7.0523880e-03, 2.9277484e-04, 6.7488763e-05, 1.4329328e-05,
+       3.2024390e-01, 6.7232913e-01], dtype=float32), array([9.8957634e-01, 5.3838080e-12, 7.1309729e-11, 2.4710238e-07,
+       5.4530818e-07, 1.0422813e-02], dtype=float32), array([2.6969325e-03, 7.8304329e-05, 5.5769024e-06, 9.9721909e-01,
+       1.5071656e-07, 2.1166056e-09], dtype=float32), array([4.7480487e-03, 2.9222419e-05, 1.2216403e-05, 4.4706212e-06,
+       2.3427625e-01, 7.6092982e-01], dtype=float32), array([5.7299207e-03, 3.9906310e-05, 7.4694776e-07, 9.9422932e-01,
+       4.0271310e-08, 6.5992423e-10], dtype=float32), array([1.2051316e-04, 1.9365469e-02, 9.5795727e-01, 6.7324901e-04,
+       1.4799974e-02, 7.0834532e-03], dtype=float32), array([0.00049205, 0.24700227, 0.25046262, 0.00479305, 0.48303553,
+       0.01421452], dtype=float32), array([1.1449934e-04, 8.8560736e-01, 1.2985282e-06, 2.8916405e-04,
+       1.1392670e-01, 6.1005670e-05], dtype=float32), array([1.0433985e-03, 4.6070680e-01, 7.3451279e-06, 5.6853791e-04,
+       5.3645372e-01, 1.2201647e-03], dtype=float32), array([1.4126882e-02, 1.4855763e-03, 1.3751226e-06, 9.8438281e-01,
+       3.2651333e-06, 1.9090491e-08], dtype=float32), array([2.8574646e-03, 3.8289869e-05, 9.4097073e-04, 8.9681680e-06,
+       1.2751321e-01, 8.6864108e-01], dtype=float32), array([4.7953324e-03, 9.6282287e-04, 2.9299564e-03, 7.7671495e-05,
+       4.4604966e-01, 5.4518455e-01], dtype=float32), array([4.2414718e-05, 8.5644436e-01, 3.4749808e-06, 3.3575163e-04,
+       1.4314039e-01, 3.3634671e-05], dtype=float32), array([9.5534724e-01, 7.0300625e-06, 2.6539533e-06, 3.3986216e-04,
+       3.5094512e-03, 4.0793777e-02], dtype=float32), array([5.4694884e-03, 1.0541336e-05, 3.0325905e-06, 1.4385392e-06,
+       2.0183106e-01, 7.9268450e-01], dtype=float32), array([0.00056267, 0.5306485 , 0.3120891 , 0.0041287 , 0.14239228,
+       0.01017875], dtype=float32), array([4.8868422e-04, 8.2662898e-01, 2.5664383e-04, 9.2501764e-04,
+       1.7030482e-01, 1.3958955e-03], dtype=float32), array([6.7690758e-06, 8.2315606e-01, 2.6712939e-07, 3.0237355e-04,
+       1.7653179e-01, 2.7350595e-06], dtype=float32), array([2.7763946e-03, 1.6107941e-05, 8.3235747e-05, 2.2750771e-06,
+       3.9096337e-02, 9.5802563e-01], dtype=float32), array([9.9554902e-01, 1.8090149e-06, 2.5235917e-07, 3.8135142e-04,
+       4.5010849e-04, 3.6174902e-03], dtype=float32), array([2.9172065e-06, 9.3285865e-01, 7.4575962e-10, 4.6094236e-05,
+       6.7092203e-02, 2.1178266e-07], dtype=float32), array([1.5661685e-03, 4.6577702e-06, 6.3031860e-07, 9.9842852e-01,
+       2.7449925e-09, 5.0317750e-11], dtype=float32), array([9.9958622e-01, 6.2174713e-08, 6.7265965e-08, 2.5435069e-04,
+       7.5210056e-07, 1.5863492e-04], dtype=float32), array([9.9898875e-01, 9.5584767e-09, 3.5172545e-09, 1.0014003e-03,
+       2.9651275e-07, 9.5579389e-06], dtype=float32), array([9.9997121e-01, 1.9265842e-14, 6.9996266e-13, 4.1101825e-07,
+       6.0521627e-10, 2.8374518e-05], dtype=float32), array([0.00091841, 0.85592765, 0.01431493, 0.00211731, 0.1198948 ,
+       0.00682688], dtype=float32), array([0.00100222, 0.5898341 , 0.15710966, 0.0035067 , 0.23463468,
+       0.01391263], dtype=float32), array([5.0469157e-03, 1.1281622e-02, 2.9276240e-05, 9.7669872e-05,
+       9.1216719e-01, 7.1377359e-02], dtype=float32), array([3.8941111e-04, 2.7162230e-01, 6.2832493e-01, 3.4780924e-03,
+       8.6205520e-02, 9.9798013e-03], dtype=float32), array([9.9913615e-01, 3.0594311e-08, 3.3034704e-07, 8.0037396e-04,
+       6.9544666e-07, 6.2363033e-05], dtype=float32), array([5.4869027e-04, 6.1002225e-01, 1.8383984e-06, 4.3885579e-04,
+       3.8838944e-01, 5.9898256e-04], dtype=float32), array([5.0930354e-05, 2.2062186e-02, 9.6338588e-01, 7.6272705e-04,
+       1.1506118e-02, 2.2321348e-03], dtype=float32), array([0.00638554, 0.10696109, 0.04646997, 0.0015691 , 0.6057607 ,
+       0.23285368], dtype=float32), array([7.6191923e-06, 2.3716309e-03, 9.9477655e-01, 2.4371959e-04,
+       2.1212602e-03, 4.7916040e-04], dtype=float32), array([9.0905884e-04, 4.9738678e-01, 4.9575723e-05, 4.3834848e-04,
+       4.9692652e-01, 4.2896904e-03], dtype=float32), array([1.6155471e-04, 8.5726969e-02, 8.8160384e-01, 1.4684437e-03,
+       2.5668984e-02, 5.3703231e-03], dtype=float32), array([0.00109686, 0.8146755 , 0.03376811, 0.00246817, 0.13694279,
+       0.01104853], dtype=float32), array([1.0386498e-05, 8.9714527e-01, 7.5952835e-09, 8.6810120e-05,
+       1.0275598e-01, 1.6171356e-06], dtype=float32), array([8.4780067e-01, 4.2914871e-05, 4.0384458e-07, 1.5214641e-01,
+       7.3237534e-06, 2.3789723e-06], dtype=float32), array([0.00165265, 0.8359904 , 0.00234607, 0.00129989, 0.15031043,
+       0.00840048], dtype=float32), array([0.00057758, 0.41660187, 0.48476496, 0.00271809, 0.08333429,
+       0.01200332], dtype=float32), array([6.4395455e-05, 3.6769336e-01, 1.2230786e-05, 8.8637177e-04,
+       6.3127589e-01, 6.7718276e-05], dtype=float32), array([5.4173060e-03, 1.0908504e-03, 1.4900832e-03, 6.2182073e-05,
+       3.0930427e-01, 6.8263531e-01], dtype=float32), array([0.00084054, 0.22794223, 0.6223008 , 0.00327551, 0.12083989,
+       0.02480099], dtype=float32), array([3.1861202e-03, 1.8283259e-04, 4.7064074e-03, 3.3503755e-05,
+       1.8005306e-01, 8.1183809e-01], dtype=float32), array([7.3219271e-06, 2.4544802e-01, 3.3223972e-05, 1.2116805e-03,
+       7.5328028e-01, 1.9537956e-05], dtype=float32), array([3.6828041e-03, 1.2785019e-05, 3.7787126e-05, 1.5023907e-06,
+       3.8292408e-02, 9.5797271e-01], dtype=float32), array([4.13141726e-03, 1.12780635e-05, 8.94314269e-07, 9.95856464e-01,
+       8.47199466e-09, 2.45836851e-10], dtype=float32), array([1.3708661e-05, 4.3475600e-03, 9.9154025e-01, 2.7691555e-04,
+       2.9639460e-03, 8.5759984e-04], dtype=float32), array([4.6927217e-04, 2.7739219e-10, 3.0924735e-08, 8.2092583e-10,
+       3.1773979e-04, 9.9921304e-01], dtype=float32), array([0.00289453, 0.5678159 , 0.01683806, 0.00191153, 0.36075956,
+       0.04978043], dtype=float32), array([1.6753909e-05, 7.8702560e-03, 9.8712343e-01, 3.5589139e-04,
+       3.6824779e-03, 9.5128157e-04], dtype=float32), array([4.8701311e-03, 1.3835002e-04, 1.2948380e-04, 8.2251154e-06,
+       1.1002841e-01, 8.8482541e-01], dtype=float32), array([3.6943834e-03, 2.9290136e-04, 4.1138046e-05, 9.9597073e-01,
+       8.3563685e-07, 1.8864368e-08], dtype=float32), array([2.9271094e-03, 1.3432126e-04, 7.8933253e-06, 9.9693030e-01,
+       3.2646503e-07, 3.7072323e-09], dtype=float32), array([8.2299539e-06, 9.0552676e-01, 1.2385696e-09, 7.2572060e-05,
+       9.4391838e-02, 6.6276351e-07], dtype=float32), array([6.3442714e-03, 2.5734836e-03, 1.5253921e-03, 8.2958468e-05,
+       2.4283396e-01, 7.4663991e-01], dtype=float32), array([2.2648163e-04, 8.6032975e-01, 1.1043161e-04, 7.2227989e-04,
+       1.3811433e-01, 4.9678545e-04], dtype=float32), array([1.6958893e-05, 8.2490647e-01, 3.0787902e-07, 2.5341305e-04,
+       1.7481498e-01, 7.8955063e-06], dtype=float32), array([9.4453686e-01, 6.6306216e-06, 3.0129115e-06, 3.6139772e-04,
+       1.5849952e-03, 5.3507060e-02], dtype=float32), array([3.5052903e-02, 1.6998954e-04, 1.7165318e-07, 9.6477681e-01,
+       1.7682633e-07, 3.1828709e-09], dtype=float32), array([1.8368046e-03, 4.0990208e-06, 3.9180159e-05, 7.9809143e-07,
+       2.2433434e-02, 9.7568572e-01], dtype=float32), array([1.1560853e-02, 4.4688125e-04, 6.7131491e-06, 9.8798484e-01,
+       6.3780925e-07, 1.6529730e-08], dtype=float32), array([1.2959527e-02, 1.1097516e-02, 2.2032457e-04, 9.7566748e-01,
+       5.4152777e-05, 9.8818316e-07], dtype=float32), array([9.9872035e-01, 4.7087667e-08, 5.8761692e-08, 1.7921245e-04,
+       9.5280866e-06, 1.0907798e-03], dtype=float32), array([3.8691316e-05, 1.7392229e-02, 9.7258234e-01, 6.0483668e-04,
+       7.4347989e-03, 1.9470655e-03], dtype=float32), array([5.8810716e-03, 2.6019194e-04, 1.1589110e-04, 9.1499414e-06,
+       2.6340464e-02, 9.6739322e-01], dtype=float32), array([9.9975532e-01, 1.0308517e-08, 2.0007123e-09, 9.5415846e-05,
+       2.4397912e-06, 1.4678678e-04], dtype=float32), array([0.00193377, 0.254055  , 0.40008697, 0.00352715, 0.2856699 ,
+       0.05472727], dtype=float32), array([3.5039923e-04, 2.9883501e-01, 5.6352991e-01, 4.3759188e-03,
+       1.2499491e-01, 7.9138372e-03], dtype=float32), array([1.5086741e-03, 2.8330585e-01, 2.4452977e-06, 2.3664781e-04,
+       7.0958251e-01, 5.3638741e-03], dtype=float32), array([9.5233945e-03, 1.6790140e-02, 7.4115838e-04, 2.0440888e-04,
+       4.9928519e-01, 4.7345573e-01], dtype=float32), array([1.0521334e-02, 3.8417477e-02, 1.9566149e-04, 2.2156839e-04,
+       6.1849034e-01, 3.3215365e-01], dtype=float32), array([7.4395575e-03, 1.2794802e-02, 1.0185462e-02, 3.7852186e-04,
+       5.0513518e-01, 4.6406651e-01], dtype=float32), array([2.5521938e-03, 3.2814081e-05, 1.3438537e-06, 9.9741364e-01,
+       2.1965866e-08, 2.9137590e-10], dtype=float32), array([0.00352375, 0.90305007, 0.0160386 , 0.00227665, 0.0564581 ,
+       0.01865291], dtype=float32), array([9.2938393e-03, 3.9633266e-03, 4.8960635e-04, 9.0668218e-05,
+       5.1269573e-01, 4.7346687e-01], dtype=float32), array([0.00092298, 0.04267658, 0.74293363, 0.00153852, 0.141875  ,
+       0.07005334], dtype=float32), array([6.4074129e-06, 8.7132597e-01, 8.1179373e-08, 1.6927406e-04,
+       1.2849636e-01, 1.9055453e-06], dtype=float32), array([1.4511364e-03, 2.1522360e-01, 3.1042539e-06, 2.9654414e-04,
+       7.8020287e-01, 2.8227188e-03], dtype=float32), array([2.2742185e-03, 7.9964557e-06, 5.4634533e-05, 1.2367749e-06,
+       2.9959744e-02, 9.6770221e-01], dtype=float32), array([5.9305951e-03, 2.0618670e-04, 5.0786839e-06, 9.9385786e-01,
+       2.5781625e-07, 4.6491606e-09], dtype=float32), array([6.5665133e-03, 4.8306556e-03, 4.3543004e-03, 1.8284410e-04,
+       5.3181899e-01, 4.5224676e-01], dtype=float32), array([4.2128780e-05, 1.2763060e-02, 9.7855073e-01, 4.2896834e-04,
+       6.0073012e-03, 2.2078778e-03], dtype=float32), array([0.0008999 , 0.78618383, 0.00400705, 0.00166534, 0.20147407,
+       0.00576979], dtype=float32), array([6.2894600e-04, 6.7920047e-01, 4.7320878e-05, 6.7093986e-04,
+       3.1806597e-01, 1.3864192e-03], dtype=float32), array([0.0031914 , 0.82686055, 0.05652433, 0.00264781, 0.07992827,
+       0.03084768], dtype=float32), array([9.9317628e-01, 9.5766541e-07, 5.5535014e-07, 4.0842485e-04,
+       1.9058841e-04, 6.2231710e-03], dtype=float32), array([6.1776014e-03, 6.6348121e-02, 1.2076114e-03, 5.1517616e-04,
+       8.0670512e-01, 1.1904645e-01], dtype=float32), array([1.3965844e-05, 8.9006805e-01, 4.8541909e-07, 2.1407426e-04,
+       1.0969682e-01, 6.5589952e-06], dtype=float32), array([3.0083072e-04, 8.5914654e-01, 1.0448798e-05, 5.4449937e-04,
+       1.3972868e-01, 2.6909882e-04], dtype=float32), array([3.6338107e-03, 5.2042975e-05, 5.4139440e-07, 9.9631357e-01,
+       3.1206028e-08, 3.4953906e-10], dtype=float32), array([1.4376090e-03, 3.3831873e-06, 4.7831095e-06, 2.8619920e-07,
+       1.8928595e-03, 9.9666113e-01], dtype=float32), array([1.3267142e-03, 1.5589852e-07, 3.9725173e-06, 7.5192780e-08,
+       6.3700117e-03, 9.9229908e-01], dtype=float32), array([9.9991173e-01, 5.8528224e-11, 4.3388557e-11, 9.2378968e-06,
+       1.6535687e-07, 7.8940895e-05], dtype=float32), array([3.7484758e-03, 2.5401032e-05, 7.4040210e-05, 2.9175756e-06,
+       5.0224841e-02, 9.4592428e-01], dtype=float32), array([3.7857797e-04, 3.2586595e-01, 5.6388015e-01, 2.5877673e-03,
+       1.0006900e-01, 7.2185346e-03], dtype=float32), array([1.4008501e-03, 2.7494950e-06, 1.9570787e-06, 9.9859446e-01,
+       7.0096511e-09, 1.8084284e-10], dtype=float32)]
+2025-04-19 18:53:07,850 - pyskl - INFO - Testing results of the last checkpoint
+2025-04-19 18:53:07,850 - pyskl - INFO - top1_acc: 0.6863
+2025-04-19 18:53:07,850 - pyskl - INFO - top5_acc: 0.9935
+2025-04-19 18:53:07,850 - pyskl - INFO - mean_class_accuracy: 0.7867
+2025-04-19 18:53:07,850 - pyskl - INFO - load checkpoint from local path: ./work_dirs/posec3d/slowonly_r50_ntu60_xsub/limb_uav/best_top1_acc_epoch_19.pth
+>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 448/459, 1.6 task/s, elapsed: 285s, ETA:     7s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 449/459, 1.6 task/s, elapsed: 285s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 450/459, 1.6 task/s, elapsed: 285s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 451/459, 1.6 task/s, elapsed: 287s, ETA:     5s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 452/459, 1.6 task/s, elapsed: 287s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 453/459, 1.6 task/s, elapsed: 288s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 454/459, 1.6 task/s, elapsed: 288s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 455/459, 1.6 task/s, elapsed: 289s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 456/459, 1.6 task/s, elapsed: 289s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 457/459, 1.6 task/s, elapsed: 289s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 458/459, 1.6 task/s, elapsed: 290s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 459/459, 1.6 task/s, elapsed: 290s, ETA:     0s
+Evaluating top_k_accuracy ...
+
+top1_acc	0.6863
+top5_acc	0.9935
+
+Evaluating mean_class_accuracy ...
+
+mean_acc	0.7867
+[                                                  ] 0/459, elapsed: 0s, ETA:[                                ] 1/459, 0.1 task/s, elapsed: 15s, ETA:  6719s[                                ] 2/459, 0.1 task/s, elapsed: 15s, ETA:  3425s[                                ] 3/459, 0.2 task/s, elapsed: 15s, ETA:  2317s[                                ] 4/459, 0.3 task/s, elapsed: 15s, ETA:  1762s[                                ] 5/459, 0.3 task/s, elapsed: 17s, ETA:  1553s[                                ] 6/459, 0.3 task/s, elapsed: 17s, ETA:  1310s[                                ] 7/459, 0.4 task/s, elapsed: 18s, ETA:  1138s[                                ] 8/459, 0.4 task/s, elapsed: 18s, ETA:  1008s[                                ] 9/459, 0.5 task/s, elapsed: 20s, ETA:   979s[                               ] 10/459, 0.5 task/s, elapsed: 20s, ETA:   892s[                               ] 11/459, 0.5 task/s, elapsed: 20s, ETA:   833s[                               ] 12/459, 0.6 task/s, elapsed: 21s, ETA:   771s[                               ] 13/459, 0.6 task/s, elapsed: 22s, ETA:   740s[                               ] 14/459, 0.6 task/s, elapsed: 22s, ETA:   696s[>                              ] 15/459, 0.7 task/s, elapsed: 23s, ETA:   668s[>                              ] 16/459, 0.7 task/s, elapsed: 23s, ETA:   632s[>                              ] 17/459, 0.7 task/s, elapsed: 24s, ETA:   623s[>                              ] 18/459, 0.7 task/s, elapsed: 24s, ETA:   596s[>                              ] 19/459, 0.8 task/s, elapsed: 25s, ETA:   580s[>                              ] 20/459, 0.8 task/s, elapsed: 25s, ETA:   555s[>                              ] 21/459, 0.8 task/s, elapsed: 26s, ETA:   547s[>                              ] 22/459, 0.8 task/s, elapsed: 27s, ETA:   529s[>                              ] 23/459, 0.8 task/s, elapsed: 27s, ETA:   516s[>                              ] 24/459, 0.9 task/s, elapsed: 27s, ETA:   498s[>                              ] 25/459, 0.9 task/s, elapsed: 29s, ETA:   501s[>                              ] 26/459, 0.9 task/s, elapsed: 29s, ETA:   485s[>                              ] 27/459, 0.9 task/s, elapsed: 30s, ETA:   479s[>                              ] 28/459, 0.9 task/s, elapsed: 30s, ETA:   464s[>                              ] 29/459, 0.9 task/s, elapsed: 31s, ETA:   467s[>>                             ] 30/459, 0.9 task/s, elapsed: 32s, ETA:   454s[>>                             ] 31/459, 1.0 task/s, elapsed: 32s, ETA:   447s[>>                             ] 32/459, 1.0 task/s, elapsed: 33s, ETA:   436s[>>                             ] 33/459, 1.0 task/s, elapsed: 34s, ETA:   438s[>>                             ] 34/459, 1.0 task/s, elapsed: 34s, ETA:   427s[>>                             ] 35/459, 1.0 task/s, elapsed: 35s, ETA:   423s[>>                             ] 36/459, 1.0 task/s, elapsed: 35s, ETA:   413s[>>                             ] 37/459, 1.0 task/s, elapsed: 37s, ETA:   420s[>>                             ] 38/459, 1.0 task/s, elapsed: 37s, ETA:   411s[>>                             ] 39/459, 1.0 task/s, elapsed: 38s, ETA:   405s[>>                             ] 40/459, 1.1 task/s, elapsed: 38s, ETA:   396s[>>                             ] 41/459, 1.0 task/s, elapsed: 40s, ETA:   407s[>>                             ] 42/459, 1.0 task/s, elapsed: 40s, ETA:   399s[>>                             ] 43/459, 1.1 task/s, elapsed: 40s, ETA:   391s[>>                             ] 44/459, 1.1 task/s, elapsed: 41s, ETA:   384s[>>>                            ] 45/459, 1.1 task/s, elapsed: 42s, ETA:   387s[>>>                            ] 46/459, 1.1 task/s, elapsed: 42s, ETA:   380s[>>>                            ] 47/459, 1.1 task/s, elapsed: 43s, ETA:   373s[>>>                            ] 48/459, 1.1 task/s, elapsed: 43s, ETA:   367s[>>>                            ] 49/459, 1.1 task/s, elapsed: 45s, ETA:   374s[>>>                            ] 50/459, 1.1 task/s, elapsed: 45s, ETA:   367s[>>>                            ] 51/459, 1.1 task/s, elapsed: 45s, ETA:   362s[>>>                            ] 52/459, 1.1 task/s, elapsed: 45s, ETA:   356s[>>>                            ] 53/459, 1.1 task/s, elapsed: 47s, ETA:   362s[>>>                            ] 54/459, 1.1 task/s, elapsed: 48s, ETA:   357s[>>>                            ] 55/459, 1.2 task/s, elapsed: 48s, ETA:   351s[>>>                            ] 56/459, 1.2 task/s, elapsed: 48s, ETA:   346s[>>>                            ] 57/459, 1.2 task/s, elapsed: 49s, ETA:   348s[>>>                            ] 58/459, 1.2 task/s, elapsed: 50s, ETA:   343s[>>>                            ] 59/459, 1.2 task/s, elapsed: 50s, ETA:   339s[>>>>                           ] 60/459, 1.2 task/s, elapsed: 50s, ETA:   334s[>>>>                           ] 61/459, 1.2 task/s, elapsed: 52s, ETA:   337s[>>>>                           ] 62/459, 1.2 task/s, elapsed: 52s, ETA:   333s[>>>>                           ] 63/459, 1.2 task/s, elapsed: 52s, ETA:   328s[>>>>                           ] 64/459, 1.2 task/s, elapsed: 52s, ETA:   324s[>>>>                           ] 65/459, 1.2 task/s, elapsed: 54s, ETA:   328s[>>>>                           ] 66/459, 1.2 task/s, elapsed: 54s, ETA:   324s[>>>>                           ] 67/459, 1.2 task/s, elapsed: 55s, ETA:   320s[>>>>                           ] 68/459, 1.2 task/s, elapsed: 55s, ETA:   316s[>>>>                           ] 69/459, 1.2 task/s, elapsed: 57s, ETA:   320s[>>>>                           ] 70/459, 1.2 task/s, elapsed: 57s, ETA:   317s[>>>>                           ] 71/459, 1.2 task/s, elapsed: 57s, ETA:   313s[>>>>                           ] 72/459, 1.3 task/s, elapsed: 57s, ETA:   309s[>>>>                           ] 73/459, 1.2 task/s, elapsed: 59s, ETA:   311s[>>>>                           ] 74/459, 1.3 task/s, elapsed: 59s, ETA:   308s[>>>>>                          ] 75/459, 1.3 task/s, elapsed: 59s, ETA:   304s[>>>>>                          ] 76/459, 1.3 task/s, elapsed: 60s, ETA:   301s[>>>>>                          ] 77/459, 1.2 task/s, elapsed: 62s, ETA:   307s[>>>>>                          ] 78/459, 1.3 task/s, elapsed: 62s, ETA:   304s[>>>>>                          ] 79/459, 1.3 task/s, elapsed: 62s, ETA:   300s[>>>>>                          ] 80/459, 1.3 task/s, elapsed: 63s, ETA:   298s[>>>>>                          ] 81/459, 1.3 task/s, elapsed: 64s, ETA:   299s[>>>>>                          ] 82/459, 1.3 task/s, elapsed: 64s, ETA:   295s[>>>>>                          ] 83/459, 1.3 task/s, elapsed: 64s, ETA:   292s[>>>>>                          ] 84/459, 1.3 task/s, elapsed: 65s, ETA:   289s[>>>>>                          ] 85/459, 1.3 task/s, elapsed: 67s, ETA:   293s[>>>>>                          ] 86/459, 1.3 task/s, elapsed: 67s, ETA:   290s[>>>>>                          ] 87/459, 1.3 task/s, elapsed: 67s, ETA:   287s[>>>>>                          ] 88/459, 1.3 task/s, elapsed: 67s, ETA:   284s[>>>>>>                         ] 89/459, 1.3 task/s, elapsed: 69s, ETA:   286s[>>>>>>                         ] 90/459, 1.3 task/s, elapsed: 69s, ETA:   283s[>>>>>>                         ] 91/459, 1.3 task/s, elapsed: 69s, ETA:   280s[>>>>>>                         ] 92/459, 1.3 task/s, elapsed: 70s, ETA:   277s[>>>>>>                         ] 93/459, 1.3 task/s, elapsed: 71s, ETA:   281s[>>>>>>                         ] 94/459, 1.3 task/s, elapsed: 72s, ETA:   278s[>>>>>>                         ] 95/459, 1.3 task/s, elapsed: 72s, ETA:   275s[>>>>>>                         ] 96/459, 1.3 task/s, elapsed: 72s, ETA:   273s[>>>>>>                         ] 97/459, 1.3 task/s, elapsed: 74s, ETA:   275s[>>>>>>                         ] 98/459, 1.3 task/s, elapsed: 74s, ETA:   272s[>>>>>>                         ] 99/459, 1.3 task/s, elapsed: 74s, ETA:   270s[>>>>>>                        ] 100/459, 1.3 task/s, elapsed: 74s, ETA:   267s[>>>>>>                        ] 101/459, 1.3 task/s, elapsed: 76s, ETA:   269s[>>>>>>                        ] 102/459, 1.3 task/s, elapsed: 76s, ETA:   267s[>>>>>>                        ] 103/459, 1.3 task/s, elapsed: 76s, ETA:   264s[>>>>>>                        ] 104/459, 1.4 task/s, elapsed: 77s, ETA:   262s[>>>>>>                        ] 105/459, 1.3 task/s, elapsed: 79s, ETA:   266s[>>>>>>                        ] 106/459, 1.3 task/s, elapsed: 79s, ETA:   263s[>>>>>>                        ] 107/459, 1.3 task/s, elapsed: 79s, ETA:   261s[>>>>>>>                       ] 108/459, 1.4 task/s, elapsed: 80s, ETA:   259s[>>>>>>>                       ] 109/459, 1.3 task/s, elapsed: 81s, ETA:   260s[>>>>>>>                       ] 110/459, 1.4 task/s, elapsed: 81s, ETA:   258s[>>>>>>>                       ] 111/459, 1.4 task/s, elapsed: 81s, ETA:   255s[>>>>>>>                       ] 112/459, 1.4 task/s, elapsed: 82s, ETA:   253s[>>>>>>>                       ] 113/459, 1.4 task/s, elapsed: 83s, ETA:   254s[>>>>>>>                       ] 114/459, 1.4 task/s, elapsed: 83s, ETA:   252s[>>>>>>>                       ] 115/459, 1.4 task/s, elapsed: 84s, ETA:   250s[>>>>>>>                       ] 116/459, 1.4 task/s, elapsed: 84s, ETA:   248s[>>>>>>>                       ] 117/459, 1.4 task/s, elapsed: 85s, ETA:   250s[>>>>>>>                       ] 118/459, 1.4 task/s, elapsed: 86s, ETA:   248s[>>>>>>>                       ] 119/459, 1.4 task/s, elapsed: 86s, ETA:   245s[>>>>>>>                       ] 120/459, 1.4 task/s, elapsed: 86s, ETA:   243s[>>>>>>>                       ] 121/459, 1.4 task/s, elapsed: 87s, ETA:   244s[>>>>>>>                       ] 122/459, 1.4 task/s, elapsed: 88s, ETA:   243s[>>>>>>>>                      ] 123/459, 1.4 task/s, elapsed: 88s, ETA:   241s[>>>>>>>>                      ] 124/459, 1.4 task/s, elapsed: 89s, ETA:   239s[>>>>>>>>                      ] 125/459, 1.4 task/s, elapsed: 90s, ETA:   240s[>>>>>>>>                      ] 126/459, 1.4 task/s, elapsed: 90s, ETA:   239s[>>>>>>>>                      ] 127/459, 1.4 task/s, elapsed: 91s, ETA:   237s[>>>>>>>>                      ] 128/459, 1.4 task/s, elapsed: 91s, ETA:   235s[>>>>>>>>                      ] 129/459, 1.4 task/s, elapsed: 92s, ETA:   236s[>>>>>>>>                      ] 130/459, 1.4 task/s, elapsed: 93s, ETA:   235s[>>>>>>>>                      ] 131/459, 1.4 task/s, elapsed: 93s, ETA:   233s[>>>>>>>>                      ] 132/459, 1.4 task/s, elapsed: 93s, ETA:   232s[>>>>>>>>                      ] 133/459, 1.4 task/s, elapsed: 94s, ETA:   232s[>>>>>>>>                      ] 134/459, 1.4 task/s, elapsed: 95s, ETA:   231s[>>>>>>>>                      ] 135/459, 1.4 task/s, elapsed: 95s, ETA:   229s[>>>>>>>>                      ] 136/459, 1.4 task/s, elapsed: 96s, ETA:   227s[>>>>>>>>                      ] 137/459, 1.4 task/s, elapsed: 97s, ETA:   228s[>>>>>>>>>                     ] 138/459, 1.4 task/s, elapsed: 98s, ETA:   227s[>>>>>>>>>                     ] 139/459, 1.4 task/s, elapsed: 98s, ETA:   225s[>>>>>>>>>                     ] 140/459, 1.4 task/s, elapsed: 98s, ETA:   224s[>>>>>>>>                     ] 141/459, 1.4 task/s, elapsed: 100s, ETA:   225s[>>>>>>>>                     ] 142/459, 1.4 task/s, elapsed: 100s, ETA:   223s[>>>>>>>>>                    ] 143/459, 1.4 task/s, elapsed: 100s, ETA:   222s[>>>>>>>>>                    ] 144/459, 1.4 task/s, elapsed: 101s, ETA:   220s[>>>>>>>>>                    ] 145/459, 1.4 task/s, elapsed: 102s, ETA:   221s[>>>>>>>>>                    ] 146/459, 1.4 task/s, elapsed: 102s, ETA:   220s[>>>>>>>>>                    ] 147/459, 1.4 task/s, elapsed: 103s, ETA:   218s[>>>>>>>>>                    ] 148/459, 1.4 task/s, elapsed: 103s, ETA:   216s[>>>>>>>>>                    ] 149/459, 1.4 task/s, elapsed: 105s, ETA:   218s[>>>>>>>>>                    ] 150/459, 1.4 task/s, elapsed: 105s, ETA:   216s[>>>>>>>>>                    ] 151/459, 1.4 task/s, elapsed: 105s, ETA:   215s[>>>>>>>>>                    ] 152/459, 1.4 task/s, elapsed: 106s, ETA:   213s[>>>>>>>>>                    ] 153/459, 1.4 task/s, elapsed: 107s, ETA:   214s[>>>>>>>>>                    ] 154/459, 1.4 task/s, elapsed: 108s, ETA:   213s[>>>>>>>>>                    ] 155/459, 1.4 task/s, elapsed: 108s, ETA:   212s[>>>>>>>>>                    ] 156/459, 1.4 task/s, elapsed: 108s, ETA:   210s[>>>>>>>>>                    ] 157/459, 1.4 task/s, elapsed: 109s, ETA:   210s[>>>>>>>>>                    ] 158/459, 1.4 task/s, elapsed: 110s, ETA:   209s[>>>>>>>>>>                   ] 159/459, 1.4 task/s, elapsed: 110s, ETA:   208s[>>>>>>>>>>                   ] 160/459, 1.4 task/s, elapsed: 111s, ETA:   207s[>>>>>>>>>>                   ] 161/459, 1.4 task/s, elapsed: 112s, ETA:   206s[>>>>>>>>>>                   ] 162/459, 1.4 task/s, elapsed: 112s, ETA:   206s[>>>>>>>>>>                   ] 163/459, 1.4 task/s, elapsed: 113s, ETA:   204s[>>>>>>>>>>                   ] 164/459, 1.5 task/s, elapsed: 113s, ETA:   203s[>>>>>>>>>>                   ] 165/459, 1.4 task/s, elapsed: 114s, ETA:   203s[>>>>>>>>>>                   ] 166/459, 1.4 task/s, elapsed: 115s, ETA:   202s[>>>>>>>>>>                   ] 167/459, 1.5 task/s, elapsed: 115s, ETA:   201s[>>>>>>>>>>                   ] 168/459, 1.5 task/s, elapsed: 115s, ETA:   199s[>>>>>>>>>>                   ] 169/459, 1.5 task/s, elapsed: 116s, ETA:   200s[>>>>>>>>>>                   ] 170/459, 1.5 task/s, elapsed: 117s, ETA:   198s[>>>>>>>>>>                   ] 171/459, 1.5 task/s, elapsed: 118s, ETA:   198s[>>>>>>>>>>                   ] 172/459, 1.5 task/s, elapsed: 118s, ETA:   197s[>>>>>>>>>>                   ] 173/459, 1.5 task/s, elapsed: 119s, ETA:   196s[>>>>>>>>>>                   ] 174/459, 1.5 task/s, elapsed: 119s, ETA:   195s[>>>>>>>>>>>                  ] 175/459, 1.5 task/s, elapsed: 120s, ETA:   194s[>>>>>>>>>>>                  ] 176/459, 1.5 task/s, elapsed: 120s, ETA:   193s[>>>>>>>>>>>                  ] 177/459, 1.5 task/s, elapsed: 121s, ETA:   193s[>>>>>>>>>>>                  ] 178/459, 1.5 task/s, elapsed: 121s, ETA:   192s[>>>>>>>>>>>                  ] 179/459, 1.5 task/s, elapsed: 122s, ETA:   191s[>>>>>>>>>>>                  ] 180/459, 1.5 task/s, elapsed: 122s, ETA:   190s[>>>>>>>>>>>                  ] 181/459, 1.5 task/s, elapsed: 123s, ETA:   189s[>>>>>>>>>>>                  ] 182/459, 1.5 task/s, elapsed: 124s, ETA:   188s[>>>>>>>>>>>                  ] 183/459, 1.5 task/s, elapsed: 125s, ETA:   189s[>>>>>>>>>>>                  ] 184/459, 1.5 task/s, elapsed: 126s, ETA:   188s[>>>>>>>>>>>                  ] 185/459, 1.5 task/s, elapsed: 126s, ETA:   187s[>>>>>>>>>>>                  ] 186/459, 1.5 task/s, elapsed: 126s, ETA:   185s[>>>>>>>>>>>                  ] 187/459, 1.5 task/s, elapsed: 128s, ETA:   186s[>>>>>>>>>>>                  ] 188/459, 1.5 task/s, elapsed: 128s, ETA:   185s[>>>>>>>>>>>                  ] 189/459, 1.5 task/s, elapsed: 128s, ETA:   183s[>>>>>>>>>>>>                 ] 190/459, 1.5 task/s, elapsed: 129s, ETA:   182s[>>>>>>>>>>>>                 ] 191/459, 1.5 task/s, elapsed: 130s, ETA:   182s[>>>>>>>>>>>>                 ] 192/459, 1.5 task/s, elapsed: 130s, ETA:   181s[>>>>>>>>>>>>                 ] 193/459, 1.5 task/s, elapsed: 131s, ETA:   180s[>>>>>>>>>>>>                 ] 194/459, 1.5 task/s, elapsed: 131s, ETA:   179s[>>>>>>>>>>>>                 ] 195/459, 1.5 task/s, elapsed: 133s, ETA:   179s[>>>>>>>>>>>>                 ] 196/459, 1.5 task/s, elapsed: 133s, ETA:   178s[>>>>>>>>>>>>                 ] 197/459, 1.5 task/s, elapsed: 133s, ETA:   177s[>>>>>>>>>>>>                 ] 198/459, 1.5 task/s, elapsed: 133s, ETA:   176s[>>>>>>>>>>>>                 ] 199/459, 1.5 task/s, elapsed: 135s, ETA:   176s[>>>>>>>>>>>>                 ] 200/459, 1.5 task/s, elapsed: 135s, ETA:   175s[>>>>>>>>>>>>                 ] 201/459, 1.5 task/s, elapsed: 135s, ETA:   174s[>>>>>>>>>>>>                 ] 202/459, 1.5 task/s, elapsed: 136s, ETA:   172s[>>>>>>>>>>>>                 ] 203/459, 1.5 task/s, elapsed: 138s, ETA:   174s[>>>>>>>>>>>>                 ] 204/459, 1.5 task/s, elapsed: 138s, ETA:   172s[>>>>>>>>>>>>                 ] 205/459, 1.5 task/s, elapsed: 138s, ETA:   171s[>>>>>>>>>>>>>                ] 206/459, 1.5 task/s, elapsed: 138s, ETA:   170s[>>>>>>>>>>>>>                ] 207/459, 1.5 task/s, elapsed: 140s, ETA:   170s[>>>>>>>>>>>>>                ] 208/459, 1.5 task/s, elapsed: 140s, ETA:   169s[>>>>>>>>>>>>>                ] 209/459, 1.5 task/s, elapsed: 141s, ETA:   168s[>>>>>>>>>>>>>                ] 210/459, 1.5 task/s, elapsed: 141s, ETA:   167s[>>>>>>>>>>>>>                ] 211/459, 1.5 task/s, elapsed: 142s, ETA:   167s[>>>>>>>>>>>>>                ] 212/459, 1.5 task/s, elapsed: 143s, ETA:   166s[>>>>>>>>>>>>>                ] 213/459, 1.5 task/s, elapsed: 143s, ETA:   165s[>>>>>>>>>>>>>                ] 214/459, 1.5 task/s, elapsed: 143s, ETA:   164s[>>>>>>>>>>>>>                ] 215/459, 1.5 task/s, elapsed: 144s, ETA:   164s[>>>>>>>>>>>>>                ] 216/459, 1.5 task/s, elapsed: 145s, ETA:   163s[>>>>>>>>>>>>>                ] 217/459, 1.5 task/s, elapsed: 145s, ETA:   162s[>>>>>>>>>>>>>                ] 218/459, 1.5 task/s, elapsed: 145s, ETA:   161s[>>>>>>>>>>>>>                ] 219/459, 1.5 task/s, elapsed: 147s, ETA:   161s[>>>>>>>>>>>>>                ] 220/459, 1.5 task/s, elapsed: 147s, ETA:   159s[>>>>>>>>>>>>>                ] 221/459, 1.5 task/s, elapsed: 147s, ETA:   158s[>>>>>>>>>>>>>>               ] 222/459, 1.5 task/s, elapsed: 147s, ETA:   157s[>>>>>>>>>>>>>>               ] 223/459, 1.5 task/s, elapsed: 149s, ETA:   157s[>>>>>>>>>>>>>>               ] 224/459, 1.5 task/s, elapsed: 149s, ETA:   156s[>>>>>>>>>>>>>>               ] 225/459, 1.5 task/s, elapsed: 149s, ETA:   155s[>>>>>>>>>>>>>>               ] 226/459, 1.5 task/s, elapsed: 150s, ETA:   155s[>>>>>>>>>>>>>>               ] 227/459, 1.5 task/s, elapsed: 151s, ETA:   154s[>>>>>>>>>>>>>>               ] 228/459, 1.5 task/s, elapsed: 151s, ETA:   153s[>>>>>>>>>>>>>>               ] 229/459, 1.5 task/s, elapsed: 151s, ETA:   152s[>>>>>>>>>>>>>>               ] 230/459, 1.5 task/s, elapsed: 153s, ETA:   152s[>>>>>>>>>>>>>>               ] 231/459, 1.5 task/s, elapsed: 153s, ETA:   151s[>>>>>>>>>>>>>>               ] 232/459, 1.5 task/s, elapsed: 154s, ETA:   151s[>>>>>>>>>>>>>>               ] 233/459, 1.5 task/s, elapsed: 154s, ETA:   150s[>>>>>>>>>>>>>>               ] 234/459, 1.5 task/s, elapsed: 156s, ETA:   150s[>>>>>>>>>>>>>>               ] 235/459, 1.5 task/s, elapsed: 156s, ETA:   149s[>>>>>>>>>>>>>>               ] 236/459, 1.5 task/s, elapsed: 156s, ETA:   148s[>>>>>>>>>>>>>>               ] 237/459, 1.5 task/s, elapsed: 157s, ETA:   147s[>>>>>>>>>>>>>>>              ] 238/459, 1.5 task/s, elapsed: 158s, ETA:   147s[>>>>>>>>>>>>>>>              ] 239/459, 1.5 task/s, elapsed: 158s, ETA:   146s[>>>>>>>>>>>>>>>              ] 240/459, 1.5 task/s, elapsed: 159s, ETA:   145s[>>>>>>>>>>>>>>>              ] 241/459, 1.5 task/s, elapsed: 159s, ETA:   144s[>>>>>>>>>>>>>>>              ] 242/459, 1.5 task/s, elapsed: 160s, ETA:   144s[>>>>>>>>>>>>>>>              ] 243/459, 1.5 task/s, elapsed: 160s, ETA:   143s[>>>>>>>>>>>>>>>              ] 244/459, 1.5 task/s, elapsed: 161s, ETA:   142s[>>>>>>>>>>>>>>>              ] 245/459, 1.5 task/s, elapsed: 161s, ETA:   141s[>>>>>>>>>>>>>>>              ] 246/459, 1.5 task/s, elapsed: 163s, ETA:   141s[>>>>>>>>>>>>>>>              ] 247/459, 1.5 task/s, elapsed: 163s, ETA:   140s[>>>>>>>>>>>>>>>              ] 248/459, 1.5 task/s, elapsed: 164s, ETA:   139s[>>>>>>>>>>>>>>>              ] 249/459, 1.5 task/s, elapsed: 164s, ETA:   138s[>>>>>>>>>>>>>>>              ] 250/459, 1.5 task/s, elapsed: 165s, ETA:   138s[>>>>>>>>>>>>>>>              ] 251/459, 1.5 task/s, elapsed: 165s, ETA:   137s[>>>>>>>>>>>>>>>              ] 252/459, 1.5 task/s, elapsed: 167s, ETA:   137s[>>>>>>>>>>>>>>>              ] 253/459, 1.5 task/s, elapsed: 167s, ETA:   136s[>>>>>>>>>>>>>>>>             ] 254/459, 1.5 task/s, elapsed: 168s, ETA:   135s[>>>>>>>>>>>>>>>>             ] 255/459, 1.5 task/s, elapsed: 168s, ETA:   134s[>>>>>>>>>>>>>>>>             ] 256/459, 1.5 task/s, elapsed: 169s, ETA:   134s[>>>>>>>>>>>>>>>>             ] 257/459, 1.5 task/s, elapsed: 169s, ETA:   133s[>>>>>>>>>>>>>>>>             ] 258/459, 1.5 task/s, elapsed: 170s, ETA:   132s[>>>>>>>>>>>>>>>>             ] 259/459, 1.5 task/s, elapsed: 170s, ETA:   131s[>>>>>>>>>>>>>>>>             ] 260/459, 1.5 task/s, elapsed: 171s, ETA:   131s[>>>>>>>>>>>>>>>>             ] 261/459, 1.5 task/s, elapsed: 171s, ETA:   130s[>>>>>>>>>>>>>>>>             ] 262/459, 1.5 task/s, elapsed: 172s, ETA:   129s[>>>>>>>>>>>>>>>>             ] 263/459, 1.5 task/s, elapsed: 172s, ETA:   128s[>>>>>>>>>>>>>>>>             ] 264/459, 1.5 task/s, elapsed: 174s, ETA:   128s[>>>>>>>>>>>>>>>>             ] 265/459, 1.5 task/s, elapsed: 174s, ETA:   127s[>>>>>>>>>>>>>>>>             ] 266/459, 1.5 task/s, elapsed: 175s, ETA:   127s[>>>>>>>>>>>>>>>>             ] 267/459, 1.5 task/s, elapsed: 175s, ETA:   126s[>>>>>>>>>>>>>>>>             ] 268/459, 1.5 task/s, elapsed: 176s, ETA:   125s[>>>>>>>>>>>>>>>>             ] 269/459, 1.5 task/s, elapsed: 176s, ETA:   124s[>>>>>>>>>>>>>>>>>            ] 270/459, 1.5 task/s, elapsed: 177s, ETA:   124s[>>>>>>>>>>>>>>>>>            ] 271/459, 1.5 task/s, elapsed: 177s, ETA:   123s[>>>>>>>>>>>>>>>>>            ] 272/459, 1.5 task/s, elapsed: 178s, ETA:   123s[>>>>>>>>>>>>>>>>>            ] 273/459, 1.5 task/s, elapsed: 179s, ETA:   122s[>>>>>>>>>>>>>>>>>            ] 274/459, 1.5 task/s, elapsed: 179s, ETA:   121s[>>>>>>>>>>>>>>>>>            ] 275/459, 1.5 task/s, elapsed: 180s, ETA:   120s[>>>>>>>>>>>>>>>>>            ] 276/459, 1.5 task/s, elapsed: 181s, ETA:   120s[>>>>>>>>>>>>>>>>>            ] 277/459, 1.5 task/s, elapsed: 181s, ETA:   119s[>>>>>>>>>>>>>>>>>            ] 278/459, 1.5 task/s, elapsed: 182s, ETA:   118s[>>>>>>>>>>>>>>>>>            ] 279/459, 1.5 task/s, elapsed: 182s, ETA:   117s[>>>>>>>>>>>>>>>>>            ] 280/459, 1.5 task/s, elapsed: 183s, ETA:   117s[>>>>>>>>>>>>>>>>>            ] 281/459, 1.5 task/s, elapsed: 183s, ETA:   116s[>>>>>>>>>>>>>>>>>            ] 282/459, 1.5 task/s, elapsed: 184s, ETA:   116s[>>>>>>>>>>>>>>>>>            ] 283/459, 1.5 task/s, elapsed: 184s, ETA:   115s[>>>>>>>>>>>>>>>>>            ] 284/459, 1.5 task/s, elapsed: 186s, ETA:   114s[>>>>>>>>>>>>>>>>>>           ] 285/459, 1.5 task/s, elapsed: 186s, ETA:   113s[>>>>>>>>>>>>>>>>>>           ] 286/459, 1.5 task/s, elapsed: 187s, ETA:   113s[>>>>>>>>>>>>>>>>>>           ] 287/459, 1.5 task/s, elapsed: 188s, ETA:   112s[>>>>>>>>>>>>>>>>>>           ] 288/459, 1.5 task/s, elapsed: 188s, ETA:   112s[>>>>>>>>>>>>>>>>>>           ] 289/459, 1.5 task/s, elapsed: 188s, ETA:   111s[>>>>>>>>>>>>>>>>>>           ] 290/459, 1.5 task/s, elapsed: 190s, ETA:   110s[>>>>>>>>>>>>>>>>>>           ] 291/459, 1.5 task/s, elapsed: 190s, ETA:   110s[>>>>>>>>>>>>>>>>>>           ] 292/459, 1.5 task/s, elapsed: 191s, ETA:   109s[>>>>>>>>>>>>>>>>>>           ] 293/459, 1.5 task/s, elapsed: 191s, ETA:   108s[>>>>>>>>>>>>>>>>>>           ] 294/459, 1.5 task/s, elapsed: 192s, ETA:   108s[>>>>>>>>>>>>>>>>>>           ] 295/459, 1.5 task/s, elapsed: 192s, ETA:   107s[>>>>>>>>>>>>>>>>>>           ] 296/459, 1.5 task/s, elapsed: 193s, ETA:   106s[>>>>>>>>>>>>>>>>>>           ] 297/459, 1.5 task/s, elapsed: 193s, ETA:   105s[>>>>>>>>>>>>>>>>>>           ] 298/459, 1.5 task/s, elapsed: 195s, ETA:   105s[>>>>>>>>>>>>>>>>>>           ] 299/459, 1.5 task/s, elapsed: 195s, ETA:   104s[>>>>>>>>>>>>>>>>>>           ] 300/459, 1.5 task/s, elapsed: 195s, ETA:   104s[>>>>>>>>>>>>>>>>>>>          ] 301/459, 1.5 task/s, elapsed: 196s, ETA:   103s[>>>>>>>>>>>>>>>>>>>          ] 302/459, 1.5 task/s, elapsed: 197s, ETA:   102s[>>>>>>>>>>>>>>>>>>>          ] 303/459, 1.5 task/s, elapsed: 197s, ETA:   101s[>>>>>>>>>>>>>>>>>>>          ] 304/459, 1.5 task/s, elapsed: 198s, ETA:   101s[>>>>>>>>>>>>>>>>>>>          ] 305/459, 1.5 task/s, elapsed: 198s, ETA:   100s[>>>>>>>>>>>>>>>>>>>          ] 306/459, 1.5 task/s, elapsed: 199s, ETA:   100s[>>>>>>>>>>>>>>>>>>>          ] 307/459, 1.5 task/s, elapsed: 199s, ETA:    99s[>>>>>>>>>>>>>>>>>>>          ] 308/459, 1.5 task/s, elapsed: 200s, ETA:    98s[>>>>>>>>>>>>>>>>>>>          ] 309/459, 1.5 task/s, elapsed: 200s, ETA:    97s[>>>>>>>>>>>>>>>>>>>          ] 310/459, 1.5 task/s, elapsed: 202s, ETA:    97s[>>>>>>>>>>>>>>>>>>>          ] 311/459, 1.5 task/s, elapsed: 202s, ETA:    96s[>>>>>>>>>>>>>>>>>>>          ] 312/459, 1.5 task/s, elapsed: 202s, ETA:    95s[>>>>>>>>>>>>>>>>>>>          ] 313/459, 1.5 task/s, elapsed: 203s, ETA:    95s[>>>>>>>>>>>>>>>>>>>          ] 314/459, 1.5 task/s, elapsed: 204s, ETA:    94s[>>>>>>>>>>>>>>>>>>>          ] 315/459, 1.5 task/s, elapsed: 205s, ETA:    94s[>>>>>>>>>>>>>>>>>>>          ] 316/459, 1.5 task/s, elapsed: 205s, ETA:    93s[>>>>>>>>>>>>>>>>>>>>         ] 317/459, 1.5 task/s, elapsed: 205s, ETA:    92s[>>>>>>>>>>>>>>>>>>>>         ] 318/459, 1.5 task/s, elapsed: 207s, ETA:    92s[>>>>>>>>>>>>>>>>>>>>         ] 319/459, 1.5 task/s, elapsed: 207s, ETA:    91s[>>>>>>>>>>>>>>>>>>>>         ] 320/459, 1.5 task/s, elapsed: 207s, ETA:    90s[>>>>>>>>>>>>>>>>>>>>         ] 321/459, 1.5 task/s, elapsed: 208s, ETA:    89s[>>>>>>>>>>>>>>>>>>>>         ] 322/459, 1.5 task/s, elapsed: 209s, ETA:    89s[>>>>>>>>>>>>>>>>>>>>         ] 323/459, 1.5 task/s, elapsed: 209s, ETA:    88s[>>>>>>>>>>>>>>>>>>>>         ] 324/459, 1.5 task/s, elapsed: 210s, ETA:    87s[>>>>>>>>>>>>>>>>>>>>         ] 325/459, 1.5 task/s, elapsed: 210s, ETA:    87s[>>>>>>>>>>>>>>>>>>>>         ] 326/459, 1.5 task/s, elapsed: 212s, ETA:    86s[>>>>>>>>>>>>>>>>>>>>         ] 327/459, 1.5 task/s, elapsed: 212s, ETA:    85s[>>>>>>>>>>>>>>>>>>>>         ] 328/459, 1.5 task/s, elapsed: 212s, ETA:    85s[>>>>>>>>>>>>>>>>>>>>         ] 329/459, 1.5 task/s, elapsed: 212s, ETA:    84s[>>>>>>>>>>>>>>>>>>>>         ] 330/459, 1.5 task/s, elapsed: 214s, ETA:    84s[>>>>>>>>>>>>>>>>>>>>         ] 331/459, 1.5 task/s, elapsed: 214s, ETA:    83s[>>>>>>>>>>>>>>>>>>>>         ] 332/459, 1.5 task/s, elapsed: 214s, ETA:    82s[>>>>>>>>>>>>>>>>>>>>>        ] 333/459, 1.6 task/s, elapsed: 215s, ETA:    81s[>>>>>>>>>>>>>>>>>>>>>        ] 334/459, 1.5 task/s, elapsed: 216s, ETA:    81s[>>>>>>>>>>>>>>>>>>>>>        ] 335/459, 1.5 task/s, elapsed: 216s, ETA:    80s[>>>>>>>>>>>>>>>>>>>>>        ] 336/459, 1.6 task/s, elapsed: 217s, ETA:    79s[>>>>>>>>>>>>>>>>>>>>>        ] 337/459, 1.6 task/s, elapsed: 217s, ETA:    78s[>>>>>>>>>>>>>>>>>>>>>        ] 338/459, 1.5 task/s, elapsed: 218s, ETA:    78s[>>>>>>>>>>>>>>>>>>>>>        ] 339/459, 1.5 task/s, elapsed: 219s, ETA:    77s[>>>>>>>>>>>>>>>>>>>>>        ] 340/459, 1.6 task/s, elapsed: 219s, ETA:    77s[>>>>>>>>>>>>>>>>>>>>>        ] 341/459, 1.6 task/s, elapsed: 219s, ETA:    76s[>>>>>>>>>>>>>>>>>>>>>        ] 342/459, 1.6 task/s, elapsed: 221s, ETA:    75s[>>>>>>>>>>>>>>>>>>>>>        ] 343/459, 1.6 task/s, elapsed: 221s, ETA:    75s[>>>>>>>>>>>>>>>>>>>>>        ] 344/459, 1.6 task/s, elapsed: 221s, ETA:    74s[>>>>>>>>>>>>>>>>>>>>>        ] 345/459, 1.6 task/s, elapsed: 221s, ETA:    73s[>>>>>>>>>>>>>>>>>>>>>        ] 346/459, 1.6 task/s, elapsed: 223s, ETA:    73s[>>>>>>>>>>>>>>>>>>>>>        ] 347/459, 1.6 task/s, elapsed: 223s, ETA:    72s[>>>>>>>>>>>>>>>>>>>>>        ] 348/459, 1.6 task/s, elapsed: 224s, ETA:    71s[>>>>>>>>>>>>>>>>>>>>>>       ] 349/459, 1.6 task/s, elapsed: 224s, ETA:    71s[>>>>>>>>>>>>>>>>>>>>>>       ] 350/459, 1.6 task/s, elapsed: 225s, ETA:    70s[>>>>>>>>>>>>>>>>>>>>>>       ] 351/459, 1.6 task/s, elapsed: 226s, ETA:    69s[>>>>>>>>>>>>>>>>>>>>>>       ] 352/459, 1.6 task/s, elapsed: 226s, ETA:    69s[>>>>>>>>>>>>>>>>>>>>>>       ] 353/459, 1.6 task/s, elapsed: 226s, ETA:    68s[>>>>>>>>>>>>>>>>>>>>>>       ] 354/459, 1.6 task/s, elapsed: 228s, ETA:    68s[>>>>>>>>>>>>>>>>>>>>>>       ] 355/459, 1.6 task/s, elapsed: 228s, ETA:    67s[>>>>>>>>>>>>>>>>>>>>>>       ] 356/459, 1.6 task/s, elapsed: 228s, ETA:    66s[>>>>>>>>>>>>>>>>>>>>>>       ] 357/459, 1.6 task/s, elapsed: 229s, ETA:    65s[>>>>>>>>>>>>>>>>>>>>>>       ] 358/459, 1.6 task/s, elapsed: 230s, ETA:    65s[>>>>>>>>>>>>>>>>>>>>>>       ] 359/459, 1.6 task/s, elapsed: 231s, ETA:    64s[>>>>>>>>>>>>>>>>>>>>>>       ] 360/459, 1.6 task/s, elapsed: 231s, ETA:    63s[>>>>>>>>>>>>>>>>>>>>>>       ] 361/459, 1.6 task/s, elapsed: 231s, ETA:    63s[>>>>>>>>>>>>>>>>>>>>>>       ] 362/459, 1.6 task/s, elapsed: 233s, ETA:    62s[>>>>>>>>>>>>>>>>>>>>>>       ] 363/459, 1.6 task/s, elapsed: 233s, ETA:    62s[>>>>>>>>>>>>>>>>>>>>>>       ] 364/459, 1.6 task/s, elapsed: 233s, ETA:    61s[>>>>>>>>>>>>>>>>>>>>>>>      ] 365/459, 1.6 task/s, elapsed: 233s, ETA:    60s[>>>>>>>>>>>>>>>>>>>>>>>      ] 366/459, 1.6 task/s, elapsed: 235s, ETA:    60s[>>>>>>>>>>>>>>>>>>>>>>>      ] 367/459, 1.6 task/s, elapsed: 235s, ETA:    59s[>>>>>>>>>>>>>>>>>>>>>>>      ] 368/459, 1.6 task/s, elapsed: 236s, ETA:    58s[>>>>>>>>>>>>>>>>>>>>>>>      ] 369/459, 1.6 task/s, elapsed: 236s, ETA:    58s[>>>>>>>>>>>>>>>>>>>>>>>      ] 370/459, 1.6 task/s, elapsed: 238s, ETA:    57s[>>>>>>>>>>>>>>>>>>>>>>>      ] 371/459, 1.6 task/s, elapsed: 238s, ETA:    56s[>>>>>>>>>>>>>>>>>>>>>>>      ] 372/459, 1.6 task/s, elapsed: 238s, ETA:    56s[>>>>>>>>>>>>>>>>>>>>>>>      ] 373/459, 1.6 task/s, elapsed: 239s, ETA:    55s[>>>>>>>>>>>>>>>>>>>>>>>      ] 374/459, 1.6 task/s, elapsed: 240s, ETA:    55s[>>>>>>>>>>>>>>>>>>>>>>>      ] 375/459, 1.6 task/s, elapsed: 240s, ETA:    54s[>>>>>>>>>>>>>>>>>>>>>>>      ] 376/459, 1.6 task/s, elapsed: 240s, ETA:    53s[>>>>>>>>>>>>>>>>>>>>>>>      ] 377/459, 1.6 task/s, elapsed: 241s, ETA:    52s[>>>>>>>>>>>>>>>>>>>>>>>      ] 378/459, 1.6 task/s, elapsed: 242s, ETA:    52s[>>>>>>>>>>>>>>>>>>>>>>>      ] 379/459, 1.6 task/s, elapsed: 243s, ETA:    51s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 380/459, 1.6 task/s, elapsed: 243s, ETA:    50s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 381/459, 1.6 task/s, elapsed: 243s, ETA:    50s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 382/459, 1.6 task/s, elapsed: 244s, ETA:    49s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 383/459, 1.6 task/s, elapsed: 245s, ETA:    49s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 384/459, 1.6 task/s, elapsed: 245s, ETA:    48s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 385/459, 1.6 task/s, elapsed: 245s, ETA:    47s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 386/459, 1.6 task/s, elapsed: 247s, ETA:    47s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 387/459, 1.6 task/s, elapsed: 247s, ETA:    46s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 388/459, 1.6 task/s, elapsed: 247s, ETA:    45s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 389/459, 1.6 task/s, elapsed: 248s, ETA:    45s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 390/459, 1.6 task/s, elapsed: 249s, ETA:    44s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 391/459, 1.6 task/s, elapsed: 249s, ETA:    43s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 392/459, 1.6 task/s, elapsed: 249s, ETA:    43s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 393/459, 1.6 task/s, elapsed: 250s, ETA:    42s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 394/459, 1.6 task/s, elapsed: 252s, ETA:    42s[>>>>>>>>>>>>>>>>>>>>>>>>     ] 395/459, 1.6 task/s, elapsed: 252s, ETA:    41s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 396/459, 1.6 task/s, elapsed: 252s, ETA:    40s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 397/459, 1.6 task/s, elapsed: 252s, ETA:    39s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 398/459, 1.6 task/s, elapsed: 254s, ETA:    39s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 399/459, 1.6 task/s, elapsed: 254s, ETA:    38s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 400/459, 1.6 task/s, elapsed: 255s, ETA:    38s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 401/459, 1.6 task/s, elapsed: 255s, ETA:    37s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 402/459, 1.6 task/s, elapsed: 257s, ETA:    36s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 403/459, 1.6 task/s, elapsed: 257s, ETA:    36s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 404/459, 1.6 task/s, elapsed: 257s, ETA:    35s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 405/459, 1.6 task/s, elapsed: 257s, ETA:    34s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 406/459, 1.6 task/s, elapsed: 259s, ETA:    34s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 407/459, 1.6 task/s, elapsed: 259s, ETA:    33s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 408/459, 1.6 task/s, elapsed: 259s, ETA:    32s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 409/459, 1.6 task/s, elapsed: 260s, ETA:    32s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 410/459, 1.6 task/s, elapsed: 261s, ETA:    31s[>>>>>>>>>>>>>>>>>>>>>>>>>    ] 411/459, 1.6 task/s, elapsed: 262s, ETA:    31s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 412/459, 1.6 task/s, elapsed: 262s, ETA:    30s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 413/459, 1.6 task/s, elapsed: 262s, ETA:    29s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 414/459, 1.6 task/s, elapsed: 264s, ETA:    29s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 415/459, 1.6 task/s, elapsed: 264s, ETA:    28s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 416/459, 1.6 task/s, elapsed: 264s, ETA:    27s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 417/459, 1.6 task/s, elapsed: 265s, ETA:    27s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 418/459, 1.6 task/s, elapsed: 266s, ETA:    26s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 419/459, 1.6 task/s, elapsed: 267s, ETA:    25s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 420/459, 1.6 task/s, elapsed: 267s, ETA:    25s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 421/459, 1.6 task/s, elapsed: 267s, ETA:    24s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 422/459, 1.6 task/s, elapsed: 269s, ETA:    24s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 423/459, 1.6 task/s, elapsed: 269s, ETA:    23s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 424/459, 1.6 task/s, elapsed: 270s, ETA:    22s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 425/459, 1.6 task/s, elapsed: 270s, ETA:    22s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 426/459, 1.6 task/s, elapsed: 271s, ETA:    21s[>>>>>>>>>>>>>>>>>>>>>>>>>>   ] 427/459, 1.6 task/s, elapsed: 271s, ETA:    20s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 428/459, 1.6 task/s, elapsed: 272s, ETA:    20s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 429/459, 1.6 task/s, elapsed: 272s, ETA:    19s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 430/459, 1.6 task/s, elapsed: 273s, ETA:    18s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 431/459, 1.6 task/s, elapsed: 274s, ETA:    18s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 432/459, 1.6 task/s, elapsed: 274s, ETA:    17s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 433/459, 1.6 task/s, elapsed: 274s, ETA:    16s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 434/459, 1.6 task/s, elapsed: 276s, ETA:    16s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 435/459, 1.6 task/s, elapsed: 276s, ETA:    15s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 436/459, 1.6 task/s, elapsed: 276s, ETA:    15s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 437/459, 1.6 task/s, elapsed: 277s, ETA:    14s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 438/459, 1.6 task/s, elapsed: 279s, ETA:    13s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 439/459, 1.6 task/s, elapsed: 279s, ETA:    13s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 440/459, 1.6 task/s, elapsed: 279s, ETA:    12s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 441/459, 1.6 task/s, elapsed: 279s, ETA:    11s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 442/459, 1.6 task/s, elapsed: 281s, ETA:    11s[>>>>>>>>>>>>>>>>>>>>>>>>>>>  ] 443/459, 1.6 task/s, elapsed: 281s, ETA:    10s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 444/459, 1.6 task/s, elapsed: 282s, ETA:    10s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 445/459, 1.6 task/s, elapsed: 282s, ETA:     9s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 446/459, 1.6 task/s, elapsed: 283s, ETA:     8s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 447/459, 1.6 task/s, elapsed: 284s, ETA:     8s[>2025-04-19 18:57:57,711 - pyskl - INFO - [array([9.1899879e-04, 7.5853246e-01, 3.6197307e-05, 7.3843915e-04,
+       2.3818998e-01, 1.5839126e-03], dtype=float32), array([2.7559280e-01, 1.4023666e-09, 6.2919597e-13, 7.2440720e-01,
+       1.2938118e-13, 5.5567924e-15], dtype=float32), array([0.007432  , 0.416308  , 0.00224057, 0.00122436, 0.4536183 ,
+       0.11917678], dtype=float32), array([9.9961853e-01, 1.3149729e-10, 9.6590713e-12, 3.8127095e-04,
+       3.8888710e-09, 1.5200548e-07], dtype=float32), array([9.5933515e-01, 3.2678342e-06, 2.6303852e-09, 4.0659245e-02,
+       2.0372825e-06, 3.1214515e-07], dtype=float32), array([0.00457239, 0.6915101 , 0.13331217, 0.00245394, 0.09759115,
+       0.07056028], dtype=float32), array([0.00434464, 0.74958503, 0.08358724, 0.00237939, 0.10306666,
+       0.05703706], dtype=float32), array([2.9235771e-02, 3.1583856e-08, 8.8885913e-12, 9.7076416e-01,
+       1.2317567e-12, 1.7554744e-14], dtype=float32), array([0.00795858, 0.49719182, 0.09633698, 0.002493  , 0.22164483,
+       0.17437486], dtype=float32), array([9.9765569e-01, 7.7683080e-13, 2.1073304e-12, 2.3443988e-03,
+       1.5348599e-13, 1.6757006e-11], dtype=float32), array([0.01858725, 0.07487639, 0.00148059, 0.00069977, 0.5345849 ,
+       0.36977118], dtype=float32), array([4.7442503e-04, 1.2620027e-01, 8.0993682e-01, 1.6729251e-03,
+       4.3095071e-02, 1.8620526e-02], dtype=float32), array([1.19264405e-02, 6.80051968e-02, 1.01868797e-03, 4.94488806e-04,
+       6.71216846e-01, 2.47338399e-01], dtype=float32), array([9.6339417e-01, 4.5087185e-07, 1.1019237e-09, 3.6605235e-02,
+       1.2568040e-07, 4.6253067e-08], dtype=float32), array([9.1926381e-03, 8.0152153e-04, 1.2156639e-04, 2.4166844e-05,
+       1.6070580e-01, 8.2915431e-01], dtype=float32), array([3.3861803e-04, 9.2037357e-02, 8.6047459e-01, 1.5086333e-03,
+       3.2415681e-02, 1.3225081e-02], dtype=float32), array([4.9547274e-02, 4.5546265e-05, 5.4438121e-09, 9.5040715e-01,
+       2.3876231e-08, 1.8997308e-10], dtype=float32), array([8.9485738e-03, 3.9613536e-03, 1.4623527e-03, 8.6418870e-05,
+       1.8271995e-01, 8.0282134e-01], dtype=float32), array([1.3386169e-02, 6.1920786e-05, 7.3266068e-07, 3.7470870e-06,
+       2.3143148e-01, 7.5511593e-01], dtype=float32), array([3.6110217e-05, 8.9995080e-01, 3.1925577e-08, 1.8837886e-04,
+       9.9819601e-02, 5.1192728e-06], dtype=float32), array([3.04363249e-03, 4.80051767e-07, 2.25008534e-07, 1.08433156e-07,
+       1.32909417e-02, 9.83664632e-01], dtype=float32), array([9.9308771e-01, 1.6142764e-06, 1.8821517e-08, 6.8962551e-03,
+       7.2553826e-06, 7.2239213e-06], dtype=float32), array([0.00101718, 0.86162645, 0.0009008 , 0.00109971, 0.1315776 ,
+       0.00377835], dtype=float32), array([0.0093061 , 0.3428218 , 0.01837698, 0.00165252, 0.3738105 ,
+       0.2540321 ], dtype=float32), array([1.1983102e-04, 8.7194365e-01, 7.0370538e-06, 5.6971633e-04,
+       1.2727027e-01, 8.9423687e-05], dtype=float32), array([1.1817745e-02, 4.6149124e-03, 6.8079983e-04, 9.2432783e-05,
+       2.5480756e-01, 7.2798657e-01], dtype=float32), array([9.8820156e-01, 5.5001163e-07, 5.1537499e-09, 1.1796172e-02,
+       8.0179308e-07, 9.4779062e-07], dtype=float32), array([0.00138269, 0.84506655, 0.00132872, 0.00122971, 0.14484186,
+       0.00615038], dtype=float32), array([5.3571188e-04, 5.5634916e-01, 2.5598225e-01, 4.5100655e-03,
+       1.7484179e-01, 7.7810413e-03], dtype=float32), array([0.00142314, 0.33644286, 0.53985506, 0.00273962, 0.08179852,
+       0.03774082], dtype=float32), array([8.4678708e-03, 1.6251360e-01, 3.3030234e-04, 5.4780504e-04,
+       6.7873591e-01, 1.4940453e-01], dtype=float32), array([1.2947813e-04, 9.0336907e-01, 4.9920197e-07, 6.6093623e-04,
+       9.5815450e-02, 2.4601182e-05], dtype=float32), array([0.00723942, 0.44660178, 0.03901004, 0.00227528, 0.32123178,
+       0.18364173], dtype=float32), array([6.1301095e-03, 2.5151882e-04, 1.7440843e-05, 1.3887072e-05,
+       5.2843493e-01, 4.6515211e-01], dtype=float32), array([9.9501747e-01, 4.0123452e-13, 1.2874171e-14, 4.9825469e-03,
+       2.4944543e-13, 1.6208275e-12], dtype=float32), array([6.1026803e-04, 8.6860543e-01, 1.6400800e-04, 8.2836999e-04,
+       1.2850673e-01, 1.2850871e-03], dtype=float32), array([0.00165405, 0.6299815 , 0.21687925, 0.002843  , 0.12404795,
+       0.02459422], dtype=float32), array([0.00575833, 0.5419565 , 0.00227586, 0.00144596, 0.3871406 ,
+       0.06142275], dtype=float32), array([0.00348251, 0.5219648 , 0.2731659 , 0.00279633, 0.12074357,
+       0.07784694], dtype=float32), array([0.00321797, 0.718555  , 0.09010043, 0.00254391, 0.1408147 ,
+       0.04476794], dtype=float32), array([4.5924223e-04, 1.2489927e-01, 8.1450140e-01, 1.7043147e-03,
+       4.0942110e-02, 1.7493730e-02], dtype=float32), array([0.00261454, 0.8044964 , 0.0304545 , 0.00225984, 0.13310312,
+       0.0270717 ], dtype=float32), array([0.00310086, 0.62403697, 0.18118249, 0.00282546, 0.1357383 ,
+       0.05311595], dtype=float32), array([1.7788326e-03, 3.2417309e-01, 9.3207082e-06, 5.2559486e-04,
+       6.6989720e-01, 3.6159910e-03], dtype=float32), array([9.9995404e-01, 7.3890781e-12, 4.1923769e-12, 4.5392775e-05,
+       2.3893161e-09, 5.9197799e-07], dtype=float32), array([1.0692113e-02, 1.8359743e-02, 6.9652996e-03, 3.0668188e-04,
+       2.9735568e-01, 6.6632050e-01], dtype=float32), array([1.1402988e-02, 3.9093081e-02, 4.8181598e-04, 3.1756712e-04,
+       6.6944152e-01, 2.7926311e-01], dtype=float32), array([9.8375160e-01, 2.9732498e-06, 3.1419212e-08, 1.6235199e-02,
+       5.5036430e-06, 4.7491044e-06], dtype=float32), array([1.8642657e-03, 4.1077176e-01, 1.8842982e-05, 6.2217820e-04,
+       5.8316994e-01, 3.5531174e-03], dtype=float32), array([0.00232294, 0.82345116, 0.02025695, 0.0020552 , 0.13156338,
+       0.02035034], dtype=float32), array([6.7564711e-04, 8.5482854e-01, 1.2953675e-03, 1.3980347e-03,
+       1.3923149e-01, 2.5709420e-03], dtype=float32), array([7.7973329e-03, 3.2265286e-03, 1.1223563e-03, 6.6768625e-05,
+       1.4199747e-01, 8.4578955e-01], dtype=float32), array([0.00158197, 0.41777983, 0.43705797, 0.00295828, 0.10102355,
+       0.03959843], dtype=float32), array([9.87914318e-05, 8.91936243e-01, 4.63770448e-07, 3.18893202e-04,
+       1.07618466e-01, 2.72350680e-05], dtype=float32), array([3.8877848e-04, 1.2134557e-01, 8.1895304e-01, 1.7906588e-03,
+       4.2986687e-02, 1.4535318e-02], dtype=float32), array([9.82963204e-01, 1.00934199e-06, 1.34374165e-08, 1.70336477e-02,
+       9.59440968e-07, 1.26971645e-06], dtype=float32), array([8.2978262e-03, 1.5327600e-11, 2.5356895e-13, 9.9170220e-01,
+       9.8325695e-17, 6.6917365e-18], dtype=float32), array([9.8856783e-01, 2.5843795e-12, 1.9594836e-12, 1.1432222e-02,
+       2.0485114e-13, 5.4565775e-12], dtype=float32), array([0.0014581 , 0.33123598, 0.54872435, 0.00281543, 0.08035012,
+       0.03541597], dtype=float32), array([0.00194971, 0.8283852 , 0.01044731, 0.00198806, 0.1424841 ,
+       0.01474561], dtype=float32), array([6.3543022e-03, 3.7328076e-02, 1.6832255e-03, 4.9924123e-04,
+       7.5164950e-01, 2.0248573e-01], dtype=float32), array([4.3886743e-04, 8.3550608e-01, 2.6533453e-05, 5.5817532e-04,
+       1.6288915e-01, 5.8119971e-04], dtype=float32), array([8.2028378e-04, 7.8470105e-01, 5.9806272e-05, 7.5912772e-04,
+       2.1207252e-01, 1.5871741e-03], dtype=float32), array([0.00150642, 0.7647076 , 0.06230533, 0.00278576, 0.15051888,
+       0.01817604], dtype=float32), array([9.67833340e-01, 1.15893615e-08, 1.89979057e-11, 3.21666859e-02,
+       3.52693941e-09, 1.37310996e-09], dtype=float32), array([0.00424319, 0.720095  , 0.10739227, 0.00242755, 0.10400613,
+       0.06183591], dtype=float32), array([6.2681049e-02, 9.4637770e-12, 1.0920614e-14, 9.3731898e-01,
+       1.4067307e-16, 1.2261635e-17], dtype=float32), array([0.07685415, 0.19671325, 0.00077622, 0.01004078, 0.46803734,
+       0.2475783 ], dtype=float32), array([8.4144853e-02, 6.6403189e-08, 2.8116523e-11, 9.1585505e-01,
+       3.1933213e-11, 7.9274434e-13], dtype=float32), array([0.00187434, 0.81689817, 0.00172742, 0.00176288, 0.1704658 ,
+       0.00727135], dtype=float32), array([9.9930662e-01, 3.7121774e-11, 2.8835480e-12, 6.9340615e-04,
+       3.2025835e-10, 4.5819504e-09], dtype=float32), array([6.7738392e-03, 8.8391885e-02, 1.0720076e-04, 3.5757772e-04,
+       8.1720906e-01, 8.7160490e-02], dtype=float32), array([9.9988186e-01, 3.7188919e-12, 1.3903709e-12, 1.1813535e-04,
+       6.1120720e-10, 5.7131082e-08], dtype=float32), array([9.9875587e-01, 2.2368308e-15, 1.4860453e-15, 1.2441896e-03,
+       2.2063394e-15, 1.5626605e-13], dtype=float32), array([1.0998724e-02, 5.9426684e-02, 2.2330674e-04, 2.7524654e-04,
+       6.1352915e-01, 3.1554696e-01], dtype=float32), array([0.00121195, 0.86590904, 0.00286328, 0.001284  , 0.12279618,
+       0.00593554], dtype=float32), array([0.00316901, 0.7058219 , 0.11745896, 0.0027181 , 0.1212961 ,
+       0.04953596], dtype=float32), array([0.00174623, 0.76578397, 0.00892187, 0.00181836, 0.20710233,
+       0.01462725], dtype=float32), array([9.9934387e-01, 4.5341910e-08, 3.4309218e-09, 6.2116835e-04,
+       2.6651342e-06, 3.2197288e-05], dtype=float32), array([0.0041112 , 0.7673129 , 0.06984853, 0.00232301, 0.10551858,
+       0.05088581], dtype=float32), array([5.45478147e-03, 3.06227765e-12, 1.00805323e-13, 9.94545162e-01,
+       1.27595405e-17, 8.46976389e-19], dtype=float32), array([0.00429786, 0.759267  , 0.07397714, 0.00235417, 0.1062267 ,
+       0.05387718], dtype=float32), array([1.54725835e-02, 1.69279157e-09, 7.51552293e-12, 9.84527409e-01,
+       3.88005295e-14, 1.42157656e-15], dtype=float32), array([8.7465141e-03, 2.7975205e-01, 8.9759360e-06, 1.9213557e-03,
+       7.0524067e-01, 4.3305107e-03], dtype=float32), array([6.8210512e-03, 7.3069736e-04, 3.5793855e-04, 2.4670995e-05,
+       9.1454528e-02, 9.0061110e-01], dtype=float32), array([4.6569048e-03, 3.1741133e-01, 2.0159439e-05, 1.2346351e-03,
+       6.7136949e-01, 5.3074560e-03], dtype=float32), array([8.8612046e-03, 3.3501354e-03, 1.3660243e-03, 7.3483534e-05,
+       1.7454942e-01, 8.1179971e-01], dtype=float32), array([7.7017643e-03, 3.3449560e-02, 1.8214493e-04, 2.1812819e-04,
+       6.8511385e-01, 2.7333450e-01], dtype=float32), array([3.8544538e-05, 8.9087629e-01, 6.7252380e-08, 2.1266859e-04,
+       1.0886469e-01, 7.7150598e-06], dtype=float32), array([5.4336297e-03, 8.0709970e-12, 1.2058507e-13, 9.9456638e-01,
+       4.5669085e-17, 1.9533707e-18], dtype=float32), array([3.8091820e-03, 1.4999315e-01, 2.6943744e-05, 4.4971789e-04,
+       8.3228493e-01, 1.3436071e-02], dtype=float32), array([2.4465668e-05, 9.0758795e-01, 6.2381318e-09, 1.6063963e-04,
+       9.2225134e-02, 1.8232764e-06], dtype=float32), array([8.8311339e-05, 9.0108031e-01, 1.4082910e-07, 3.2230030e-04,
+       9.8493412e-02, 1.5522199e-05], dtype=float32), array([0.097287  , 0.26233998, 0.00237469, 0.01730004, 0.43583837,
+       0.18485995], dtype=float32), array([2.2367777e-04, 9.1199630e-01, 9.5413827e-07, 1.2945883e-03,
+       8.6458847e-02, 2.5656034e-05], dtype=float32), array([4.1838968e-04, 8.6437953e-01, 2.6275937e-05, 6.3614536e-04,
+       1.3402322e-01, 5.1648321e-04], dtype=float32), array([0.00530317, 0.56899756, 0.00307413, 0.00107934, 0.3334966 ,
+       0.08804921], dtype=float32), array([1.1023232e-02, 8.9568375e-03, 2.2062757e-04, 1.2700001e-04,
+       6.1222082e-01, 3.6745152e-01], dtype=float32), array([6.3492567e-05, 8.9452428e-01, 2.1907839e-07, 2.5879923e-04,
+       1.0513573e-01, 1.7474085e-05], dtype=float32), array([5.0004665e-04, 8.2871658e-01, 4.2443473e-05, 5.6416349e-04,
+       1.6931321e-01, 8.6363341e-04], dtype=float32), array([3.2660277e-03, 5.5167985e-01, 1.7196957e-04, 6.3121971e-04,
+       4.1985831e-01, 2.4392659e-02], dtype=float32), array([0.00307239, 0.80524886, 0.03575714, 0.00221212, 0.12160448,
+       0.03210497], dtype=float32), array([0.00677942, 0.585103  , 0.04846958, 0.00232705, 0.24679938,
+       0.11052159], dtype=float32), array([3.07089649e-05, 8.89903545e-01, 3.46298599e-08, 1.91561296e-04,
+       1.09868966e-01, 5.17352964e-06], dtype=float32), array([6.3116808e-04, 1.6035655e-01, 7.6190931e-01, 1.9680914e-03,
+       5.2042153e-02, 2.3092732e-02], dtype=float32), array([0.01116871, 0.22034493, 0.00422532, 0.00119956, 0.5565492 ,
+       0.20651229], dtype=float32), array([9.9821299e-01, 3.7937271e-12, 7.6607687e-12, 1.7869581e-03,
+       7.8488241e-13, 7.8464277e-11], dtype=float32), array([1.3893813e-02, 3.5652554e-09, 1.7209095e-12, 9.8610622e-01,
+       1.2250932e-13, 1.5191205e-15], dtype=float32), array([0.00401739, 0.7857443 , 0.057663  , 0.00233315, 0.10484282,
+       0.04539941], dtype=float32), array([2.7182407e-03, 3.2016428e-07, 2.8482273e-07, 8.5553999e-08,
+       1.2700006e-02, 9.8458111e-01], dtype=float32), array([0.01271543, 0.32469496, 0.0122477 , 0.00170614, 0.43121538,
+       0.21742037], dtype=float32), array([0.00578089, 0.48352394, 0.17892115, 0.0026587 , 0.19139855,
+       0.13771673], dtype=float32), array([9.9703419e-01, 1.6555646e-11, 8.5290905e-13, 2.9658645e-03,
+       1.8219527e-11, 2.2309665e-10], dtype=float32), array([0.01187959, 0.04734189, 0.01341589, 0.00062945, 0.38252208,
+       0.5442111 ], dtype=float32), array([2.9796532e-03, 4.6016869e-01, 3.9602542e-06, 2.6078799e-03,
+       5.3332824e-01, 9.1158500e-04], dtype=float32), array([8.3987856e-01, 1.1260906e-03, 1.3670032e-07, 1.5883882e-01,
+       1.5169325e-04, 4.7561421e-06], dtype=float32), array([1.0269035e-02, 7.4827382e-03, 1.7968221e-03, 1.2530117e-04,
+       2.1706831e-01, 7.6325780e-01], dtype=float32), array([0.0031911 , 0.71573967, 0.04950532, 0.0027044 , 0.1861862 ,
+       0.04267333], dtype=float32), array([1.3737372e-02, 2.3784660e-02, 1.5221516e-03, 2.8370286e-04,
+       4.8057467e-01, 4.8009753e-01], dtype=float32), array([0.00132669, 0.86383486, 0.00260307, 0.00136783, 0.1244566 ,
+       0.00641101], dtype=float32), array([9.9990767e-01, 2.5962751e-11, 1.0613732e-11, 9.2179449e-05,
+       2.1551159e-09, 1.6356455e-07], dtype=float32), array([0.01421473, 0.21285133, 0.01287273, 0.00138372, 0.43252078,
+       0.32615674], dtype=float32), array([1.7939991e-03, 8.8145115e-14, 1.9884372e-15, 9.9820596e-01,
+       1.6990287e-19, 4.9377961e-21], dtype=float32), array([0.00257928, 0.5239408 , 0.31117782, 0.00281665, 0.10337718,
+       0.05610826], dtype=float32), array([4.3053743e-03, 5.4167494e-13, 9.5055274e-15, 9.9569464e-01,
+       1.4503575e-18, 8.1264569e-20], dtype=float32), array([6.0212803e-03, 1.9126853e-12, 3.7373997e-14, 9.9397868e-01,
+       6.3537298e-18, 3.9332423e-19], dtype=float32), array([6.2924897e-04, 7.8200769e-01, 2.5792750e-05, 6.0351234e-04,
+       2.1570025e-01, 1.0335336e-03], dtype=float32), array([0.0119158 , 0.2857948 , 0.05136324, 0.00185329, 0.33369353,
+       0.31537935], dtype=float32), array([0.00153568, 0.77815515, 0.05352794, 0.00276298, 0.1478316 ,
+       0.01618665], dtype=float32), array([3.2392439e-02, 2.7303006e-06, 1.3888267e-09, 9.6760482e-01,
+       7.1594786e-10, 9.2428929e-12], dtype=float32), array([0.00129889, 0.32416543, 0.5462393 , 0.00273392, 0.08833112,
+       0.0372313 ], dtype=float32), array([0.00790861, 0.32594034, 0.0011253 , 0.00099069, 0.52426606,
+       0.13976899], dtype=float32), array([1.5058523e-04, 7.7740008e-01, 3.8082459e-07, 4.3673874e-04,
+       2.2195975e-01, 5.2501349e-05], dtype=float32), array([1.2665719e-02, 3.7283371e-11, 5.3877492e-14, 9.8733425e-01,
+       2.4044404e-16, 5.8332223e-18], dtype=float32), array([7.7395723e-03, 8.3927875e-03, 2.5068743e-05, 9.9334400e-05,
+       7.7363002e-01, 2.1011321e-01], dtype=float32), array([2.3028043e-03, 3.8767946e-01, 1.7924105e-04, 1.1681400e-03,
+       5.9975386e-01, 8.9165214e-03], dtype=float32), array([9.8531973e-01, 1.2643083e-06, 1.1824236e-08, 1.4674968e-02,
+       2.4332639e-06, 1.6027489e-06], dtype=float32), array([1.2120627e-02, 2.2586356e-11, 1.6445665e-14, 9.8787940e-01,
+       1.1424456e-16, 2.4986759e-18], dtype=float32), array([0.00479426, 0.4639077 , 0.01112822, 0.0017179 , 0.4452002 ,
+       0.07325175], dtype=float32), array([3.0632145e-04, 6.6105884e-01, 9.5815312e-07, 4.7811968e-04,
+       3.3797303e-01, 1.8274346e-04], dtype=float32), array([0.00158492, 0.43049726, 0.4341526 , 0.00271072, 0.09840687,
+       0.03264756], dtype=float32), array([5.1333434e-03, 4.4215863e-04, 1.2946865e-03, 5.3708012e-05,
+       2.8515735e-01, 7.0791882e-01], dtype=float32), array([3.59885889e-05, 8.92789006e-01, 3.68646091e-08, 1.90021005e-04,
+       1.06979184e-01, 5.79852212e-06], dtype=float32), array([5.2661687e-04, 8.5720819e-01, 1.2369351e-03, 1.5223760e-03,
+       1.3793433e-01, 1.5716025e-03], dtype=float32), array([1.9756427e-02, 5.3616526e-07, 1.3855542e-09, 9.8024303e-01,
+       1.2425978e-10, 2.6299707e-12], dtype=float32), array([8.8416459e-03, 3.5703895e-09, 1.8851002e-11, 9.9115831e-01,
+       1.7267736e-13, 4.0963602e-15], dtype=float32), array([9.0531439e-01, 4.5226787e-09, 3.8141119e-11, 9.4685666e-02,
+       9.1013552e-10, 1.4457389e-09], dtype=float32), array([9.92522061e-01, 9.95047117e-07, 1.41015635e-08, 7.46964617e-03,
+       3.43971146e-06, 3.85718249e-06], dtype=float32), array([0.00252257, 0.40591437, 0.4188799 , 0.0028648 , 0.10479589,
+       0.06502254], dtype=float32), array([9.9560261e-01, 8.9177911e-13, 1.6250470e-12, 4.3973639e-03,
+       2.2120934e-13, 1.4828357e-11], dtype=float32), array([0.00114708, 0.5029642 , 0.3337681 , 0.00332683, 0.13590643,
+       0.02288736], dtype=float32), array([9.9824697e-01, 5.7630400e-11, 9.0192610e-11, 1.7529862e-03,
+       2.3738025e-11, 1.4578360e-09], dtype=float32), array([6.5349173e-05, 9.1292268e-01, 4.4983825e-08, 3.7610368e-04,
+       8.6630315e-02, 5.5354417e-06], dtype=float32), array([5.9087186e-05, 8.9831018e-01, 6.2817172e-08, 2.7476269e-04,
+       1.0134750e-01, 8.3872883e-06], dtype=float32), array([1.9487238e-03, 4.2793065e-01, 4.4060941e-04, 1.6320896e-03,
+       5.6089872e-01, 7.1491608e-03], dtype=float32), array([1.4074606e-02, 1.3295404e-02, 1.1376074e-03, 1.8821767e-04,
+       3.6397120e-01, 6.0733300e-01], dtype=float32), array([1.0706190e-02, 2.2072697e-02, 1.4041627e-03, 2.5620789e-04,
+       4.0558305e-01, 5.5997771e-01], dtype=float32), array([9.8718137e-01, 7.0623236e-07, 4.4366653e-09, 1.2816123e-02,
+       1.1335077e-06, 6.8459525e-07], dtype=float32), array([7.0987064e-01, 1.2454329e-05, 2.8749614e-08, 2.9011652e-01,
+       1.8228701e-07, 1.4695418e-07], dtype=float32), array([1.0717939e-02, 1.2004081e-10, 1.2595886e-12, 9.8928207e-01,
+       1.5857651e-15, 8.8699146e-17], dtype=float32), array([7.1790568e-03, 5.2694637e-01, 1.4809941e-04, 2.8190550e-03,
+       4.4260740e-01, 2.0300077e-02], dtype=float32), array([4.5795488e-04, 4.5569634e-01, 9.8450221e-07, 5.5076927e-04,
+       5.4298210e-01, 3.1185351e-04], dtype=float32), array([4.7856651e-05, 8.9718431e-01, 8.9230532e-08, 2.1599916e-04,
+       1.0254171e-01, 1.0022188e-05], dtype=float32), array([0.00154818, 0.85036224, 0.00548695, 0.00173954, 0.13163343,
+       0.00922971], dtype=float32), array([7.8456348e-04, 8.3734506e-01, 2.1801474e-04, 8.4236823e-04,
+       1.5912813e-01, 1.6818403e-03], dtype=float32), array([1.33002205e-02, 1.86707862e-02, 4.72409854e-04, 2.00047303e-04,
+       5.63027501e-01, 4.04329032e-01], dtype=float32), array([9.5082301e-01, 1.5460914e-10, 2.4463424e-12, 4.9176928e-02,
+       2.2416380e-11, 4.3963451e-11], dtype=float32), array([7.7249096e-03, 1.4440218e-03, 5.6295650e-04, 3.5391797e-05,
+       1.1086730e-01, 8.7936544e-01], dtype=float32), array([4.20825054e-05, 8.59678209e-01, 1.07239671e-07, 2.47770658e-04,
+       1.40021279e-01, 1.06066445e-05], dtype=float32), array([6.7189182e-03, 4.8926480e-10, 5.8080862e-13, 9.9328119e-01,
+       1.0497796e-14, 1.2090523e-16], dtype=float32), array([0.00515759, 0.5028098 , 0.00065307, 0.00080571, 0.42263332,
+       0.06794053], dtype=float32), array([1.0586319e-01, 1.3669868e-08, 6.7025227e-12, 8.9413685e-01,
+       1.6768222e-12, 6.3726497e-14], dtype=float32), array([9.9608144e-03, 3.3387549e-02, 3.5130262e-04, 2.6374820e-04,
+       6.0740662e-01, 3.4862998e-01], dtype=float32), array([9.7306389e-01, 4.6379336e-10, 4.6517309e-10, 2.6936084e-02,
+       1.8252932e-11, 2.1118050e-10], dtype=float32), array([4.2741056e-04, 8.5303450e-01, 2.4984824e-05, 6.3335762e-04,
+       1.4535435e-01, 5.2537600e-04], dtype=float32), array([1.5775482e-04, 4.8253797e-02, 9.2358458e-01, 1.1073923e-03,
+       1.9898921e-02, 6.9976049e-03], dtype=float32), array([3.9739232e-03, 2.3633494e-05, 2.1359954e-05, 1.8987305e-06,
+       4.1162953e-02, 9.5481628e-01], dtype=float32), array([9.13848635e-03, 5.87913394e-02, 1.43116224e-04, 3.58722202e-04,
+       8.07742059e-01, 1.23826325e-01], dtype=float32), array([9.8646325e-01, 5.8888332e-11, 1.1760969e-10, 1.3536716e-02,
+       7.8129786e-12, 1.4448095e-10], dtype=float32), array([4.1830847e-03, 1.1569095e-01, 5.7874360e-05, 5.0371233e-04,
+       8.6108667e-01, 1.8477768e-02], dtype=float32), array([9.9994087e-01, 2.8786903e-12, 2.0394925e-12, 5.9041453e-05,
+       4.1228199e-10, 8.6239559e-08], dtype=float32), array([5.0667454e-03, 9.4328761e-06, 2.3124312e-06, 9.8165106e-07,
+       5.9086811e-02, 9.3583375e-01], dtype=float32), array([0.00225901, 0.7131505 , 0.04593204, 0.00274148, 0.20766072,
+       0.02825623], dtype=float32), array([9.1755455e-03, 2.9329509e-03, 6.5601803e-04, 6.4556742e-05,
+       1.9212516e-01, 7.9504573e-01], dtype=float32), array([1.7572237e-02, 1.4662740e-08, 1.6249663e-11, 9.8242778e-01,
+       7.7659548e-13, 1.6815256e-14], dtype=float32), array([8.7323887e-03, 7.7312795e-10, 3.1886310e-12, 9.9126762e-01,
+       1.9245796e-14, 3.9959920e-16], dtype=float32), array([9.901686e-01, 1.448307e-12, 4.568825e-14, 9.831435e-03,
+       1.531072e-13, 1.450773e-12], dtype=float32), array([5.9958536e-02, 1.7944849e-09, 1.1654245e-12, 9.4004154e-01,
+       1.3575512e-13, 5.0267911e-15], dtype=float32), array([9.7268784e-01, 7.9130263e-07, 3.4448200e-09, 2.7311062e-02,
+       2.0472383e-07, 1.1804671e-07], dtype=float32), array([2.74951512e-04, 9.25790891e-02, 8.60326469e-01, 1.56397210e-03,
+       3.45053747e-02, 1.07501615e-02], dtype=float32), array([1.1223894e-02, 1.2430149e-02, 2.7823788e-03, 1.9284425e-04,
+       2.7188620e-01, 7.0148450e-01], dtype=float32), array([2.4421600e-04, 7.5043774e-01, 2.2415341e-07, 5.0009525e-04,
+       2.4875970e-01, 5.8016925e-05], dtype=float32), array([9.9848175e-01, 1.5961675e-12, 2.4092453e-12, 1.5182219e-03,
+       2.4784138e-13, 2.0311581e-11], dtype=float32), array([9.9248600e-01, 1.2180326e-11, 3.3181919e-11, 7.5140372e-03,
+       2.3617861e-12, 7.6184344e-11], dtype=float32), array([1.1648659e-04, 8.8368654e-01, 7.0391388e-07, 6.2081468e-04,
+       1.1554964e-01, 2.5852642e-05], dtype=float32), array([0.00111842, 0.84997284, 0.00130989, 0.00125118, 0.14173388,
+       0.0046138 ], dtype=float32), array([0.0059498 , 0.4383211 , 0.0021918 , 0.0012776 , 0.48508468,
+       0.06717499], dtype=float32), array([8.2242293e-03, 2.3597105e-11, 2.7060935e-13, 9.9177581e-01,
+       1.8736185e-16, 1.0940700e-17], dtype=float32), array([2.7577975e-03, 1.2010671e-14, 4.2492205e-16, 9.9724215e-01,
+       8.4487525e-21, 6.1253487e-22], dtype=float32), array([0.00663075, 0.42977372, 0.18309806, 0.00247433, 0.1985493 ,
+       0.17947383], dtype=float32), array([6.6696513e-03, 1.7159380e-03, 5.3761661e-04, 3.3197652e-05,
+       7.0524640e-02, 9.2051899e-01], dtype=float32), array([9.91402805e-01, 1.08525945e-10, 2.59667537e-10, 8.59716441e-03,
+       1.92751804e-11, 4.13107382e-10], dtype=float32), array([3.0779766e-04, 8.4644519e-02, 8.6929858e-01, 1.3854591e-03,
+       3.1327732e-02, 1.3035898e-02], dtype=float32), array([8.8381544e-03, 1.0486197e-03, 2.6522286e-04, 3.0016632e-05,
+       1.3738322e-01, 8.5243481e-01], dtype=float32), array([1.0995672e-02, 7.1623445e-02, 2.3794381e-03, 5.5822392e-04,
+       6.2295038e-01, 2.9149285e-01], dtype=float32), array([9.9967986e-01, 1.6441506e-11, 2.5049218e-12, 3.2012790e-04,
+       2.5214214e-10, 8.9630703e-09], dtype=float32), array([1.7675589e-04, 5.0917495e-02, 9.1818279e-01, 1.0110618e-03,
+       2.1348799e-02, 8.3631268e-03], dtype=float32), array([0.00282843, 0.7802586 , 0.02855746, 0.00231423, 0.15638077,
+       0.02966051], dtype=float32), array([7.1069892e-03, 7.3198102e-02, 8.0355283e-05, 3.1477507e-04,
+       8.1940520e-01, 9.9894650e-02], dtype=float32), array([0.00283748, 0.8492989 , 0.01846544, 0.00197603, 0.10606731,
+       0.02135487], dtype=float32), array([9.8397970e-01, 2.0872903e-10, 5.7554603e-12, 1.6020320e-02,
+       1.1852810e-10, 2.9459934e-10], dtype=float32), array([4.4014598e-03, 4.8098373e-03, 7.0818925e-05, 1.0461351e-04,
+       8.4395516e-01, 1.4665812e-01], dtype=float32), array([5.9290318e-04, 8.3428144e-01, 5.0500335e-06, 2.0011547e-03,
+       1.6298981e-01, 1.2962201e-04], dtype=float32), array([5.7868245e-03, 5.9043776e-02, 8.5919739e-05, 2.7331049e-04,
+       8.2008582e-01, 1.1472442e-01], dtype=float32), array([1.4308318e-03, 1.6334814e-01, 5.4255902e-06, 3.4867876e-04,
+       8.3090383e-01, 3.9631720e-03], dtype=float32), array([0.00896693, 0.37035137, 0.00374017, 0.00130866, 0.46811113,
+       0.14752181], dtype=float32), array([7.8779052e-04, 7.9637289e-01, 6.1582359e-05, 7.4359408e-04,
+       2.0063753e-01, 1.3966045e-03], dtype=float32), array([9.7590610e-03, 8.6999930e-12, 7.8571810e-15, 9.9024099e-01,
+       3.4145337e-17, 7.1595734e-19], dtype=float32), array([9.9566616e-03, 1.2428298e-02, 6.7726979e-03, 2.3333135e-04,
+       2.3504977e-01, 7.3555917e-01], dtype=float32), array([7.88265228e-01, 2.18271889e-09, 1.35156695e-11, 2.11734772e-01,
+       9.69425026e-11, 5.40633927e-11], dtype=float32), array([9.9964184e-01, 5.5409285e-11, 4.4159030e-12, 3.5817592e-04,
+       1.2961622e-09, 2.2107583e-08], dtype=float32), array([8.7007219e-01, 8.1289299e-06, 1.2559148e-07, 1.2991734e-01,
+       1.0632446e-06, 1.2108661e-06], dtype=float32), array([8.6235516e-03, 5.2682328e-04, 1.6124129e-04, 1.9295789e-05,
+       1.4795503e-01, 8.4271413e-01], dtype=float32), array([4.7188280e-03, 2.4477790e-11, 5.7566945e-13, 9.9528122e-01,
+       3.0860184e-16, 1.4989800e-17], dtype=float32), array([0.00697826, 0.34019718, 0.00110226, 0.00080977, 0.43658552,
+       0.21432708], dtype=float32), array([6.1591150e-04, 1.3092500e-01, 7.9212689e-01, 1.7693359e-03,
+       4.9658131e-02, 2.4904704e-02], dtype=float32), array([6.0743588e-01, 6.1181082e-09, 2.4078137e-11, 3.9256415e-01,
+       3.5208236e-11, 1.2475532e-11], dtype=float32), array([4.3040825e-04, 8.1686336e-01, 2.5221560e-05, 5.6560669e-04,
+       1.8156703e-01, 5.4831471e-04], dtype=float32), array([3.0273819e-05, 1.1420651e-02, 9.7908491e-01, 4.4659275e-04,
+       6.9276928e-03, 2.0898541e-03], dtype=float32), array([0.00178446, 0.829586  , 0.00388235, 0.00163733, 0.15272205,
+       0.01038785], dtype=float32), array([1.2642408e-02, 1.1116275e-08, 4.4207301e-11, 9.8735756e-01,
+       6.8427864e-13, 1.8446990e-14], dtype=float32), array([2.5241959e-04, 7.5153545e-02, 8.8586158e-01, 1.2571855e-03,
+       2.6957063e-02, 1.0518114e-02], dtype=float32), array([6.84270490e-05, 8.79923820e-01, 3.04937544e-07, 2.80553562e-04,
+       1.19704485e-01, 2.24204832e-05], dtype=float32), array([0.00103547, 0.5672414 , 0.2688783 , 0.00328065, 0.1416064 ,
+       0.0179578 ], dtype=float32), array([0.00836253, 0.37278223, 0.00608148, 0.001238  , 0.37881258,
+       0.23272322], dtype=float32), array([9.7270554e-01, 7.8980675e-06, 3.0671611e-08, 2.7274994e-02,
+       8.3287596e-06, 3.1962772e-06], dtype=float32), array([9.9622440e-01, 9.4291391e-07, 1.1137402e-08, 3.7501238e-03,
+       1.0930647e-05, 1.3632062e-05], dtype=float32), array([1.1747060e-03, 7.1022749e-01, 9.8011828e-05, 7.2039413e-04,
+       2.8443092e-01, 3.3485049e-03], dtype=float32), array([3.36362212e-03, 1.63141012e-01, 1.07975375e-05, 4.71257343e-04,
+       8.24744165e-01, 8.26913957e-03], dtype=float32), array([2.5026430e-03, 4.7703400e-01, 1.2639297e-04, 8.2354824e-04,
+       5.0783104e-01, 1.1682398e-02], dtype=float32), array([0.01274474, 0.1769863 , 0.00103944, 0.00077777, 0.50279254,
+       0.30565923], dtype=float32), array([1.4962855e-02, 4.5619782e-02, 2.2730837e-03, 4.2512524e-04,
+       3.7479797e-01, 5.6192112e-01], dtype=float32), array([1.2677294e-04, 8.6612874e-01, 1.9460772e-07, 3.8558673e-04,
+       1.3333254e-01, 2.6178861e-05], dtype=float32), array([5.84214414e-03, 1.07513264e-01, 1.33435984e-04, 2.08117231e-03,
+       8.71074498e-01, 1.33554405e-02], dtype=float32), array([7.2083676e-05, 8.5452712e-01, 1.7491112e-07, 2.9969439e-04,
+       1.4508218e-01, 1.8816281e-05], dtype=float32), array([3.3558183e-03, 2.2234550e-01, 3.4457087e-05, 5.8103510e-04,
+       7.6153845e-01, 1.2144762e-02], dtype=float32), array([5.41373156e-04, 8.74964654e-01, 2.36309483e-04, 7.90322782e-04,
+       1.22185566e-01, 1.28185027e-03], dtype=float32), array([0.00329441, 0.56180495, 0.2457298 , 0.00290651, 0.11814334,
+       0.06812096], dtype=float32), array([0.0068342 , 0.38320342, 0.0005357 , 0.00082537, 0.49584457,
+       0.11275675], dtype=float32), array([0.00123247, 0.8326885 , 0.00213739, 0.00140175, 0.15644966,
+       0.00609016], dtype=float32), array([9.9469608e-01, 1.6003124e-10, 1.5214034e-10, 5.3039198e-03,
+       2.0458543e-11, 6.3503486e-10], dtype=float32), array([2.95554812e-04, 1.03886604e-01, 8.46965432e-01, 1.63448753e-03,
+       3.63615006e-02, 1.08564822e-02], dtype=float32), array([9.41279352e-01, 1.50863650e-06, 1.18551640e-08, 5.87188564e-02,
+       2.45860207e-07, 1.07259325e-07], dtype=float32), array([0.00270855, 0.6265504 , 0.19631891, 0.00299262, 0.12109331,
+       0.05033624], dtype=float32), array([6.2693916e-03, 3.3599243e-10, 2.8977120e-12, 9.9373066e-01,
+       8.4648720e-15, 2.3826897e-16], dtype=float32), array([0.0043305 , 0.5705656 , 0.00193043, 0.00149149, 0.3913989 ,
+       0.03028309], dtype=float32), array([9.6127966e-05, 8.5625726e-01, 4.0504423e-07, 3.1502041e-04,
+       1.4329492e-01, 3.6235935e-05], dtype=float32), array([5.4174894e-04, 8.6551398e-01, 3.0874350e-04, 7.3048024e-04,
+       1.3139167e-01, 1.5133457e-03], dtype=float32), array([2.3389293e-02, 5.3770183e-10, 2.5677851e-13, 9.7661078e-01,
+       1.6455104e-14, 2.3939197e-16], dtype=float32), array([1.8840462e-02, 7.5929915e-11, 2.8279218e-14, 9.8115951e-01,
+       7.3206178e-16, 1.2800611e-17], dtype=float32), array([7.3313335e-04, 8.5060161e-01, 2.3575854e-03, 3.2490545e-03,
+       1.4153330e-01, 1.5252925e-03], dtype=float32), array([0.00207825, 0.68665284, 0.14202379, 0.00289888, 0.13572066,
+       0.03062559], dtype=float32), array([4.5215110e-03, 2.4477802e-01, 5.4959499e-05, 5.9300062e-04,
+       7.2476488e-01, 2.5287664e-02], dtype=float32), array([8.9283657e-01, 1.5453000e-07, 4.8718468e-10, 1.0716323e-01,
+       6.4965144e-09, 2.1487807e-09], dtype=float32), array([0.01484987, 0.07237883, 0.00424901, 0.00062403, 0.41416726,
+       0.49373093], dtype=float32), array([9.9732363e-01, 2.9628235e-09, 1.0616559e-10, 2.6763587e-03,
+       9.5716928e-09, 8.4547594e-08], dtype=float32), array([2.0353618e-01, 4.5731678e-08, 2.7402811e-11, 7.9646391e-01,
+       3.8884174e-11, 1.6821688e-12], dtype=float32), array([0.0023829 , 0.7435616 , 0.06190423, 0.00280723, 0.15811811,
+       0.03122595], dtype=float32), array([9.9233580e-01, 7.5342504e-10, 3.0484029e-09, 7.6641291e-03,
+       3.5501804e-10, 9.7409236e-09], dtype=float32), array([3.3720536e-04, 8.6390322e-01, 2.0334125e-04, 8.7792316e-04,
+       1.3397424e-01, 7.0404046e-04], dtype=float32), array([0.0054345 , 0.4164563 , 0.00070183, 0.00116251, 0.54455626,
+       0.03168866], dtype=float32), array([0.00347862, 0.72848153, 0.01121236, 0.00189336, 0.2187505 ,
+       0.03618363], dtype=float32), array([0.00412248, 0.77668375, 0.06223627, 0.00233422, 0.10638457,
+       0.04823875], dtype=float32), array([5.4851634e-04, 8.7805051e-01, 1.2531223e-04, 7.7946315e-04,
+       1.1949110e-01, 1.0050968e-03], dtype=float32), array([7.3102093e-03, 2.3858571e-04, 4.5248812e-06, 9.2158398e-06,
+       5.3038579e-01, 4.6205172e-01], dtype=float32), array([0.00676229, 0.3074642 , 0.00111285, 0.00095115, 0.566859  ,
+       0.11685052], dtype=float32), array([0.00151984, 0.3318015 , 0.5485633 , 0.00267707, 0.07601156,
+       0.03942678], dtype=float32), array([1.2402271e-02, 3.1466570e-02, 3.7321562e-04, 2.5766372e-04,
+       6.5039337e-01, 3.0510694e-01], dtype=float32), array([0.00185296, 0.83660716, 0.01538791, 0.00191531, 0.12926245,
+       0.01497429], dtype=float32), array([1.4873979e-02, 2.3278959e-09, 7.2157796e-12, 9.8512602e-01,
+       5.8205604e-14, 1.8097653e-15], dtype=float32), array([2.6801592e-04, 9.2680134e-02, 8.5187644e-01, 1.9337680e-03,
+       4.3342628e-02, 9.8989652e-03], dtype=float32), array([6.3054264e-03, 1.5233913e-01, 3.6774683e-04, 5.8712962e-04,
+       7.5924039e-01, 8.1160218e-02], dtype=float32), array([0.01295097, 0.14195852, 0.00279425, 0.00084589, 0.5207879 ,
+       0.32066256], dtype=float32), array([0.0136612 , 0.08519315, 0.00204225, 0.00068604, 0.6272289 ,
+       0.2711884 ], dtype=float32), array([8.1166261e-05, 8.6083478e-01, 2.5049985e-07, 2.9699286e-04,
+       1.3876070e-01, 2.6117108e-05], dtype=float32), array([0.00144911, 0.3207359 , 0.55327946, 0.00258668, 0.08052677,
+       0.04142215], dtype=float32), array([9.4745678e-01, 7.4283082e-07, 2.8062892e-09, 5.2542388e-02,
+       1.6536988e-07, 4.6112554e-08], dtype=float32), array([9.9240172e-01, 2.5090212e-12, 7.6008407e-14, 7.5983168e-03,
+       3.1987276e-13, 1.8293906e-12], dtype=float32), array([4.2084581e-03, 9.9302232e-02, 7.3528681e-06, 3.1630497e-04,
+       8.8334197e-01, 1.2823689e-02], dtype=float32), array([0.00267162, 0.71997577, 0.09118037, 0.00277046, 0.14471555,
+       0.03868627], dtype=float32), array([4.6368004e-04, 8.7217563e-01, 1.1707512e-04, 6.7793357e-04,
+       1.2574637e-01, 8.1939215e-04], dtype=float32), array([9.6320501e-03, 5.9517368e-04, 1.3088482e-04, 2.0855372e-05,
+       1.8898754e-01, 8.0063343e-01], dtype=float32), array([0.00381538, 0.49803257, 0.00065178, 0.00117572, 0.47410843,
+       0.0222162 ], dtype=float32), array([8.6450148e-01, 1.6743807e-03, 7.4209020e-06, 1.3154958e-01,
+       1.7206486e-03, 5.4650888e-04], dtype=float32), array([2.8874261e-02, 2.0536577e-07, 1.0545236e-10, 9.7112554e-01,
+       2.0999414e-11, 3.1913453e-13], dtype=float32), array([5.0421315e-03, 1.9132971e-05, 7.8429102e-06, 1.5129502e-06,
+       6.9018811e-02, 9.2591059e-01], dtype=float32), array([3.3592576e-05, 8.9924270e-01, 2.7236714e-08, 1.7841502e-04,
+       1.0054042e-01, 4.8817324e-06], dtype=float32), array([9.99384999e-01, 9.08774449e-15, 2.29286588e-15, 6.15039608e-04,
+       1.37036895e-14, 8.19022909e-13], dtype=float32), array([4.8467736e-03, 2.9031567e-11, 5.8874363e-13, 9.9515325e-01,
+       3.1183976e-16, 1.2266367e-17], dtype=float32), array([3.0631461e-05, 8.7037241e-01, 7.3649517e-08, 2.8709392e-04,
+       1.2930362e-01, 6.1948749e-06], dtype=float32), array([1.3507137e-02, 2.9079286e-02, 1.8950086e-03, 3.2988485e-04,
+       4.2931372e-01, 5.2587503e-01], dtype=float32), array([2.1817615e-04, 8.8549083e-01, 9.9800227e-06, 5.0956837e-04,
+       1.1357500e-01, 1.9650765e-04], dtype=float32), array([0.00138746, 0.3100226 , 0.57346696, 0.00258044, 0.07444886,
+       0.03809366], dtype=float32), array([5.0846045e-04, 1.3441871e-01, 8.0090141e-01, 1.7607611e-03,
+       4.3444280e-02, 1.8966302e-02], dtype=float32), array([0.00580624, 0.59636164, 0.04803767, 0.00250455, 0.24769425,
+       0.09959566], dtype=float32), array([3.1786782e-04, 8.9025098e-01, 4.5058881e-05, 5.3486490e-04,
+       1.0842474e-01, 4.2651928e-04], dtype=float32), array([9.4102043e-01, 1.5876981e-07, 2.2031987e-09, 5.8979373e-02,
+       5.7292606e-08, 8.6709200e-08], dtype=float32), array([1.3833155e-02, 1.5520882e-08, 2.4195685e-11, 9.8616689e-01,
+       1.0358250e-12, 1.8663692e-14], dtype=float32), array([6.0899467e-03, 2.2541611e-01, 1.8191162e-04, 6.1627541e-04,
+       7.0524544e-01, 6.2450327e-02], dtype=float32), array([3.1869128e-04, 8.3332136e-02, 8.7044775e-01, 1.3056541e-03,
+       3.1066595e-02, 1.3529188e-02], dtype=float32), array([9.9908870e-01, 5.7492046e-11, 9.5670112e-12, 9.1132423e-04,
+       3.1499153e-10, 9.3956727e-09], dtype=float32), array([0.00384206, 0.60301507, 0.00165141, 0.00143249, 0.36314198,
+       0.02691701], dtype=float32), array([8.9496728e-03, 1.0784060e-03, 2.0117522e-04, 3.0529256e-05,
+       1.8376671e-01, 8.0597347e-01], dtype=float32), array([0.00557113, 0.5950336 , 0.09020375, 0.00266458, 0.2019259 ,
+       0.1046011 ], dtype=float32), array([1.0141271e-02, 1.3988107e-09, 8.0447655e-13, 9.8985875e-01,
+       3.3763509e-14, 3.3302982e-16], dtype=float32), array([7.0770783e-04, 7.8640604e-01, 3.4497887e-05, 6.3074887e-04,
+       2.1095537e-01, 1.2656599e-03], dtype=float32), array([4.1374299e-04, 8.9825720e-01, 4.4764947e-05, 7.3952717e-04,
+       1.0010292e-01, 4.4189813e-04], dtype=float32), array([4.7968677e-04, 5.9811181e-01, 1.4287438e-06, 4.4879882e-04,
+       4.0053621e-01, 4.2211343e-04], dtype=float32), array([4.4855318e-04, 7.7771491e-01, 7.2818016e-06, 5.5007037e-04,
+       2.2085543e-01, 4.2378900e-04], dtype=float32), array([3.2897410e-01, 2.4644280e-07, 1.8149411e-10, 6.7102569e-01,
+       2.0522350e-10, 1.3091416e-11], dtype=float32), array([8.2053952e-03, 1.3949526e-10, 4.1171450e-13, 9.9179459e-01,
+       1.4468020e-15, 3.0798644e-17], dtype=float32), array([0.0039903 , 0.7423319 , 0.08875546, 0.00239698, 0.10784259,
+       0.05468274], dtype=float32), array([4.7621988e-03, 3.3774506e-04, 2.9337523e-04, 1.4662753e-05,
+       7.4863248e-02, 9.1972876e-01], dtype=float32), array([0.00455311, 0.720425  , 0.1072669 , 0.00239352, 0.09997571,
+       0.06538573], dtype=float32), array([8.6996111e-04, 8.3860987e-01, 2.1128243e-04, 8.9563895e-04,
+       1.5723413e-01, 2.1790122e-03], dtype=float32), array([9.8185617e-01, 1.0222741e-05, 9.5534190e-08, 1.8100603e-02,
+       1.9818008e-05, 1.3165528e-05], dtype=float32), array([6.2021811e-04, 5.8286667e-01, 9.5202395e-06, 8.9522416e-04,
+       4.1503912e-01, 5.6930090e-04], dtype=float32), array([9.87957001e-01, 9.09023898e-12, 5.78761171e-12, 1.20430635e-02,
+       1.75445184e-12, 2.33018223e-11], dtype=float32), array([2.4981011e-05, 8.8628381e-01, 1.9360076e-08, 1.7667643e-04,
+       1.1351092e-01, 3.6472841e-06], dtype=float32), array([3.1738959e-03, 1.2717289e-06, 7.7341048e-07, 2.1170789e-07,
+       1.8413456e-02, 9.7841036e-01], dtype=float32), array([0.01188389, 0.23820725, 0.00588736, 0.00129188, 0.519405  ,
+       0.22332464], dtype=float32), array([0.00343495, 0.8149182 , 0.03340196, 0.00215695, 0.11247974,
+       0.03360816], dtype=float32), array([1.5295381e-02, 1.3741429e-11, 9.6498186e-15, 9.8470467e-01,
+       6.5818391e-17, 1.4798955e-18], dtype=float32), array([9.9925435e-01, 1.2227099e-09, 1.4127960e-10, 7.4513513e-04,
+       1.7020227e-08, 5.1906670e-07], dtype=float32), array([7.46089041e-01, 1.06076525e-08, 4.97923820e-11, 2.53910929e-01,
+       2.40782699e-10, 7.28348493e-11], dtype=float32), array([0.00785824, 0.4537944 , 0.00391873, 0.00113225, 0.38186824,
+       0.15142818], dtype=float32), array([3.4930717e-04, 8.6467499e-01, 3.5201370e-05, 5.6678063e-04,
+       1.3390397e-01, 4.6982389e-04], dtype=float32), array([0.0024737 , 0.5907349 , 0.24241816, 0.0026813 , 0.11787371,
+       0.04381826], dtype=float32), array([1.11757601e-02, 1.17518716e-01, 7.12960900e-04, 6.58447156e-04,
+       7.17108727e-01, 1.52825400e-01], dtype=float32), array([9.1080600e-03, 8.8861138e-03, 6.6749426e-03, 2.0909985e-04,
+       2.3943190e-01, 7.3568982e-01], dtype=float32), array([0.00289531, 0.7842273 , 0.03000915, 0.00231242, 0.1502967 ,
+       0.03025912], dtype=float32), array([5.4885552e-04, 8.7489617e-01, 2.7154243e-04, 9.5186755e-04,
+       1.2207500e-01, 1.2565927e-03], dtype=float32), array([1.4245997e-03, 5.2556929e-06, 2.0780382e-04, 1.9478728e-06,
+       3.4428757e-02, 9.6393156e-01], dtype=float32), array([7.93817817e-05, 8.86236370e-01, 6.47495483e-07, 3.15286423e-04,
+       1.13336705e-01, 3.15429133e-05], dtype=float32), array([8.6250591e-01, 5.7499254e-09, 8.8625017e-11, 1.3749407e-01,
+       3.5240003e-10, 3.3961461e-10], dtype=float32), array([0.00235621, 0.4481407 , 0.39652777, 0.00267922, 0.09402468,
+       0.0562714 ], dtype=float32), array([0.00220905, 0.5775    , 0.24443598, 0.00307003, 0.12991634,
+       0.04286866], dtype=float32), array([4.9662986e-04, 8.6614764e-01, 1.6393721e-04, 6.9967768e-04,
+       1.3140690e-01, 1.0851761e-03], dtype=float32), array([6.9869700e-04, 1.4183302e-01, 7.8177792e-01, 1.6893828e-03,
+       4.8497137e-02, 2.5503909e-02], dtype=float32), array([0.00775908, 0.41358003, 0.0010247 , 0.00078844, 0.40757528,
+       0.16927244], dtype=float32), array([5.5474084e-04, 7.4394524e-01, 2.2002761e-05, 7.0395664e-04,
+       2.5394604e-01, 8.2804135e-04], dtype=float32), array([6.6476967e-04, 1.7249234e-01, 7.5678694e-01, 1.8480610e-03,
+       4.7491360e-02, 2.0716576e-02], dtype=float32), array([7.4145473e-03, 1.0826886e-01, 2.6533761e-04, 4.6621967e-04,
+       7.2331738e-01, 1.6026765e-01], dtype=float32), array([9.0093452e-01, 1.1313386e-08, 5.2054797e-12, 9.9065505e-02,
+       2.5745989e-10, 2.8134259e-11], dtype=float32), array([0.00218657, 0.43114814, 0.41789314, 0.00277581, 0.09269165,
+       0.05330474], dtype=float32), array([9.7730511e-01, 1.0468972e-10, 8.4952309e-11, 2.2694906e-02,
+       1.3209621e-11, 1.4475317e-10], dtype=float32), array([2.9344205e-03, 2.0396993e-04, 4.1059331e-05, 4.8114980e-06,
+       2.0555815e-02, 9.7625989e-01], dtype=float32), array([9.8305780e-01, 6.2121218e-11, 4.2622294e-13, 1.6942305e-02,
+       1.0196015e-11, 1.7672766e-11], dtype=float32), array([5.2585783e-03, 1.0746073e-12, 4.6476376e-14, 9.9474144e-01,
+       3.4722329e-18, 3.2586369e-19], dtype=float32), array([0.00434512, 0.72779375, 0.10106056, 0.00238625, 0.10278445,
+       0.06162989], dtype=float32), array([8.0391328e-05, 8.6141604e-01, 4.8696478e-07, 3.1689051e-04,
+       1.3815433e-01, 3.1894637e-05], dtype=float32), array([1.18906675e-02, 1.11105023e-02, 2.29089856e-04, 1.33763926e-04,
+       5.11012018e-01, 4.65624064e-01], dtype=float32), array([9.9989671e-01, 1.7448558e-13, 1.7688712e-13, 1.0324221e-04,
+       8.4515754e-12, 1.9806052e-09], dtype=float32), array([1.1543017e-02, 7.7253439e-09, 2.9143323e-11, 9.8845702e-01,
+       4.7731393e-13, 1.0791793e-14], dtype=float32), array([5.6624939e-03, 1.0339528e-03, 4.7996571e-05, 4.5573644e-05,
+       7.5795716e-01, 2.3525277e-01], dtype=float32), array([1.2545163e-02, 1.4385938e-10, 8.9927787e-14, 9.8745483e-01,
+       1.7834637e-15, 2.9000046e-17], dtype=float32), array([0.0018535 , 0.4133868 , 0.44847146, 0.00275258, 0.08981051,
+       0.04372513], dtype=float32), array([4.5882302e-04, 6.7563009e-01, 3.4575850e-02, 3.6088645e-03,
+       2.8093877e-01, 4.7876523e-03], dtype=float32), array([5.1727495e-04, 8.4353942e-01, 1.0061960e-04, 6.0086302e-04,
+       1.5415566e-01, 1.0861764e-03], dtype=float32), array([1.7715847e-03, 6.2536132e-01, 1.3243943e-04, 8.1949506e-04,
+       3.6638400e-01, 5.5311401e-03], dtype=float32), array([1.8071033e-02, 3.1865894e-09, 1.9366960e-12, 9.8192894e-01,
+       8.0730602e-14, 1.2156421e-15], dtype=float32), array([7.7292579e-03, 9.9773984e-04, 6.5380387e-04, 3.5775483e-05,
+       1.8369187e-01, 8.0689156e-01], dtype=float32), array([1.0947307e-02, 6.5384775e-02, 2.4357294e-03, 5.7205057e-04,
+       6.6349226e-01, 2.5716791e-01], dtype=float32), array([1.9775210e-04, 8.6288005e-01, 5.5460887e-06, 4.9660756e-04,
+       1.3626821e-01, 1.5185559e-04], dtype=float32), array([9.9369282e-01, 5.5217965e-06, 5.7935335e-08, 6.2172962e-03,
+       4.1110001e-05, 4.3282882e-05], dtype=float32), array([1.0029130e-02, 1.3373600e-03, 5.6967274e-06, 2.6415382e-05,
+       7.4961519e-01, 2.3898618e-01], dtype=float32), array([0.00084832, 0.84108764, 0.00304377, 0.00162921, 0.14917326,
+       0.00421776], dtype=float32), array([0.0016877 , 0.858259  , 0.00465494, 0.001617  , 0.12445867,
+       0.00932269], dtype=float32), array([9.9071905e-05, 8.7138236e-01, 2.2641306e-07, 3.7503472e-04,
+       1.2812066e-01, 2.2693692e-05], dtype=float32), array([8.2662320e-03, 4.1387728e-03, 5.6236936e-04, 8.5149266e-05,
+       2.6779252e-01, 7.1915501e-01], dtype=float32), array([9.8254508e-01, 2.6221910e-06, 8.0483451e-09, 1.7446740e-02,
+       4.3237301e-06, 1.3066118e-06], dtype=float32), array([3.4826731e-05, 9.0091413e-01, 3.1647385e-08, 1.7221148e-04,
+       9.8873429e-02, 5.3980743e-06], dtype=float32), array([4.3060291e-03, 3.8192049e-12, 5.0407883e-14, 9.9569398e-01,
+       1.6517232e-17, 6.1071898e-19], dtype=float32), array([9.9389088e-01, 2.4484531e-10, 2.6892208e-10, 6.1091259e-03,
+       3.5433545e-11, 1.5869670e-09], dtype=float32), array([8.6947984e-01, 8.3878965e-10, 1.4979176e-11, 1.3052018e-01,
+       3.5170294e-11, 3.8327192e-11], dtype=float32), array([9.9875206e-01, 1.5661121e-15, 8.9120847e-16, 1.2480313e-03,
+       1.8350418e-15, 1.4102205e-13], dtype=float32), array([0.0018407 , 0.8542039 , 0.00465127, 0.00161277, 0.12722722,
+       0.01046419], dtype=float32), array([0.0015094 , 0.81142324, 0.00492102, 0.00163558, 0.17213227,
+       0.00837855], dtype=float32), array([4.0249084e-03, 2.8437194e-01, 4.9352693e-05, 5.4231234e-04,
+       6.8741697e-01, 2.3594502e-02], dtype=float32), array([0.00220101, 0.4511992 , 0.39942437, 0.00279408, 0.09220795,
+       0.05217347], dtype=float32), array([9.8073196e-01, 3.1809466e-10, 6.6769235e-10, 1.9268025e-02,
+       3.5957515e-11, 5.4116917e-10], dtype=float32), array([5.0884299e-04, 8.7116206e-01, 1.3136820e-04, 6.7093479e-04,
+       1.2643223e-01, 1.0945909e-03], dtype=float32), array([0.00172143, 0.5999919 , 0.23177142, 0.0032457 , 0.13136177,
+       0.03190776], dtype=float32), array([0.00680883, 0.43862924, 0.00468989, 0.00155922, 0.45707914,
+       0.0912337 ], dtype=float32), array([0.00147275, 0.523119  , 0.31287295, 0.00342074, 0.13205436,
+       0.02706028], dtype=float32), array([5.7052256e-04, 7.8336924e-01, 1.8152656e-05, 6.4552092e-04,
+       2.1465094e-01, 7.4562116e-04], dtype=float32), array([0.00212651, 0.41877985, 0.41720077, 0.00290121, 0.10392642,
+       0.05506527], dtype=float32), array([0.00268897, 0.81633914, 0.02718906, 0.00218874, 0.12541597,
+       0.02617813], dtype=float32), array([4.7162641e-05, 8.8220674e-01, 4.2222389e-08, 2.0018283e-04,
+       1.1753756e-01, 8.3133655e-06], dtype=float32), array([3.2183942e-01, 2.7408631e-10, 1.9709905e-13, 6.7816055e-01,
+       4.4406346e-14, 6.5405479e-15], dtype=float32), array([0.00333039, 0.7092184 , 0.00234295, 0.00153145, 0.26157063,
+       0.02200623], dtype=float32), array([0.00246017, 0.78711456, 0.04258897, 0.00246555, 0.13674027,
+       0.02863047], dtype=float32), array([2.69262411e-04, 8.78552556e-01, 8.07340427e-07, 1.46176340e-03,
+       1.19684316e-01, 3.12849807e-05], dtype=float32), array([1.0328954e-02, 1.0359005e-02, 2.3465562e-03, 1.6738752e-04,
+       2.4887519e-01, 7.2792292e-01], dtype=float32), array([0.00380614, 0.66598076, 0.043132  , 0.00269998, 0.23233691,
+       0.05204429], dtype=float32), array([8.1559112e-03, 2.8679962e-03, 2.3318210e-03, 8.3876759e-05,
+       1.8478000e-01, 8.0178040e-01], dtype=float32), array([1.1550745e-05, 7.8898668e-01, 2.4975321e-07, 5.4317917e-04,
+       2.1045510e-01, 3.2654370e-06], dtype=float32), array([6.6835261e-03, 1.0598818e-03, 4.7792328e-04, 2.8258093e-05,
+       1.0098962e-01, 8.9076084e-01], dtype=float32), array([6.5016868e-03, 6.4885905e-12, 1.5135943e-13, 9.9349827e-01,
+       3.5169023e-17, 2.3536179e-18], dtype=float32), array([1.3354971e-04, 4.1113760e-02, 9.3396109e-01, 9.2799932e-04,
+       1.7467787e-02, 6.3957982e-03], dtype=float32), array([2.9139768e-03, 5.9958836e-07, 4.5234316e-07, 1.3018068e-07,
+       1.2462481e-02, 9.8462242e-01], dtype=float32), array([0.00368561, 0.6809239 , 0.00283545, 0.00160666, 0.2824981 ,
+       0.0284504 ], dtype=float32), array([5.5813644e-04, 1.3450368e-01, 7.9824460e-01, 1.7228390e-03,
+       4.4306159e-02, 2.0664627e-02], dtype=float32), array([9.8939044e-03, 4.7034710e-03, 7.0322939e-04, 9.1194313e-05,
+       2.8261742e-01, 7.0199078e-01], dtype=float32), array([2.14626547e-02, 4.52823166e-08, 1.11419762e-10, 9.78537261e-01,
+       3.28466009e-12, 1.03796034e-13], dtype=float32), array([1.1428480e-02, 1.4024870e-09, 5.9753829e-12, 9.8857158e-01,
+       4.3391546e-14, 1.4318883e-15], dtype=float32), array([1.7521631e-04, 8.9556164e-01, 2.8593422e-07, 5.5472087e-04,
+       1.0368349e-01, 2.4740211e-05], dtype=float32), array([1.3007722e-02, 7.1454667e-02, 1.9024998e-03, 5.1877048e-04,
+       3.7617537e-01, 5.3694099e-01], dtype=float32), array([3.2989043e-04, 8.6959952e-01, 2.3118262e-05, 6.0223340e-04,
+       1.2905805e-01, 3.8716319e-04], dtype=float32), array([1.0945048e-04, 8.6260796e-01, 6.7716638e-07, 3.4021464e-04,
+       1.3689478e-01, 4.6871963e-05], dtype=float32), array([9.9250329e-01, 6.0265415e-06, 2.5503650e-07, 7.3951813e-03,
+       2.2895769e-05, 7.2396666e-05], dtype=float32), array([2.15523988e-02, 4.64270601e-11, 1.31120836e-14, 9.78447616e-01,
+       4.20752102e-16, 7.47729997e-18], dtype=float32), array([3.5772964e-03, 1.6051492e-04, 2.3393850e-04, 9.4628940e-06,
+       5.6860026e-02, 9.3915886e-01], dtype=float32), array([2.4705840e-02, 4.1078301e-09, 6.7756204e-12, 9.7529411e-01,
+       9.2653817e-14, 3.4985491e-15], dtype=float32), array([3.9294612e-02, 8.2243487e-06, 6.9781558e-09, 9.6069717e-01,
+       3.4700982e-09, 7.4690372e-11], dtype=float32), array([9.5467150e-01, 5.1061386e-09, 1.4227863e-10, 4.5328435e-02,
+       5.2641064e-10, 2.6302238e-09], dtype=float32), array([0.00142279, 0.3037851 , 0.57047117, 0.00254394, 0.07978024,
+       0.0419968 ], dtype=float32), array([8.1397602e-03, 3.5162733e-03, 9.1278361e-04, 5.7142806e-05,
+       1.0406073e-01, 8.8331336e-01], dtype=float32), array([9.9236959e-01, 1.6340745e-09, 1.7929486e-11, 7.6304004e-03,
+       1.2104359e-09, 2.2002451e-09], dtype=float32), array([0.0045631 , 0.6406541 , 0.01951126, 0.00234203, 0.27782175,
+       0.05510777], dtype=float32), array([0.00122078, 0.8122695 , 0.01467549, 0.00241027, 0.1601209 ,
+       0.00930307], dtype=float32), array([4.80749225e-03, 1.48181245e-01, 1.08215645e-05, 3.33296310e-04,
+       8.24084461e-01, 2.25826334e-02], dtype=float32), array([0.01576846, 0.1558488 , 0.00199354, 0.00107181, 0.60602635,
+       0.21929108], dtype=float32), array([0.00912313, 0.33103815, 0.00147624, 0.00105358, 0.52701735,
+       0.13029157], dtype=float32), array([0.0140677 , 0.12880546, 0.00642089, 0.00095917, 0.49165413,
+       0.35809267], dtype=float32), array([9.6286433e-03, 5.2033772e-10, 2.4997821e-12, 9.9037135e-01,
+       9.8463997e-15, 2.9771284e-16], dtype=float32), array([0.00451844, 0.71679604, 0.11039962, 0.0024091 , 0.10028422,
+       0.06559262], dtype=float32), array([1.3905786e-02, 8.4112346e-02, 1.3670971e-03, 6.2333810e-04,
+       6.2966126e-01, 2.7033016e-01], dtype=float32), array([0.00781408, 0.42122975, 0.02997353, 0.00215402, 0.36296842,
+       0.17586026], dtype=float32), array([4.6325917e-05, 8.8347787e-01, 9.2502262e-08, 2.1104542e-04,
+       1.1625358e-01, 1.1071594e-05], dtype=float32), array([2.7149559e-03, 5.3767544e-01, 5.4392429e-05, 4.9844268e-04,
+       4.4253263e-01, 1.6524121e-02], dtype=float32), array([5.05549042e-03, 4.03271726e-04, 3.21653817e-04, 1.82477634e-05,
+       1.15585186e-01, 8.78616154e-01], dtype=float32), array([2.2129081e-02, 4.3730948e-09, 3.1942376e-12, 9.7787094e-01,
+       1.2381623e-13, 2.4963738e-15], dtype=float32), array([0.01341191, 0.06456697, 0.00327166, 0.00058631, 0.5427351 ,
+       0.37542805], dtype=float32), array([1.8074374e-04, 5.4045897e-02, 9.1354561e-01, 1.0750942e-03,
+       2.2446712e-02, 8.7059839e-03], dtype=float32), array([0.00213157, 0.82334805, 0.00503998, 0.00168046, 0.15394263,
+       0.01385733], dtype=float32), array([1.1712475e-03, 7.1447653e-01, 6.4800923e-05, 7.1403926e-04,
+       2.8020889e-01, 3.3645337e-03], dtype=float32), array([0.00440227, 0.71110487, 0.11454989, 0.00240964, 0.10190755,
+       0.06562579], dtype=float32), array([9.8160774e-01, 5.2895327e-08, 1.8221517e-09, 1.8391950e-02,
+       8.7290374e-08, 1.9974622e-07], dtype=float32), array([0.01182835, 0.12647079, 0.00171694, 0.00082958, 0.6804113 ,
+       0.17874303], dtype=float32), array([7.83502983e-05, 8.92004967e-01, 4.03145037e-07, 2.83958856e-04,
+       1.07605375e-01, 2.68697240e-05], dtype=float32), array([6.0795684e-04, 8.6791706e-01, 1.6450019e-04, 7.7586359e-04,
+       1.2927805e-01, 1.2565609e-03], dtype=float32), array([1.6329687e-02, 1.8549884e-09, 3.7370064e-12, 9.8367041e-01,
+       4.0496818e-14, 1.2655336e-15], dtype=float32), array([4.2819465e-03, 5.1212823e-04, 1.9735038e-04, 1.1870558e-05,
+       2.9380715e-02, 9.6561605e-01], dtype=float32), array([4.9111429e-03, 5.2333908e-05, 3.1230764e-05, 3.2086009e-06,
+       5.3116888e-02, 9.4188517e-01], dtype=float32), array([9.9634802e-01, 4.2145364e-13, 2.7355537e-14, 3.6520001e-03,
+       3.7737296e-13, 4.5641880e-12], dtype=float32), array([1.1718984e-02, 5.5875303e-03, 6.3664396e-04, 1.0013167e-04,
+       2.6920646e-01, 7.1275026e-01], dtype=float32), array([0.0026477 , 0.7357414 , 0.08294554, 0.00280208, 0.13803868,
+       0.03782466], dtype=float32), array([6.7025321e-03, 2.4525346e-10, 1.3376785e-11, 9.9329752e-01,
+       8.7107759e-15, 4.2843779e-16], dtype=float32)]
+2025-04-19 18:57:57,799 - pyskl - INFO - Testing results of the best checkpoint
+2025-04-19 18:57:57,799 - pyskl - INFO - top1_acc: 0.7146
+2025-04-19 18:57:57,799 - pyskl - INFO - top5_acc: 1.0000
+2025-04-19 18:57:57,799 - pyskl - INFO - mean_class_accuracy: 0.7736
+>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 448/459, 1.6 task/s, elapsed: 284s, ETA:     7s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 449/459, 1.6 task/s, elapsed: 284s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 450/459, 1.6 task/s, elapsed: 286s, ETA:     6s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 451/459, 1.6 task/s, elapsed: 286s, ETA:     5s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 452/459, 1.6 task/s, elapsed: 287s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 453/459, 1.6 task/s, elapsed: 287s, ETA:     4s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 454/459, 1.6 task/s, elapsed: 288s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 455/459, 1.6 task/s, elapsed: 288s, ETA:     3s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 456/459, 1.6 task/s, elapsed: 288s, ETA:     2s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 457/459, 1.6 task/s, elapsed: 288s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>> ] 458/459, 1.6 task/s, elapsed: 289s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 459/459, 1.6 task/s, elapsed: 289s, ETA:     0s
+Evaluating top_k_accuracy ...
+
+top1_acc	0.7146
+top5_acc	1.0000
+
+Evaluating mean_class_accuracy ...
+
+mean_acc	0.7736

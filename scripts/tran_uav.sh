@@ -9,4 +9,4 @@ export PYTHONPATH=$PYTHONPATH:$NEW_PATH
 
 # Optional: Print the PYTHONPATH to verify
 echo "Updated PYTHONPATH: $PYTHONPATH"
-python /home/jsingh/projects/thesis/code/pyskl_thesis/tools/train.py configs/posec3d/slowonly_r50_ntu60_xsub/limb_uav.py --validate --test-last --test-best
+python /home/jsingh/projects/thesis/code/pyskl_thesis/tools/train.py configs/posec3d/slowonly_r50_ntu60_xsub/limb_thesis.py --validate --test-last --test-best

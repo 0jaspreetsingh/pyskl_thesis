@@ -49,6 +49,7 @@ default_pose_ckpt = (
 
 
 def extract_frame(video_path, is_folder=False):
+    print(video_path)
     if is_folder:
         ## read all the frames from the folder
         frames = []
@@ -166,25 +167,29 @@ def main():
     print(pose_model)
     results = []
     for anno in tqdm(my_part):
-        frames = extract_frame(anno['filename'])
-        det_results = detection_inference(det_model, frames)
-        # * Get detection results for human
-        det_results = [x[0] for x in det_results]
-        for i, res in enumerate(det_results):
-            # * filter boxes with small scores
-            res = res[res[:, 4] >= args.det_score_thr]
-            # * filter boxes with small areas
-            box_areas = (res[:, 3] - res[:, 1]) * (res[:, 2] - res[:, 0])
-            assert np.all(box_areas >= 0)
-            res = res[box_areas >= args.det_area_thr]
-            det_results[i] = res
+        try:
+            frames = extract_frame(anno['filename'])
+            det_results = detection_inference(det_model, frames)
+            # * Get detection results for human
+            det_results = [x[0] for x in det_results]
+            for i, res in enumerate(det_results):
+                # * filter boxes with small scores
+                res = res[res[:, 4] >= args.det_score_thr]
+                # * filter boxes with small areas
+                box_areas = (res[:, 3] - res[:, 1]) * (res[:, 2] - res[:, 0])
+                assert np.all(box_areas >= 0)
+                res = res[box_areas >= args.det_area_thr]
+                det_results[i] = res
 
-        shape = frames[0].shape[:2]
-        anno['img_shape'] = shape
-        anno = pose_inference(anno, pose_model, frames, det_results, compress=args.compress)
-        print(anno['keypoint_score'].shape)
-        anno.pop('filename')
-        results.append(anno)
+            shape = frames[0].shape[:2]
+            anno['img_shape'] = shape
+            anno = pose_inference(anno, pose_model, frames, det_results, compress=args.compress)
+            print(anno['keypoint_score'].shape)
+            anno.pop('filename')
+            results.append(anno)
+        except Exception as e:
+            print(f'Error in {anno["filename"]}: {e}, skipping this video')
+            continue
 
     if args.non_dist:
         mmcv.dump(results, args.out)
